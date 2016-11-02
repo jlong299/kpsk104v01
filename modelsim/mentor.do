@@ -28,9 +28,9 @@ vlog -sv ../src/dct/dct_vecRot_twiddle.v
 vlog -sv ../src/dct/dct_vecRot_scaling.v 
 vlog -sv ../src/dct/dct_vecRot_coeff.v 
 vlog -sv ../src/RAM_FIFO/ROM_cos_dct_vecRot/sim/ROM_cos_dct_vecRot.v
-vlog -sv ../src/RAM_FIFO/ROM_cos_dct_vecRot/rom_1port_151/sim/ROM_cos_dct_vecRot_rom_1port_151_gip373i.v
+vlog -sv ../src/RAM_FIFO/ROM_cos_dct_vecRot/rom_1port_151/sim/ROM_cos_dct_vecRot_rom_1port_151_6n7d5py.v
 vlog -sv ../src/RAM_FIFO/ROM_sin_dct_vecRot/sim/ROM_sin_dct_vecRot.v
-vlog -sv ../src/RAM_FIFO/ROM_sin_dct_vecRot/rom_1port_151/sim/ROM_sin_dct_vecRot_rom_1port_151_xhfa2qa.v
+vlog -sv ../src/RAM_FIFO/ROM_sin_dct_vecRot/rom_1port_151/sim/ROM_sin_dct_vecRot_rom_1port_151_nni4jta.v
 vlog -sv ../src/dct/dct_vecRot.v 
 vlog -sv ../src/RAM_FIFO/RAM_dct_preFFT_reod/sim/RAM_dct_preFFT_reod.v
 vlog -sv ../src/RAM_FIFO/RAM_dct_preFFT_reod/ram_2port_151/sim/RAM_dct_preFFT_reod_ram_2port_151_nn5gxoa.v
@@ -44,10 +44,10 @@ elab
 view wave
 add wave *
 add wave sim:/dct_tb/u0/*
-add wave sim:/dct_tb/u0/dct_vecRot_inst/dct_vecRot_ram_inst/*
+add wave sim:/dct_tb/u0/dct_vecRot_inst/*
 view structure
 view signals
-run 100us
+run 180us
 # Report success to the shell
 # exit -code 0
 # End of template

@@ -61,9 +61,3 @@ x1(1:2:N-1) = x1_reod(1:N/2);
 x1(2:2:N) = x1_reod(N:-1:N/2+1);
 %disp(x1);
 
-%% Compare with FPGA simulation result
-outf = fopen('../modelsim/dct_result.dat','r');
-    FPGA_out = fscanf(outf , '%d %d', [2 Inf]);
-fclose(outf);
-
-max(abs(FPGA_out(1,:) - real(D1)))   

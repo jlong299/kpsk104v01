@@ -35,7 +35,7 @@ module dct_vecRot_coeff #(parameter
 	input wire		rst_n_sync,  // clk synchronous reset active low
 	input wire		clk,    
 
-	output wire		sink_valid, 	
+	input wire		sink_valid, 	
 	input wire [11:0] 		fftpts_in, 		
 	// right side
 	// 1 clks delay with sink_valid

@@ -29,11 +29,12 @@ module dct_tb (
 	wire [15:0] source_real;  //       .source_real
 	wire [15:0] source_imag;  //       .source_imag
 
-	reg [15:0] cnt_rd;
+	reg [15:0] cnt_rd, cnt_file_end;
 	integer 	data_file, scan_file, wr_file;
 	reg [31:0] 	captured_data, captured_data_imag;
 	localparam reg [15:0] cnt_rd_end = 16'd2048;
 	localparam reg [11:0] fftpts_cnst = 12'd2048;
+	localparam reg [15:0] param_cnt_file_end = 16'd6;  //Number of frames to be processed.
 
 	initial	begin
 		rst_n = 0;
@@ -74,6 +75,7 @@ module dct_tb (
 			cnt_rd <= 0;
 			captured_data <= 0;
 			captured_data_imag <= 0;
+			cnt_file_end <= 0;
 		end
 		else
 		begin
@@ -81,21 +83,32 @@ module dct_tb (
 			inverse <= 0;
 			fftpts_in <= fftpts_cnst;
 
-			cnt_rd <= (cnt_rd == cnt_rd_end+16'd1) ? cnt_rd : cnt_rd+16'd1;
-			//cnt_rd <= (cnt_rd == cnt_rd_end+16'd2400) ? 16'd0 : cnt_rd+16'd1;
+			//cnt_rd <= (cnt_rd == cnt_rd_end+16'd1) ? cnt_rd : cnt_rd+16'd1;
+			cnt_rd <= (cnt_rd == cnt_rd_end+16'd20) ? 16'd0 : cnt_rd+16'd1;
 
-			if (cnt_rd >= 16'd1 && cnt_rd <= cnt_rd_end) begin
-				if (!$feof(data_file)) begin
-					scan_file = $fscanf(data_file, "%d %d\n", captured_data, captured_data_imag);
-					sink_real = captured_data[15:0];
-					sink_imag = captured_data_imag[15:0];
+			if (cnt_file_end <= (param_cnt_file_end-1'd1) )
+			begin
+				if (cnt_rd >= 16'd1 && cnt_rd <= cnt_rd_end) begin
+					if (!$feof(data_file)) begin
+						scan_file = $fscanf(data_file, "%d %d\n", captured_data, captured_data_imag);
+						sink_real = captured_data[15:0];
+						sink_imag = captured_data_imag[15:0];
+					end
+					else begin
+						sink_real = 0;
+						sink_imag = 0;
+					end
 				end
-				else begin
-					sink_real = 0;
-					sink_imag = 0;
+				else
+				begin
+					if ($feof(data_file))
+					begin
+						$fseek(data_file,0,0);
+						cnt_file_end = cnt_file_end + 16'd1;
+						if (cnt_file_end==param_cnt_file_end) $fclose(data_file);
+					end
 				end
 			end
-			if (cnt_rd==cnt_rd_end+16'd1)  $fclose(data_file);
 
 			sink_sop = (cnt_rd==16'd1) ? 1'b1 : 1'b0;
 			sink_eop = (cnt_rd==cnt_rd_end)? 1'b1 : 1'b0;
@@ -128,17 +141,28 @@ module dct_tb (
 	);
 
 	reg signed [15:0] source_real_r, source_imag_r;
+	reg [15:0] 	cnt_source_eop;
 	assign source_real_r = source_real;
 	assign source_imag_r = source_imag;
 
 	always@(posedge clk)
 	begin
-		
-			if (source_valid)
+		if (!rst_n)
+			cnt_source_eop <= 0;
+		else
+		begin
+			if (cnt_source_eop <= (param_cnt_file_end-1'd1) )
 			begin
-				$fwrite(wr_file, "%d %d\n", source_real_r, source_imag_r,);
+				if (source_valid)
+				begin
+					$fwrite(wr_file, "%d %d\n", source_real_r, source_imag_r,);
+				end
+
+				cnt_source_eop = (source_eop)? cnt_source_eop + 1'd1 : cnt_source_eop;
+				if (cnt_source_eop==param_cnt_file_end)  $fclose(wr_file);
 			end
-			if (source_eop)  $fclose(wr_file);
+		end
+
 	end
 
 

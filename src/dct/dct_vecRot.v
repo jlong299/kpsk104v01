@@ -103,7 +103,6 @@ wire [wDataOut_t1-1:0] source_real_t1;  //       .source_real
 wire [wDataOut_t1-1:0] source_imag_t1;  //       .source_imag
 
 wire [wCoeff-1:0] 	coeff_cos, coeff_sin;
-wire 				coeff_valid;
 
 reg is_pong_sink, is_pong_source;
 
@@ -157,14 +156,12 @@ begin
 	if (!rst_n_sync)
 	begin
 		sink_valid_ping <= 0;
-		sink_ready_ping <= 0;
 		sink_error_ping <= 0;
 		sink_sop_ping <= 0; 	
 		sink_eop_ping <= 0; 	
 		sink_real_ping <= 0; 
 		sink_imag_ping <= 0; 
 		sink_valid_pong <= 0;
-		sink_ready_pong <= 0;
 		sink_error_pong <= 0;
 		sink_sop_pong <= 0; 	
 		sink_eop_pong <= 0; 	

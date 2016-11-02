@@ -2,7 +2,7 @@
 # 
 preplace inst ROM_sin_dct_vecRot -pg 1 -lvl 1 -y 40 -regy -20
 preplace inst ROM_sin_dct_vecRot.rom_1port_0 -pg 1 -lvl 1 -y 30
-preplace netloc EXPORT<net_container>ROM_sin_dct_vecRot</net_container>(SLAVE)ROM_sin_dct_vecRot.rom_output,(SLAVE)rom_1port_0.rom_output) 1 0 1 NJ
 preplace netloc EXPORT<net_container>ROM_sin_dct_vecRot</net_container>(SLAVE)ROM_sin_dct_vecRot.rom_input,(SLAVE)rom_1port_0.rom_input) 1 0 1 NJ
+preplace netloc EXPORT<net_container>ROM_sin_dct_vecRot</net_container>(SLAVE)rom_1port_0.rom_output,(SLAVE)ROM_sin_dct_vecRot.rom_output) 1 0 1 NJ
 levelinfo -pg 1 0 80 230
 levelinfo -hier ROM_sin_dct_vecRot 90 120 220
