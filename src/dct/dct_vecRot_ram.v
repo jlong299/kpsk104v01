@@ -71,6 +71,8 @@ wire [2*wDataIn-1:0] 	data;
 reg [11:0] 		cnt_sink_valid;
 reg 	read_latter_half, read_latter_half_r;
 
+reg [11:0] 	cnt_sink_valid_rev;
+
 assign 	source_error = 2'b00;
 assign 	fftpts_divd2 = {1'b0,fftpts_in[11:1]};
 assign 	data = {sink_real,sink_imag};
@@ -159,17 +161,31 @@ else
 	else
 		cnt_sink_valid <= 0;
 end
+ //------------  !!!!  Only when 2048 fft pts -----------
+assign cnt_sink_valid_rev[11] = 1'b0;
+assign cnt_sink_valid_rev[10] =cnt_sink_valid[0];
+assign cnt_sink_valid_rev[9] = cnt_sink_valid[1];
+assign cnt_sink_valid_rev[8] = cnt_sink_valid[2];
+assign cnt_sink_valid_rev[7] = cnt_sink_valid[3];
+assign cnt_sink_valid_rev[6] = cnt_sink_valid[4];
+assign cnt_sink_valid_rev[5] = cnt_sink_valid[5];
+assign cnt_sink_valid_rev[4] = cnt_sink_valid[6];
+assign cnt_sink_valid_rev[3] = cnt_sink_valid[7];
+assign cnt_sink_valid_rev[2] = cnt_sink_valid[8];
+assign cnt_sink_valid_rev[1] = cnt_sink_valid[9];
+assign cnt_sink_valid_rev[0] = cnt_sink_valid[10];
+//-------------------------------------------------------
 
 always@(*)
 begin
-	wren0 = (cnt_sink_valid < fftpts_divd2) ? sink_valid : 1'b0;
-	wren1 = (cnt_sink_valid >= fftpts_divd2) ? sink_valid : 1'b0;
+	wren0 = (cnt_sink_valid_rev < fftpts_divd2) ? sink_valid : 1'b0;
+	wren1 = (cnt_sink_valid_rev >= fftpts_divd2) ? sink_valid : 1'b0;
 end
 
 always@(*)
 begin
-	wraddress0 = (cnt_sink_valid < fftpts_divd2) ? cnt_sink_valid : 0;
-	wraddress1 = (cnt_sink_valid >= fftpts_divd2) ? (cnt_sink_valid - fftpts_divd2) : 0;
+	wraddress0 = (cnt_sink_valid_rev < fftpts_divd2) ? cnt_sink_valid_rev : 0;
+	wraddress1 = (cnt_sink_valid_rev >= fftpts_divd2) ? (cnt_sink_valid_rev - fftpts_divd2) : 0;
 end
 
 //-----------------  Read RAM ------------------------

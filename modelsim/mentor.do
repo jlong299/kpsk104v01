@@ -44,10 +44,10 @@ elab
 view wave
 add wave *
 add wave sim:/dct_tb/u0/*
-add wave sim:/dct_tb/u0/dct_preFFT_reod_inst/*
+add wave sim:/dct_tb/u0/dct_vecRot_inst/dct_vecRot_ram_inst/*
 view structure
 view signals
-run 90us
+run 100us
 # Report success to the shell
 # exit -code 0
 # End of template
