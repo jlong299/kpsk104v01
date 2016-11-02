@@ -47,7 +47,7 @@ add wave sim:/dct_tb/u0/*
 add wave sim:/dct_tb/u0/dct_vecRot_inst/*
 view structure
 view signals
-run 180us
+run 80us
 # Report success to the shell
 # exit -code 0
 # End of template

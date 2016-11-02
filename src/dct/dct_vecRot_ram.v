@@ -165,18 +165,32 @@ end
  
 //------------  Write address bit reverse ----------
 //------------  !!!!  Only when 2048 fft pts -----------
+// assign cnt_sink_valid_rev[11] = 1'b0;
+// assign cnt_sink_valid_rev[10] =cnt_sink_valid[0];
+// assign cnt_sink_valid_rev[9] = cnt_sink_valid[1];
+// assign cnt_sink_valid_rev[8] = cnt_sink_valid[2];
+// assign cnt_sink_valid_rev[7] = cnt_sink_valid[3];
+// assign cnt_sink_valid_rev[6] = cnt_sink_valid[4];
+// assign cnt_sink_valid_rev[5] = cnt_sink_valid[5];
+// assign cnt_sink_valid_rev[4] = cnt_sink_valid[6];
+// assign cnt_sink_valid_rev[3] = cnt_sink_valid[7];
+// assign cnt_sink_valid_rev[2] = cnt_sink_valid[8];
+// assign cnt_sink_valid_rev[1] = cnt_sink_valid[9];
+// assign cnt_sink_valid_rev[0] = cnt_sink_valid[10];
+//-------------------------------------------------------
+//------------  !!!!  Only when 512 fft pts -----------
 assign cnt_sink_valid_rev[11] = 1'b0;
-assign cnt_sink_valid_rev[10] =cnt_sink_valid[0];
-assign cnt_sink_valid_rev[9] = cnt_sink_valid[1];
-assign cnt_sink_valid_rev[8] = cnt_sink_valid[2];
-assign cnt_sink_valid_rev[7] = cnt_sink_valid[3];
-assign cnt_sink_valid_rev[6] = cnt_sink_valid[4];
-assign cnt_sink_valid_rev[5] = cnt_sink_valid[5];
-assign cnt_sink_valid_rev[4] = cnt_sink_valid[6];
-assign cnt_sink_valid_rev[3] = cnt_sink_valid[7];
-assign cnt_sink_valid_rev[2] = cnt_sink_valid[8];
-assign cnt_sink_valid_rev[1] = cnt_sink_valid[9];
-assign cnt_sink_valid_rev[0] = cnt_sink_valid[10];
+assign cnt_sink_valid_rev[10] = 1'b0;
+assign cnt_sink_valid_rev[9] = 1'b0;
+assign cnt_sink_valid_rev[8] = cnt_sink_valid[0];
+assign cnt_sink_valid_rev[7] = cnt_sink_valid[1];
+assign cnt_sink_valid_rev[6] = cnt_sink_valid[2];
+assign cnt_sink_valid_rev[5] = cnt_sink_valid[3];
+assign cnt_sink_valid_rev[4] = cnt_sink_valid[4];
+assign cnt_sink_valid_rev[3] = cnt_sink_valid[5];
+assign cnt_sink_valid_rev[2] = cnt_sink_valid[6];
+assign cnt_sink_valid_rev[1] = cnt_sink_valid[7];
+assign cnt_sink_valid_rev[0] = cnt_sink_valid[8];
 //-------------------------------------------------------
 
 always@(*)

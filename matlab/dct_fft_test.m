@@ -1,13 +1,13 @@
 complex_sig = 1;
+N = 512;
 
-x_real=round((2*rand(1,2048)-1)*8192);
-x_imag=round((2*rand(1,2048)-1)*8192);
+x_real=round((2*rand(1,N)-1)*8192);
+x_imag=round((2*rand(1,N)-1)*8192);
 if complex_sig == 1
 x = x_real + 1j*x_imag;
 end
 %disp(x); 
 
-N=length(x);
 D0 = dct_t(x);
 
 srcf = fopen('../modelsim/dct_src.dat','w');
