@@ -18,9 +18,10 @@
 //        D1(k) = w(k)*D1(k);
 //    end
 //  --------------------------------------------------------------------------------------------------
-//  ST ---> | RAM0: 1 ~ N/2 | --> F(k)   : source_real+j*source_imag
-//      |
-//      --> | RAM1: N/2 ~ N | --> F(N+2-k) : source_real_rev+j*source_imag_rev
+//  ST --------->    | RAM0: 1 ~ N/2 | --> F(k)   : source_real+j*source_imag
+//      |   wraddress 
+//      |  bit-reversed
+//      -------->    | RAM1: N/2 ~ N | --> F(N+2-k) : source_real_rev+j*source_imag_rev
 //  ---------------------------------------------------------------------------- 
 //  Note :  (1) N = fftpts_in : The number of FFT points is power of 2
 //          (2) Source_valid length is ( N/2 + 1 ) 
@@ -161,7 +162,9 @@ else
 	else
 		cnt_sink_valid <= 0;
 end
- //------------  !!!!  Only when 2048 fft pts -----------
+ 
+//------------  Write address bit reverse ----------
+//------------  !!!!  Only when 2048 fft pts -----------
 assign cnt_sink_valid_rev[11] = 1'b0;
 assign cnt_sink_valid_rev[10] =cnt_sink_valid[0];
 assign cnt_sink_valid_rev[9] = cnt_sink_valid[1];

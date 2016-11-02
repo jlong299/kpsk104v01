@@ -58,7 +58,7 @@ module dct_vecRot #(parameter
 	input wire				clk,    
 
 	input wire        sink_valid, // sink.sink_valid
-	output wire       sink_ready, //       .sink_ready
+	output reg        sink_ready, //       .sink_ready
 	input wire [1:0]  sink_error, //       .sink_error
 	input wire        sink_sop,   //       .sink_sop
 	input wire        sink_eop,   //       .sink_eop
@@ -84,15 +84,15 @@ localparam 	wDataOut_t0 = 28;
 localparam 	wDataOut_t1 = 22;
 localparam 	wCoeff = 18;
 
-wire        source_valid_t0; // source.source_valid
+reg        source_valid_t0; // source.source_valid
 wire        source_ready_t0; //       .source_ready
-wire [1:0]  source_error_t0; //       .source_error
-wire        source_sop_t0;   //       .source_sop
-wire        source_eop_t0;   //       .source_eop
-wire [wDataOut_t0-1:0] source_real_t0;  //       .source_real
-wire [wDataOut_t0-1:0] source_imag_t0;  //       .source_imag
-wire [wDataOut_t0-1:0] source_real_rev_t0;  //       .source_real
-wire [wDataOut_t0-1:0] source_imag_rev_t0;  //       .source_imag
+reg [1:0]  source_error_t0; //       .source_error
+reg        source_sop_t0;   //       .source_sop
+reg        source_eop_t0;   //       .source_eop
+reg [wDataOut_t0-1:0] source_real_t0;  //       .source_real
+reg [wDataOut_t0-1:0] source_imag_t0;  //       .source_imag
+reg [wDataOut_t0-1:0] source_real_rev_t0;  //       .source_real
+reg [wDataOut_t0-1:0] source_imag_rev_t0;  //       .source_imag
 
 wire        source_valid_t1; // source.source_valid
 wire        source_ready_t1; //       .source_ready
@@ -105,43 +105,238 @@ wire [wDataOut_t1-1:0] source_imag_t1;  //       .source_imag
 wire [wCoeff-1:0] 	coeff_cos, coeff_sin;
 wire 				coeff_valid;
 
+reg is_pong_sink, is_pong_source;
+
+reg        sink_valid_ping, sink_valid_pong; // sink.sink_valid
+reg        sink_ready_ping, sink_ready_pong; //       .sink_ready
+reg [1:0]  sink_error_ping, sink_error_pong; //       .sink_error
+reg        sink_sop_ping, sink_sop_pong;   //       .sink_sop
+reg        sink_eop_ping, sink_eop_pong;   //       .sink_eop
+reg [wDataIn-1:0] sink_real_ping, sink_real_pong;  //       .sink_real
+reg [wDataIn-1:0] sink_imag_ping, sink_imag_pong;  //       .sink_imag
+
+reg        source_valid_ping, source_valid_pong; // source.source_valid
+reg        source_ready_ping, source_ready_pong; //       .source_ready
+reg [1:0]  source_error_ping, source_error_pong; //       .source_error
+reg        source_sop_ping, source_sop_pong;   //       .source_sop
+reg        source_eop_ping, source_eop_pong;   //       .source_eop
+reg [wDataIn-1:0] source_real_ping, source_real_pong;  //       .source_real
+reg [wDataIn-1:0] source_imag_ping, source_imag_pong;  //       .source_imag
+reg [wDataIn-1:0] source_real_rev_ping, source_real_rev_pong;  //       .source_real_rev
+reg [wDataIn-1:0] source_imag_rev_ping, source_imag_rev_pong;  //       .source_imag_rev
+
 
 assign fftpts_out = fftpts_in;
 assign source_error = 2'b00;
+
+//-----------------------------------------------------
+//-----------  Part 1 :  dct_vecRot_ram   -------------
+//-----------------------------------------------------
+//---- Change to ping-pong mode to increase throughput. 2016.11.2 ----
+//start----------  Ping Pong  --------------
+always@(posedge clk)
+begin
+	if (!rst_n_sync)
+	begin
+		is_pong_sink <= 0;
+		sink_ready <= 0;
+	end
+	else 
+	begin
+		if (is_pong_sink==1'b0 && sink_eop_ping==1'b1)
+			is_pong_sink <= 1'b1;
+		else if (is_pong_sink==1'b1 && sink_eop_pong==1'b1)
+			is_pong_sink <= 1'b0;
+
+		sink_ready <= (is_pong_sink==1'b0)? sink_ready_ping : sink_ready_pong;
+	end
+end
+
+always@(posedge clk)
+begin
+	if (!rst_n_sync)
+	begin
+		sink_valid_ping <= 0;
+		sink_ready_ping <= 0;
+		sink_error_ping <= 0;
+		sink_sop_ping <= 0; 	
+		sink_eop_ping <= 0; 	
+		sink_real_ping <= 0; 
+		sink_imag_ping <= 0; 
+		sink_valid_pong <= 0;
+		sink_ready_pong <= 0;
+		sink_error_pong <= 0;
+		sink_sop_pong <= 0; 	
+		sink_eop_pong <= 0; 	
+		sink_real_pong <= 0; 
+		sink_imag_pong <= 0; 
+	end
+	else
+	begin
+		if (is_pong_sink==1'b0)
+		begin
+			sink_valid_ping <= sink_valid;
+			sink_error_ping <= sink_error;
+			sink_sop_ping <= sink_sop; 	
+			sink_eop_ping <= sink_eop; 	
+			sink_real_ping <= sink_real; 
+			sink_imag_ping <= sink_imag; 
+			sink_valid_pong <= 0;
+			sink_error_pong <= 0;
+			sink_sop_pong <= 0; 	
+			sink_eop_pong <= 0; 	
+			sink_real_pong <= 0; 
+			sink_imag_pong <= 0;
+		end
+		else
+		begin
+			sink_valid_ping <= 0;
+			sink_error_ping <= 0;
+			sink_sop_ping <= 0; 	
+			sink_eop_ping <= 0; 	
+			sink_real_ping <= 0; 
+			sink_imag_ping <= 0; 
+			sink_valid_pong <= sink_valid;
+			sink_error_pong <= sink_error;
+			sink_sop_pong <= sink_sop; 	
+			sink_eop_pong <= sink_eop; 	
+			sink_real_pong <= sink_real; 
+			sink_imag_pong <= sink_imag;
+		end
+	end
+end
 
 dct_vecRot_ram #(
 	.wDataIn (wDataIn),  
 	.wDataOutbla (28)  
 	)
-dct_vecRot_ram_inst (
+dct_vecRot_ram_ping (
 	// left side
 	.rst_n_sync 	(rst_n_sync),
 	.clk 			(clk),
 
-	.sink_valid 	(sink_valid), 
-	.sink_ready 	(sink_ready), 
-	.sink_error 	(sink_error), 
-	.sink_sop 		(sink_sop 	),   
-	.sink_eop 		(sink_eop 	),   
-	.sink_real 		(sink_real ),  
-	.sink_imag 		(sink_imag ),  
+	.sink_valid 	(sink_valid_ping), 
+	.sink_ready 	(sink_ready_ping), 
+	.sink_error 	(sink_error_ping), 
+	.sink_sop 		(sink_sop_ping 	),   
+	.sink_eop 		(sink_eop_ping 	),   
+	.sink_real 		(sink_real_ping ),  
+	.sink_imag 		(sink_imag_ping ),  
 
 	.fftpts_in 		(fftpts_in),
 
 	// right side
-	.source_valid 	(source_valid_t0), 
-	.source_ready 	(source_ready_t0), 
-	.source_error 	(source_error_t0), 
-	.source_sop 	(source_sop_t0 ),   
-	.source_eop 	(source_eop_t0 ),   
-	.source_real 	(source_real_t0 ),  
-	.source_imag 	(source_imag_t0 ),
-	.source_real_rev 	(source_real_rev_t0 ),  
-	.source_imag_rev 	(source_imag_rev_t0 ),   
+	.source_valid 	(source_valid_ping), 
+	.source_ready 	(source_ready_ping), 
+	.source_error 	(source_error_ping), 
+	.source_sop 	(source_sop_ping ),   
+	.source_eop 	(source_eop_ping ),   
+	.source_real 	(source_real_ping ),  
+	.source_imag 	(source_imag_ping ),
+	.source_real_rev 	(source_real_rev_ping ),  
+	.source_imag_rev 	(source_imag_rev_ping ),   
 	.fftpts_out 	( )   
 
 	);
 
+dct_vecRot_ram #(
+	.wDataIn (wDataIn),  
+	.wDataOutbla (28)  
+	)
+dct_vecRot_ram_pong (
+	// left side
+	.rst_n_sync 	(rst_n_sync),
+	.clk 			(clk),
+
+	.sink_valid 	(sink_valid_pong), 
+	.sink_ready 	(sink_ready_pong), 
+	.sink_error 	(sink_error_pong), 
+	.sink_sop 		(sink_sop_pong 	),   
+	.sink_eop 		(sink_eop_pong 	),   
+	.sink_real 		(sink_real_pong ),  
+	.sink_imag 		(sink_imag_pong ),  
+
+	.fftpts_in 		(fftpts_in),
+
+	// right side
+	.source_valid 	(source_valid_pong), 
+	.source_ready 	(source_ready_pong), 
+	.source_error 	(source_error_pong), 
+	.source_sop 	(source_sop_pong ),   
+	.source_eop 	(source_eop_pong ),   
+	.source_real 	(source_real_pong ),  
+	.source_imag 	(source_imag_pong ),
+	.source_real_rev 	(source_real_rev_pong ),  
+	.source_imag_rev 	(source_imag_rev_pong ),   
+	.fftpts_out 	( )   
+
+	);
+
+always@(posedge clk)
+begin
+	if (!rst_n_sync)
+	begin
+		is_pong_source <= 0;
+		source_ready_ping <= 0;
+		source_ready_pong <= 0;
+	end
+	else 
+	begin
+		if (is_pong_source==1'b0 && source_eop_ping==1'b1)
+			is_pong_source <= 1'b1;
+		else if (is_pong_source==1'b1 && source_eop_pong==1'b1)
+			is_pong_source <= 1'b0;
+
+		source_ready_ping <= (is_pong_source==1'b0)? source_ready_t0 : 1'b0;
+		source_ready_pong <= (is_pong_source==1'b1)? source_ready_t0 : 1'b0;
+	end
+end
+
+always@(posedge clk)
+begin
+	if (!rst_n_sync)
+	begin
+		source_valid_t0 <= 0; 
+		source_error_t0 <= 0; 
+		source_sop_t0 <= 0;   
+		source_eop_t0 <= 0;   
+		source_real_t0 <= 0;  
+		source_imag_t0 <= 0;  
+		source_real_rev_t0 <= 0; 
+		source_imag_rev_t0 <= 0; 
+	end
+	else
+	begin
+		if (is_pong_source==1'b0)
+		begin
+			source_valid_t0 <= source_valid_ping; 
+			source_error_t0 <= source_error_ping; 
+			source_sop_t0 <= source_sop_ping;   
+			source_eop_t0 <= source_eop_ping;   
+			source_real_t0 <= source_real_ping;  
+			source_imag_t0 <= source_imag_ping;  
+			source_real_rev_t0 <= source_real_rev_ping; 
+			source_imag_rev_t0 <= source_imag_rev_ping; 
+		end
+		else
+		begin
+			source_valid_t0 <= source_valid_pong; 
+			source_error_t0 <= source_error_pong; 
+			source_sop_t0 <= source_sop_pong;   
+			source_eop_t0 <= source_eop_pong;   
+			source_real_t0 <= source_real_pong;  
+			source_imag_t0 <= source_imag_pong;  
+			source_real_rev_t0 <= source_real_rev_pong; 
+			source_imag_rev_t0 <= source_imag_rev_pong; 
+		end
+	end
+end
+//end----------  Ping Pong  --------------
+
+
+//-----------------------------------------------------
+//-----------  Part 2 :  dct_vecRot_twiddle -----------
+//-----------------------------------------------------
 dct_vecRot_twiddle #(
 	.wDataIn (wDataOut_t0),  
 	.wDataOut (wDataOut_t1),
@@ -198,7 +393,9 @@ dct_vecRot_coeff_inst (
 	.source_sin 	(coeff_sin )
 	);
 
-
+//-----------------------------------------------------
+//-----------  Part 3 :  dct_vecRot_scaling -----------
+//-----------------------------------------------------
 dct_vecRot_scaling #(
 	.wDataIn (wDataOut_t1),  
 	.wDataOut (wDataOut)  
