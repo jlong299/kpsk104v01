@@ -43,4 +43,20 @@ end
 fprintf(outf,'END;\n');
 fclose(outf);
 
+outf = fopen('../src/RAM_FIFO/coeff2_cos_dct_vecRot.mif','w');
+fprintf(outf,'WIDTH=%d;\nDEPTH=%d;\n\nADDRESS_RADIX=UNS;\nDATA_RADIX=DEC;\n\nCONTENT BEGIN\n',width,depth);
+for k=1:N
+    fprintf(outf,'%d:%d;\n',k-1,round(real(65536*sqrt(2)*coeff_numerator(k))));
+end
+fprintf(outf,'END;\n');
+fclose(outf);
+
+outf = fopen('../src/RAM_FIFO/coeff2_sin_dct_vecRot.mif','w');
+fprintf(outf,'WIDTH=%d;\nDEPTH=%d;\n\nADDRESS_RADIX=UNS;\nDATA_RADIX=DEC;\n\nCONTENT BEGIN\n',width,depth);
+for k=1:N
+    fprintf(outf,'%d:%d;\n',k-1,round(imag(65536*sqrt(2)*coeff_numerator(k))));
+end
+fprintf(outf,'END;\n');
+fclose(outf);
+
 

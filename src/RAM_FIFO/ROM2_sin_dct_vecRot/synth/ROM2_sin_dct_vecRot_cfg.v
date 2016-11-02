@@ -1,0 +1,5 @@
+config ROM2_sin_dct_vecRot_cfg;
+		design ROM2_sin_dct_vecRot;
+		instance ROM2_sin_dct_vecRot.rom_1port_0 use ROM2_sin_dct_vecRot_rom_1port_151.ROM2_sin_dct_vecRot_rom_1port_151_ofi6pdq;
+endconfig
+

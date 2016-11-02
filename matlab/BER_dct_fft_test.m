@@ -15,4 +15,4 @@ for k=1:repeat_times
     D1_repeat(2, (N*(k-1)+1):(N*k)) = imag(D1(1:N));
 end
 
-max(max(abs(FPGA_out - D1_repeat)) )
+max(max(abs(FPGA_out/sqrt(2) - D1_repeat)) )

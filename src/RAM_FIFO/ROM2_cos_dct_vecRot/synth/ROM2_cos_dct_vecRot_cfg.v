@@ -1,0 +1,5 @@
+config ROM2_cos_dct_vecRot_cfg;
+		design ROM2_cos_dct_vecRot;
+		instance ROM2_cos_dct_vecRot.rom_1port_0 use ROM2_cos_dct_vecRot_rom_1port_151.ROM2_cos_dct_vecRot_rom_1port_151_h2jlawq;
+endconfig
+
