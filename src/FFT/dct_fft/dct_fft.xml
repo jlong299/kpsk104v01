@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <deploy
- date="2016.11.02.09:51:48"
+ date="2016.11.03.17:16:31"
  outputDirectory="C:/work/pj104/code/1611/CE/src/FFT/dct_fft/">
  <perimeter>
   <parameter
@@ -90,7 +90,7 @@
  </perimeter>
  <entity kind="dct_fft" version="1.0" name="dct_fft">
   <parameter name="AUTO_CLK_CLOCK_RATE" value="-1" />
-  <parameter name="AUTO_GENERATION_ID" value="1478051507" />
+  <parameter name="AUTO_GENERATION_ID" value="1478164591" />
   <parameter name="AUTO_DEVICE" value="10AX115U3F45E2SGE3" />
   <parameter name="AUTO_DEVICE_FAMILY" value="Arria 10" />
   <parameter name="AUTO_CLK_RESET_DOMAIN" value="-1" />
@@ -125,18 +125,18 @@
   </childSourceFiles>
   <messages>
    <message level="Info" culprit="dct_fft">"Generating: dct_fft"</message>
-   <message level="Info" culprit="dct_fft">"Generating: dct_fft_altera_fft_ii_151_2xmofsy"</message>
+   <message level="Info" culprit="dct_fft">"Generating: dct_fft_altera_fft_ii_151_c7dyz3i"</message>
   </messages>
  </entity>
  <entity
    kind="altera_fft_ii"
    version="15.1"
-   name="dct_fft_altera_fft_ii_151_2xmofsy">
+   name="dct_fft_altera_fft_ii_151_c7dyz3i">
   <parameter name="THROUGHPUT_LATENCY" value="2048" />
   <parameter name="in_width_derived" value="16" />
   <parameter name="in_order" value="Natural" />
   <parameter name="num_engines_derived" value="1" />
-  <parameter name="twid_width_derived" value="16" />
+  <parameter name="twid_width_derived" value="24" />
   <parameter name="length" value="2048" />
   <parameter name="out_order" value="Bit Reverse" />
   <parameter name="selected_device_family" value="Arria 10" />
@@ -151,38 +151,38 @@
   <parameter name="num_engines" value="1" />
   <parameter name="out_width_derived" value="28" />
   <parameter name="hard_fp" value="false" />
-  <parameter name="twid_width" value="16" />
+  <parameter name="twid_width" value="24" />
   <parameter name="direction" value="Bi-directional" />
   <generatedFiles>
    <file
-       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_2xmofsy_opt_twr4.hex"
+       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_c7dyz3i_opt_twr3.hex"
        attributes="" />
    <file
-       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_2xmofsy_opt_twi5.hex"
+       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_c7dyz3i_opt_twi4.hex"
        attributes="" />
    <file
-       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_2xmofsy_opt_twi1.hex"
+       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_c7dyz3i_opt_twi1.hex"
        attributes="" />
    <file
-       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_2xmofsy_opt_twr1.hex"
+       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_c7dyz3i_opt_twr4.hex"
        attributes="" />
    <file
-       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_2xmofsy_opt_twi2.hex"
+       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_c7dyz3i_opt_twi5.hex"
        attributes="" />
    <file
-       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_2xmofsy_opt_twr5.hex"
+       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_c7dyz3i_opt_twr1.hex"
        attributes="" />
    <file
-       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_2xmofsy_opt_twr2.hex"
+       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_c7dyz3i_opt_twi2.hex"
        attributes="" />
    <file
-       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_2xmofsy_opt_twi3.hex"
+       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_c7dyz3i_opt_twr5.hex"
        attributes="" />
    <file
-       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_2xmofsy_opt_twr3.hex"
+       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_c7dyz3i_opt_twr2.hex"
        attributes="" />
    <file
-       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_2xmofsy_opt_twi4.hex"
+       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_c7dyz3i_opt_twi3.hex"
        attributes="" />
    <file
        path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\auk_dspip_text_pkg.vhd"
@@ -314,39 +314,39 @@
        path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\auk_dspip_r22sdf_twrom.vhd"
        attributes="" />
    <file
-       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_2xmofsy.sv"
+       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_c7dyz3i.sv"
        attributes="" />
   </generatedFiles>
   <childGeneratedFiles>
    <file
-       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_2xmofsy_opt_twr4.hex"
+       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_c7dyz3i_opt_twr3.hex"
        attributes="" />
    <file
-       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_2xmofsy_opt_twi5.hex"
+       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_c7dyz3i_opt_twi4.hex"
        attributes="" />
    <file
-       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_2xmofsy_opt_twi1.hex"
+       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_c7dyz3i_opt_twi1.hex"
        attributes="" />
    <file
-       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_2xmofsy_opt_twr1.hex"
+       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_c7dyz3i_opt_twr4.hex"
        attributes="" />
    <file
-       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_2xmofsy_opt_twi2.hex"
+       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_c7dyz3i_opt_twi5.hex"
        attributes="" />
    <file
-       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_2xmofsy_opt_twr5.hex"
+       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_c7dyz3i_opt_twr1.hex"
        attributes="" />
    <file
-       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_2xmofsy_opt_twr2.hex"
+       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_c7dyz3i_opt_twi2.hex"
        attributes="" />
    <file
-       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_2xmofsy_opt_twi3.hex"
+       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_c7dyz3i_opt_twr5.hex"
        attributes="" />
    <file
-       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_2xmofsy_opt_twr3.hex"
+       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_c7dyz3i_opt_twr2.hex"
        attributes="" />
    <file
-       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_2xmofsy_opt_twi4.hex"
+       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_c7dyz3i_opt_twi3.hex"
        attributes="" />
    <file
        path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\auk_dspip_text_pkg.vhd"
@@ -478,7 +478,7 @@
        path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\auk_dspip_r22sdf_twrom.vhd"
        attributes="" />
    <file
-       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_2xmofsy.sv"
+       path="C:\work\pj104\code\1611\CE\src\FFT\dct_fft\altera_fft_ii_151\synth\dct_fft_altera_fft_ii_151_c7dyz3i.sv"
        attributes="" />
   </childGeneratedFiles>
   <sourceFiles>
@@ -491,7 +491,7 @@
   <childSourceFiles/>
   <instantiator instantiator="dct_fft" as="fft_ii_0" />
   <messages>
-   <message level="Info" culprit="dct_fft">"Generating: dct_fft_altera_fft_ii_151_2xmofsy"</message>
+   <message level="Info" culprit="dct_fft">"Generating: dct_fft_altera_fft_ii_151_c7dyz3i"</message>
   </messages>
  </entity>
 </deploy>

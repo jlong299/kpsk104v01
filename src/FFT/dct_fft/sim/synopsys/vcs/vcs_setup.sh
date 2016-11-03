@@ -12,7 +12,7 @@
 # or its authorized distributors. Please refer to the applicable 
 # agreement for further details.
 
-# ACDS 15.1 185 win32 2016.11.02.09:51:47
+# ACDS 15.1 185 win32 2016.11.03.17:16:31
 
 # ----------------------------------------
 # vcs - auto-generated simulation script
@@ -54,7 +54,7 @@
 # within the Quartus project, and generate a unified
 # script which supports all the Altera IP within the design.
 # ----------------------------------------
-# ACDS 15.1 185 win32 2016.11.02.09:51:47
+# ACDS 15.1 185 win32 2016.11.03.17:16:31
 # ----------------------------------------
 # initialize variables
 TOP_LEVEL_NAME="dct_fft"
@@ -91,16 +91,16 @@ fi
 # ----------------------------------------
 # copy RAM/ROM files to simulation directory
 if [ $SKIP_FILE_COPY -eq 0 ]; then
-  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_2xmofsy_opt_twr4.hex ./
-  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_2xmofsy_opt_twi5.hex ./
-  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_2xmofsy_opt_twi1.hex ./
-  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_2xmofsy_opt_twr1.hex ./
-  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_2xmofsy_opt_twi2.hex ./
-  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_2xmofsy_opt_twr5.hex ./
-  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_2xmofsy_opt_twr2.hex ./
-  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_2xmofsy_opt_twi3.hex ./
-  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_2xmofsy_opt_twr3.hex ./
-  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_2xmofsy_opt_twi4.hex ./
+  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_c7dyz3i_opt_twr3.hex ./
+  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_c7dyz3i_opt_twi4.hex ./
+  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_c7dyz3i_opt_twi1.hex ./
+  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_c7dyz3i_opt_twr4.hex ./
+  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_c7dyz3i_opt_twi5.hex ./
+  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_c7dyz3i_opt_twr1.hex ./
+  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_c7dyz3i_opt_twi2.hex ./
+  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_c7dyz3i_opt_twr5.hex ./
+  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_c7dyz3i_opt_twr2.hex ./
+  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_c7dyz3i_opt_twi3.hex ./
 fi
 
 vcs -lca -timescale=1ps/1ps -sverilog +verilog2001ext+.v -ntb_opts dtm $ELAB_OPTIONS $USER_DEFINED_ELAB_OPTIONS \
@@ -115,7 +115,7 @@ vcs -lca -timescale=1ps/1ps -sverilog +verilog2001ext+.v -ntb_opts dtm $ELAB_OPT
   -v $QUARTUS_INSTALL_DIR/eda/sim_lib/twentynm_hssi_atoms.v \
   -v $QUARTUS_INSTALL_DIR/eda/sim_lib/synopsys/twentynm_hip_atoms_ncrypt.v \
   -v $QUARTUS_INSTALL_DIR/eda/sim_lib/twentynm_hip_atoms.v \
-  $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_2xmofsy.vo \
+  $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_c7dyz3i.vo \
   $QSYS_SIMDIR/dct_fft.v \
   -top $TOP_LEVEL_NAME
 # ----------------------------------------

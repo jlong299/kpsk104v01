@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <EnsembleReport name="dct_fft" kind="dct_fft" version="1.0" fabric="QSYS">
  <!-- Format version 15.1 185 (Future versions may contain additional information.) -->
- <!-- 2016.11.02.09:51:47 -->
+ <!-- 2016.11.03.17:16:31 -->
  <!-- A collection of modules and connections -->
  <parameter name="AUTO_GENERATION_ID">
   <type>java.lang.Integer</type>
-  <value>1478051507</value>
+  <value>1478164591</value>
   <derived>false</derived>
   <enabled>true</enabled>
   <visible>false</visible>
@@ -173,7 +173,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="twid_width">
    <type>int</type>
-   <value>16</value>
+   <value>24</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -181,7 +181,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="twid_width_derived">
    <type>int</type>
-   <value>16</value>
+   <value>24</value>
    <derived>true</derived>
    <enabled>true</enabled>
    <visible>false</visible>

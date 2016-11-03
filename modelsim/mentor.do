@@ -49,7 +49,7 @@ elab
 view wave
 add wave *
 add wave sim:/dct_tb/u0/*
-add wave sim:/dct_tb/u0/dct_vecRot_inst/*
+#add wave sim:/dct_tb/u0/dct_vecRot_inst/*
 view structure
 view signals
 run 200us

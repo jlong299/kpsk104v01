@@ -2,3 +2,5 @@ modelsim/libraries/
 modelsim/transcript
 modelsim/modelsim.ini
 modelsim/vsim.wlf
+modelsim/*.hex
+modelsim/*.ver

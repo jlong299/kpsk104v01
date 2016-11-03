@@ -14,12 +14,12 @@ Info: dct_fft: Running transform generation_view_transform took 0.000s
 Info: fft_ii_0: Running transform generation_view_transform
 Info: fft_ii_0: Running transform generation_view_transform took 0.000s
 Info: dct_fft: Running transform merlin_avalon_transform
-Info: dct_fft: Running transform merlin_avalon_transform took 0.038s
+Info: dct_fft: Running transform merlin_avalon_transform took 0.085s
 Info: dct_fft: "Naming system components in system: dct_fft"
 Info: dct_fft: "Processing generation queue"
 Info: dct_fft: "Generating: dct_fft"
-Info: dct_fft: "Generating: dct_fft_altera_fft_ii_151_2xmofsy"
-Info: fft_ii_0: Created simgen file at: C:/Users/longjia1/AppData/Local/Temp/alt7107_8834236320076505134.dir/0001_fft_ii_0_gen/dct_fft_altera_fft_ii_151_2xmofsy.vo
+Info: dct_fft: "Generating: dct_fft_altera_fft_ii_151_c7dyz3i"
+Info: fft_ii_0: Created simgen file at: C:/Users/longjia1/AppData/Local/Temp/alt7108_3449671368747045801.dir/0001_fft_ii_0_gen/dct_fft_altera_fft_ii_151_c7dyz3i.vo
 Info: dct_fft: Done "dct_fft" with 2 modules, 12 files
 Info: qsys-generate succeeded.
 Info: Finished: Create simulation model
@@ -63,7 +63,7 @@ Info: dct_fft: Running transform merlin_avalon_transform took 0.007s
 Info: dct_fft: "Naming system components in system: dct_fft"
 Info: dct_fft: "Processing generation queue"
 Info: dct_fft: "Generating: dct_fft"
-Info: dct_fft: "Generating: dct_fft_altera_fft_ii_151_2xmofsy"
+Info: dct_fft: "Generating: dct_fft_altera_fft_ii_151_c7dyz3i"
 Info: dct_fft: Done "dct_fft" with 2 modules, 56 files
 Info: qsys-generate succeeded.
 Info: Finished: Create HDL design files for synthesis

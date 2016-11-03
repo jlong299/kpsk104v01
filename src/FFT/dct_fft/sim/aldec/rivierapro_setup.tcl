@@ -12,7 +12,7 @@
 # or its authorized distributors. Please refer to the applicable 
 # agreement for further details.
 
-# ACDS 15.1 185 win32 2016.11.02.09:51:47
+# ACDS 15.1 185 win32 2016.11.03.17:16:31
 # ----------------------------------------
 # Auto-generated simulation script rivierapro_setup.tcl
 # ----------------------------------------
@@ -106,16 +106,16 @@ if { [ string match "Active" $Aldec ] } {
 # Copy ROM/RAM files to simulation directory
 alias file_copy {
   echo "\[exec\] file_copy"
-  file copy -force $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_2xmofsy_opt_twr4.hex ./
-  file copy -force $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_2xmofsy_opt_twi5.hex ./
-  file copy -force $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_2xmofsy_opt_twi1.hex ./
-  file copy -force $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_2xmofsy_opt_twr1.hex ./
-  file copy -force $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_2xmofsy_opt_twi2.hex ./
-  file copy -force $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_2xmofsy_opt_twr5.hex ./
-  file copy -force $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_2xmofsy_opt_twr2.hex ./
-  file copy -force $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_2xmofsy_opt_twi3.hex ./
-  file copy -force $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_2xmofsy_opt_twr3.hex ./
-  file copy -force $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_2xmofsy_opt_twi4.hex ./
+  file copy -force $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_c7dyz3i_opt_twr3.hex ./
+  file copy -force $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_c7dyz3i_opt_twi4.hex ./
+  file copy -force $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_c7dyz3i_opt_twi1.hex ./
+  file copy -force $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_c7dyz3i_opt_twr4.hex ./
+  file copy -force $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_c7dyz3i_opt_twi5.hex ./
+  file copy -force $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_c7dyz3i_opt_twr1.hex ./
+  file copy -force $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_c7dyz3i_opt_twi2.hex ./
+  file copy -force $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_c7dyz3i_opt_twr5.hex ./
+  file copy -force $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_c7dyz3i_opt_twr2.hex ./
+  file copy -force $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_c7dyz3i_opt_twi3.hex ./
 }
 
 # ----------------------------------------
@@ -164,7 +164,7 @@ alias dev_com {
 # Compile the design files in correct order
 alias com {
   echo "\[exec\] com"
-  eval  vlog -v2k5 $USER_DEFINED_COMPILE_OPTIONS "$QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_2xmofsy.vo" -work dct_fft_altera_fft_ii_151
+  eval  vlog -v2k5 $USER_DEFINED_COMPILE_OPTIONS "$QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_c7dyz3i.vo" -work dct_fft_altera_fft_ii_151
   eval  vlog -v2k5 $USER_DEFINED_COMPILE_OPTIONS "$QSYS_SIMDIR/dct_fft.v"                                                                                    
 }
 
