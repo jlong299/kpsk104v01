@@ -68,7 +68,7 @@ reg	 [9:0]	wraddress0, rdaddress0, wraddress1, rdaddress1;	//constant width
  wire [2*wDataOutbla -1:0]  	q0, q1;
 //wire [55:0]  	q0, q1;
 reg [1:0] 	fsm;
-wire [2*wDataIn-1:0] 	data;
+reg [2*wDataIn-1:0] 	data;
 reg [11:0] 		cnt_sink_valid;
 reg 	read_latter_half, read_latter_half_r;
 
@@ -76,7 +76,7 @@ reg [11:0] 	cnt_sink_valid_rev;
 
 assign 	source_error = 2'b00;
 assign 	fftpts_divd2 = {1'b0,fftpts_in[11:1]};
-assign 	data = {sink_real,sink_imag};
+assign	data = {sink_real,sink_imag};
 assign  fftpts_out = fftpts_in;
 
 
@@ -179,19 +179,216 @@ end
 // assign cnt_sink_valid_rev[0] = cnt_sink_valid[10];
 //-------------------------------------------------------
 //------------  !!!!  Only when 1024 fft pts -----------
-assign cnt_sink_valid_rev[11] = 1'b0;
-assign cnt_sink_valid_rev[10] = 1'b0;
-assign cnt_sink_valid_rev[9] = cnt_sink_valid[0];
-assign cnt_sink_valid_rev[8] = cnt_sink_valid[1];
-assign cnt_sink_valid_rev[7] = cnt_sink_valid[2];
-assign cnt_sink_valid_rev[6] = cnt_sink_valid[3];
-assign cnt_sink_valid_rev[5] = cnt_sink_valid[4];
-assign cnt_sink_valid_rev[4] = cnt_sink_valid[5];
-assign cnt_sink_valid_rev[3] = cnt_sink_valid[6];
-assign cnt_sink_valid_rev[2] = cnt_sink_valid[7];
-assign cnt_sink_valid_rev[1] = cnt_sink_valid[8];
-assign cnt_sink_valid_rev[0] = cnt_sink_valid[9];
+// assign cnt_sink_valid_rev[11] = 1'b0;
+// assign cnt_sink_valid_rev[10] = 1'b0;
+// assign cnt_sink_valid_rev[9] = cnt_sink_valid[0];
+// assign cnt_sink_valid_rev[8] = cnt_sink_valid[1];
+// assign cnt_sink_valid_rev[7] = cnt_sink_valid[2];
+// assign cnt_sink_valid_rev[6] = cnt_sink_valid[3];
+// assign cnt_sink_valid_rev[5] = cnt_sink_valid[4];
+// assign cnt_sink_valid_rev[4] = cnt_sink_valid[5];
+// assign cnt_sink_valid_rev[3] = cnt_sink_valid[6];
+// assign cnt_sink_valid_rev[2] = cnt_sink_valid[7];
+// assign cnt_sink_valid_rev[1] = cnt_sink_valid[8];
+// assign cnt_sink_valid_rev[0] = cnt_sink_valid[9];
 //-------------------------------------------------------
+//------------  !!!!  Only when 512 fft pts -----------
+// assign cnt_sink_valid_rev[11] = 1'b0;
+// assign cnt_sink_valid_rev[10] = 1'b0;
+// assign cnt_sink_valid_rev[9] = 1'b0;
+// assign cnt_sink_valid_rev[8] = cnt_sink_valid[0];
+// assign cnt_sink_valid_rev[7] = cnt_sink_valid[1];
+// assign cnt_sink_valid_rev[6] = cnt_sink_valid[2];
+// assign cnt_sink_valid_rev[5] = cnt_sink_valid[3];
+// assign cnt_sink_valid_rev[4] = cnt_sink_valid[4];
+// assign cnt_sink_valid_rev[3] = cnt_sink_valid[5];
+// assign cnt_sink_valid_rev[2] = cnt_sink_valid[6];
+// assign cnt_sink_valid_rev[1] = cnt_sink_valid[7];
+// assign cnt_sink_valid_rev[0] = cnt_sink_valid[8];
+//-------------------------------------------------------
+//------------  !!!!  Only when 256 fft pts -----------
+// assign cnt_sink_valid_rev[11] = 1'b0;
+// assign cnt_sink_valid_rev[10] = 1'b0;
+// assign cnt_sink_valid_rev[9] = 1'b0;
+// assign cnt_sink_valid_rev[8] = 1'b0;
+// assign cnt_sink_valid_rev[7] = cnt_sink_valid[0];
+// assign cnt_sink_valid_rev[6] = cnt_sink_valid[1];
+// assign cnt_sink_valid_rev[5] = cnt_sink_valid[2];
+// assign cnt_sink_valid_rev[4] = cnt_sink_valid[3];
+// assign cnt_sink_valid_rev[3] = cnt_sink_valid[4];
+// assign cnt_sink_valid_rev[2] = cnt_sink_valid[5];
+// assign cnt_sink_valid_rev[1] = cnt_sink_valid[6];
+// assign cnt_sink_valid_rev[0] = cnt_sink_valid[7];
+//-------------------------------------------------------
+//------------  !!!!  Only when 128 fft pts -----------
+// assign cnt_sink_valid_rev[11] = 1'b0;
+// assign cnt_sink_valid_rev[10] = 1'b0;
+// assign cnt_sink_valid_rev[9] = 1'b0;
+// assign cnt_sink_valid_rev[8] = 1'b0;
+// assign cnt_sink_valid_rev[7] = 1'b0;
+// assign cnt_sink_valid_rev[6] = cnt_sink_valid[0];
+// assign cnt_sink_valid_rev[5] = cnt_sink_valid[1];
+// assign cnt_sink_valid_rev[4] = cnt_sink_valid[2];
+// assign cnt_sink_valid_rev[3] = cnt_sink_valid[3];
+// assign cnt_sink_valid_rev[2] = cnt_sink_valid[4];
+// assign cnt_sink_valid_rev[1] = cnt_sink_valid[5];
+// assign cnt_sink_valid_rev[0] = cnt_sink_valid[6];
+//-------------------------------------------------------
+//------------  !!!!  Only when 64 fft pts -----------
+// assign cnt_sink_valid_rev[11] = 1'b0;
+// assign cnt_sink_valid_rev[10] = 1'b0;
+// assign cnt_sink_valid_rev[9] = 1'b0;
+// assign cnt_sink_valid_rev[8] = 1'b0;
+// assign cnt_sink_valid_rev[7] = 1'b0;
+// assign cnt_sink_valid_rev[6] = 1'b0;
+// assign cnt_sink_valid_rev[5] = cnt_sink_valid[0];
+// assign cnt_sink_valid_rev[4] = cnt_sink_valid[1];
+// assign cnt_sink_valid_rev[3] = cnt_sink_valid[2];
+// assign cnt_sink_valid_rev[2] = cnt_sink_valid[3];
+// assign cnt_sink_valid_rev[1] = cnt_sink_valid[4];
+// assign cnt_sink_valid_rev[0] = cnt_sink_valid[5];
+// //-------------------------------------------------------
+//------------  !!!!  Only when 32 fft pts -----------
+// assign cnt_sink_valid_rev[11] = 1'b0;
+// assign cnt_sink_valid_rev[10] = 1'b0;
+// assign cnt_sink_valid_rev[9] = 1'b0;
+// assign cnt_sink_valid_rev[8] = 1'b0;
+// assign cnt_sink_valid_rev[7] = 1'b0;
+// assign cnt_sink_valid_rev[6] = 1'b0;
+// assign cnt_sink_valid_rev[5] = 1'b0;
+// assign cnt_sink_valid_rev[4] = cnt_sink_valid[0];
+// assign cnt_sink_valid_rev[3] = cnt_sink_valid[1];
+// assign cnt_sink_valid_rev[2] = cnt_sink_valid[2];
+// assign cnt_sink_valid_rev[1] = cnt_sink_valid[3];
+// assign cnt_sink_valid_rev[0] = cnt_sink_valid[4];
+//-------------------------------------------------------
+
+always@(*)
+begin
+case (fftpts_in)
+12'd2048 : 
+begin
+	cnt_sink_valid_rev[11] = 1'b0;
+	cnt_sink_valid_rev[10] =cnt_sink_valid[0];
+	cnt_sink_valid_rev[9] = cnt_sink_valid[1];
+	cnt_sink_valid_rev[8] = cnt_sink_valid[2];
+	cnt_sink_valid_rev[7] = cnt_sink_valid[3];
+	cnt_sink_valid_rev[6] = cnt_sink_valid[4];
+	cnt_sink_valid_rev[5] = cnt_sink_valid[5];
+	cnt_sink_valid_rev[4] = cnt_sink_valid[6];
+	cnt_sink_valid_rev[3] = cnt_sink_valid[7];
+	cnt_sink_valid_rev[2] = cnt_sink_valid[8];
+	cnt_sink_valid_rev[1] = cnt_sink_valid[9];
+	cnt_sink_valid_rev[0] = cnt_sink_valid[10];
+end
+12'd1024 : 
+begin
+	cnt_sink_valid_rev[11] = 1'b0;
+	cnt_sink_valid_rev[10] = 1'b0;
+	cnt_sink_valid_rev[9] = cnt_sink_valid[0];
+	cnt_sink_valid_rev[8] = cnt_sink_valid[1];
+	cnt_sink_valid_rev[7] = cnt_sink_valid[2];
+	cnt_sink_valid_rev[6] = cnt_sink_valid[3];
+	cnt_sink_valid_rev[5] = cnt_sink_valid[4];
+	cnt_sink_valid_rev[4] = cnt_sink_valid[5];
+	cnt_sink_valid_rev[3] = cnt_sink_valid[6];
+	cnt_sink_valid_rev[2] = cnt_sink_valid[7];
+	cnt_sink_valid_rev[1] = cnt_sink_valid[8];
+	cnt_sink_valid_rev[0] = cnt_sink_valid[9];
+end
+12'd512 :
+begin
+	cnt_sink_valid_rev[11] = 1'b0;
+	cnt_sink_valid_rev[10] = 1'b0;
+	cnt_sink_valid_rev[9] = 1'b0;
+	cnt_sink_valid_rev[8] = cnt_sink_valid[0];
+	cnt_sink_valid_rev[7] = cnt_sink_valid[1];
+	cnt_sink_valid_rev[6] = cnt_sink_valid[2];
+	cnt_sink_valid_rev[5] = cnt_sink_valid[3];
+	cnt_sink_valid_rev[4] = cnt_sink_valid[4];
+	cnt_sink_valid_rev[3] = cnt_sink_valid[5];
+	cnt_sink_valid_rev[2] = cnt_sink_valid[6];
+	cnt_sink_valid_rev[1] = cnt_sink_valid[7];
+	cnt_sink_valid_rev[0] = cnt_sink_valid[8];
+end
+12'd256 :
+begin
+	cnt_sink_valid_rev[11] = 1'b0;
+	cnt_sink_valid_rev[10] = 1'b0;
+	cnt_sink_valid_rev[9] = 1'b0;
+	cnt_sink_valid_rev[8] = 1'b0;
+	cnt_sink_valid_rev[7] = cnt_sink_valid[0];
+	cnt_sink_valid_rev[6] = cnt_sink_valid[1];
+	cnt_sink_valid_rev[5] = cnt_sink_valid[2];
+	cnt_sink_valid_rev[4] = cnt_sink_valid[3];
+	cnt_sink_valid_rev[3] = cnt_sink_valid[4];
+	cnt_sink_valid_rev[2] = cnt_sink_valid[5];
+	cnt_sink_valid_rev[1] = cnt_sink_valid[6];
+	cnt_sink_valid_rev[0] = cnt_sink_valid[7];
+end
+12'd128 :
+begin
+	cnt_sink_valid_rev[11] = 1'b0;
+	cnt_sink_valid_rev[10] = 1'b0;
+	cnt_sink_valid_rev[9] = 1'b0;
+	cnt_sink_valid_rev[8] = 1'b0;
+	cnt_sink_valid_rev[7] = 1'b0;
+	cnt_sink_valid_rev[6] = cnt_sink_valid[0];
+	cnt_sink_valid_rev[5] = cnt_sink_valid[1];
+	cnt_sink_valid_rev[4] = cnt_sink_valid[2];
+	cnt_sink_valid_rev[3] = cnt_sink_valid[3];
+	cnt_sink_valid_rev[2] = cnt_sink_valid[4];
+	cnt_sink_valid_rev[1] = cnt_sink_valid[5];
+	cnt_sink_valid_rev[0] = cnt_sink_valid[6];
+end
+12'd64 :
+begin
+	cnt_sink_valid_rev[11] = 1'b0;
+	cnt_sink_valid_rev[10] = 1'b0;
+	cnt_sink_valid_rev[9] = 1'b0;
+	cnt_sink_valid_rev[8] = 1'b0;
+	cnt_sink_valid_rev[7] = 1'b0;
+	cnt_sink_valid_rev[6] = 1'b0;
+	cnt_sink_valid_rev[5] = cnt_sink_valid[0];
+	cnt_sink_valid_rev[4] = cnt_sink_valid[1];
+	cnt_sink_valid_rev[3] = cnt_sink_valid[2];
+	cnt_sink_valid_rev[2] = cnt_sink_valid[3];
+	cnt_sink_valid_rev[1] = cnt_sink_valid[4];
+	cnt_sink_valid_rev[0] = cnt_sink_valid[5];
+end
+12'd32 :
+begin
+	cnt_sink_valid_rev[11] = 1'b0;
+	cnt_sink_valid_rev[10] = 1'b0;
+	cnt_sink_valid_rev[9] = 1'b0;
+	cnt_sink_valid_rev[8] = 1'b0;
+	cnt_sink_valid_rev[7] = 1'b0;
+	cnt_sink_valid_rev[6] = 1'b0;
+	cnt_sink_valid_rev[5] = 1'b0;
+	cnt_sink_valid_rev[4] = cnt_sink_valid[0];
+	cnt_sink_valid_rev[3] = cnt_sink_valid[1];
+	cnt_sink_valid_rev[2] = cnt_sink_valid[2];
+	cnt_sink_valid_rev[1] = cnt_sink_valid[3];
+	cnt_sink_valid_rev[0] = cnt_sink_valid[4];
+end
+default :
+begin
+	cnt_sink_valid_rev[11] = 1'b0;
+	cnt_sink_valid_rev[10] =cnt_sink_valid[0];
+	cnt_sink_valid_rev[9] = cnt_sink_valid[1];
+	cnt_sink_valid_rev[8] = cnt_sink_valid[2];
+	cnt_sink_valid_rev[7] = cnt_sink_valid[3];
+	cnt_sink_valid_rev[6] = cnt_sink_valid[4];
+	cnt_sink_valid_rev[5] = cnt_sink_valid[5];
+	cnt_sink_valid_rev[4] = cnt_sink_valid[6];
+	cnt_sink_valid_rev[3] = cnt_sink_valid[7];
+	cnt_sink_valid_rev[2] = cnt_sink_valid[8];
+	cnt_sink_valid_rev[1] = cnt_sink_valid[9];
+	cnt_sink_valid_rev[0] = cnt_sink_valid[10];
+end
+endcase
+end
+
 
 always@(*)
 begin
@@ -204,6 +401,7 @@ begin
 	wraddress0 = (cnt_sink_valid_rev < fftpts_divd2) ? cnt_sink_valid_rev : 0;
 	wraddress1 = (cnt_sink_valid_rev >= fftpts_divd2) ? (cnt_sink_valid_rev - fftpts_divd2) : 0;
 end
+
 
 //-----------------  Read RAM ------------------------
 //  Expected output : 

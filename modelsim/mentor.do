@@ -37,6 +37,11 @@ vlog -sv ../src/RAM_FIFO/RAM_dct_preFFT_reod/ram_2port_151/sim/RAM_dct_preFFT_re
 vlog -sv ../src/dct/dct_preFFT_reod.v 
 vlog -sv ../src/dct/dct_top.v 
 
+vlog -sv ../src/RAM_FIFO/ROM2_cos_dct_vecRot/sim/ROM2_cos_dct_vecRot.v
+vlog -sv ../src/RAM_FIFO/ROM2_cos_dct_vecRot/rom_1port_151/sim/ROM2_cos_dct_vecRot_rom_1port_151_h2jlawq.v
+vlog -sv ../src/RAM_FIFO/ROM2_sin_dct_vecRot/sim/ROM2_sin_dct_vecRot.v
+vlog -sv ../src/RAM_FIFO/ROM2_sin_dct_vecRot/rom_1port_151/sim/ROM2_sin_dct_vecRot_rom_1port_151_ofi6pdq.v
+
 # Elaborate the design.
 elab
 # Run the simulation
@@ -47,7 +52,7 @@ add wave sim:/dct_tb/u0/*
 add wave sim:/dct_tb/u0/dct_vecRot_inst/*
 view structure
 view signals
-run 100us
+run 200us
 # Report success to the shell
 # exit -code 0
 # End of template

@@ -6,13 +6,13 @@ outf = fopen('../modelsim/dct_result.dat','r');
 fclose(outf);
 
 len_fpga_out = length(FPGA_out(1,:));
-repeat_times = len_fpga_out/N;
+repeat_times = floor(len_fpga_out/N);
 
-D1_repeat = zeros(2,len_fpga_out);
+D1_repeat = zeros(2,repeat_times*N);
 
 for k=1:repeat_times
     D1_repeat(1, (N*(k-1)+1):(N*k)) = real(D1(1:N));
     D1_repeat(2, (N*(k-1)+1):(N*k)) = imag(D1(1:N));
 end
 
-max(max(abs(FPGA_out/sqrt(2) - D1_repeat)) )
+max(max(abs(FPGA_out(:,1:repeat_times*N) - D1_repeat)) )

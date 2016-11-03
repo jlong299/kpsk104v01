@@ -172,8 +172,8 @@ begin
 		end
 		12'd1024:
 		begin
-			source_real <= p3[0][wDataIn+wCoeff-4:21]+p3[0][20]; //rounding
-			source_imag <= p3[1][wDataIn+wCoeff-4:21]+p3[1][20]; //rounding
+			source_real <= p3[0][wDataIn+wCoeff-3:22]+p3[0][21]; //rounding
+			source_imag <= p3[1][wDataIn+wCoeff-3:22]+p3[1][21]; //rounding
 		end
 		12'd512:
 		begin
@@ -182,8 +182,8 @@ begin
 		end
 		12'd256:
 		begin
-			source_real <= p3[0][wDataIn+wCoeff-5:20]+p3[0][19]; //rounding
-			source_imag <= p3[1][wDataIn+wCoeff-5:20]+p3[1][19]; //rounding
+			source_real <= p3[0][wDataIn+wCoeff-4:21]+p3[0][20]; //rounding
+			source_imag <= p3[1][wDataIn+wCoeff-4:21]+p3[1][20]; //rounding
 		end
 		12'd128:
 		begin
@@ -192,8 +192,8 @@ begin
 		end
 		12'd64:
 		begin
-			source_real <= p3[0][wDataIn+wCoeff-6:19]+p3[0][18]; //rounding
-			source_imag <= p3[1][wDataIn+wCoeff-6:19]+p3[1][18]; //rounding
+			source_real <= p3[0][wDataIn+wCoeff-5:20]+p3[0][19]; //rounding
+			source_imag <= p3[1][wDataIn+wCoeff-5:20]+p3[1][19]; //rounding
 		end
 		12'd32:
 		begin

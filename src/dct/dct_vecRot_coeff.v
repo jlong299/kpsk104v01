@@ -39,24 +39,51 @@ module dct_vecRot_coeff #(parameter
 	input wire [11:0] 		fftpts_in, 		
 	// right side
 	// 1 clks delay with sink_valid
-	output wire [wDataOut-1:0] 	source_cos,
-	output wire [wDataOut-1:0] 	source_sin
+	output reg [wDataOut-1:0] 	source_cos,
+	output reg [wDataOut-1:0] 	source_sin
 	);
 
 
 	reg [10:0] address_cos, address_sin;
 	reg [9:0]  step;
+	wire [wDataOut-1:0] 	source_cos1, source_cos2;
+	wire [wDataOut-1:0] 	source_sin1, source_sin2;
 
 	ROM_cos_dct_vecRot ROM_cos_dct_vecRot_inst (
 		.address (address_cos), //  rom_input.address
 		.clock   (clk),   //           .clk
-		.q       (source_cos)        // rom_output.dataout
+		.q       (source_cos1)        // rom_output.dataout
 	);
 	ROM_sin_dct_vecRot ROM_sin_dct_vecRot_inst (
 		.address (address_sin), //  rom_input.address
 		.clock   (clk),   //           .clk
-		.q       (source_sin)        // rom_output.dataout
+		.q       (source_sin1)        // rom_output.dataout
 	);
+
+	ROM2_cos_dct_vecRot ROM2_cos_dct_vecRot_inst (
+		.address (address_cos), //  rom_input.address
+		.clock   (clk),   //           .clk
+		.q       (source_cos2)        // rom_output.dataout
+	);
+	ROM2_sin_dct_vecRot ROM2_sin_dct_vecRot_inst (
+		.address (address_sin), //  rom_input.address
+		.clock   (clk),   //           .clk
+		.q       (source_sin2)        // rom_output.dataout
+	);
+
+	always@(*)
+	begin
+		if (fftpts_in==12'd2048 || fftpts_in==12'd512 || fftpts_in==12'd128 || fftpts_in==12'd32)
+		begin
+			source_cos = source_cos1;
+			source_sin = source_sin1;
+		end
+		else
+		begin
+			source_cos = source_cos2;
+			source_sin = source_sin2;
+		end
+	end
 
 	always@(posedge clk)
 	begin
