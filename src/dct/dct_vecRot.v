@@ -205,7 +205,7 @@ end
 
 dct_vecRot_ram #(
 	.wDataIn (wDataIn),  
-	.wDataOutbla (28)  
+	.wDataOut (wDataOut_t0)  
 	)
 dct_vecRot_ram_ping (
 	// left side
@@ -238,7 +238,7 @@ dct_vecRot_ram_ping (
 
 dct_vecRot_ram #(
 	.wDataIn (wDataIn),  
-	.wDataOutbla (28)  
+	.wDataOut (wDataOut_t0)  
 	)
 dct_vecRot_ram_pong (
 	// left side
