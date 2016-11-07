@@ -92,8 +92,8 @@ module idct_vecRot_coeff #(parameter
 	// 	end
 	// end
 
-			source_cos = source_cos1;
-			source_sin = source_sin1;
+			assign source_cos = source_cos1;
+			assign source_sin = source_sin1;
 
 	always@(posedge clk)
 	begin

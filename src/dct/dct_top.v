@@ -40,6 +40,11 @@
 //    --> dct_preFFT_reod --> FFT --> dct_vecRot -->
 //
 //  ---------------------------------------------------------------------------- 
+//  Output : 
+//         D(1), D(2), ... D(k),  ...,    D(N)
+//         0,    D(N), ... D(N+2-k), ..., D(2)
+//                                               k = 1, 2, ... , N
+//  ---------------------------------------------------------------------------- 
 //  Note :  (1) fftpts_in : The number of FFT points is power of 2
 //          (2) Ping-pong strutrue to improve throughput
 // 
@@ -112,7 +117,7 @@ reg        source_eop_ping, source_eop_pong;   //       .source_eop
 reg [wDataIn-1:0] source_real_ping, source_real_pong;  //       .source_real
 reg [wDataIn-1:0] source_imag_ping, source_imag_pong;  //       .source_imag
 
-
+assign fftpts_out = fftpts_in;
 
 //-----------------------------------------------------
 //-----------  Part 1 :  dct_preFFT_reod   ------------

@@ -20,6 +20,7 @@ set TOP_LEVEL_NAME dct_tb
 # Compile the standalone IP.
 com
 # Compile the user top-level
+#------ DCT -----------
 vlog -sv ../tb/dct_tb.v
 vlog -sv ../src/dct/dct_vecRot_ram.v 
 vlog -sv ../src/RAM_FIFO/RAM_dct_vecRot/sim/RAM_dct_vecRot.v
@@ -36,11 +37,14 @@ vlog -sv ../src/RAM_FIFO/RAM_dct_preFFT_reod/sim/RAM_dct_preFFT_reod.v
 vlog -sv ../src/RAM_FIFO/RAM_dct_preFFT_reod/ram_2port_151/sim/RAM_dct_preFFT_reod_ram_2port_151_nn5gxoa.v
 vlog -sv ../src/dct/dct_preFFT_reod.v 
 vlog -sv ../src/dct/dct_top.v 
-
 vlog -sv ../src/RAM_FIFO/ROM2_cos_dct_vecRot/sim/ROM2_cos_dct_vecRot.v
 vlog -sv ../src/RAM_FIFO/ROM2_cos_dct_vecRot/rom_1port_151/sim/ROM2_cos_dct_vecRot_rom_1port_151_h2jlawq.v
 vlog -sv ../src/RAM_FIFO/ROM2_sin_dct_vecRot/sim/ROM2_sin_dct_vecRot.v
 vlog -sv ../src/RAM_FIFO/ROM2_sin_dct_vecRot/rom_1port_151/sim/ROM2_sin_dct_vecRot_rom_1port_151_ofi6pdq.v
+#-------- IDCT ------------
+vlog -sv ../src/idct/idct_top.v 
+vlog -sv ../src/idct/idct_vecRot_coeff.v 
+
 
 # Elaborate the design.
 elab
