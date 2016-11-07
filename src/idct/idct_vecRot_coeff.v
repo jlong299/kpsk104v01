@@ -1,33 +1,40 @@
 //-----------------------------------------------------------------
-// Module Name:        	dct_vecRot_coeff.v
+// Module Name:        	idct_vecRot_coeff.v
 // Project:             CE RTL
 // Description:         
 // Author:				Long Jiang
 //------------------------------------------------------------------
 //  Version 0.1
 //  Description :  First version 
-//  2016-10-24
+//  2016-11-7
 //  ----------------------------------------------------------------
 //  Detail :  (Matlab Code)
 //
-//  w = sqrt(2/N)*ones(1,N);
-//  w(1) = 1/sqrt(N);
-//  D1(1) = w(1)*F(1);
-//    for k = 2:N
-//        D1(k) = 1/2*( exp(-1j*pi*(k-1)/(2*N))* F(k) + exp(1j*pi*(k-1)/(2*N))* F(N+2-k));
-//        D1(k) = w(k)*D1(k);
-//    end
+//  %% Calc idct from dct result and ifft
+// 
+//  F1 = zeros(1,N);
+//  F1(1) = 1/w(1) * D1(1);
+//  for k=2:N
+//      F1(k) = 1/w(k) * (D1(k)-1j*D1(N+2-k))/exp(-1j*pi*(k-1)/2/N);
+//  end
+//  %disp(F1);
+// 
+//  x1_reod = ifft(F1);
+// 
+//  x1 = zeros(1,N);
+//  x1(1:2:N-1) = x1_reod(1:N/2);
+//  x1(2:2:N) = x1_reod(N:-1:N/2+1);
 //  --------------------------------------------------------------------------------------------------
 //  Output : 
 //      source_cos :  
-//          65536/sqrt(2)                              k=1
+//          65536*sqrt(2)               k=1
 //          65536*(cos(pi*(k-1)/2/N)    k=2:N
 //      source_sin :  
-//          0                                   k=1
+//          0*sqrt(2)                   k=1
 //          65536*(sin(pi*(k-1)/2/N)    k=2:N
 
 
-module dct_vecRot_coeff #(parameter  
+module idct_vecRot_coeff #(parameter  
 		wDataOut =18  
 	)
 	(
@@ -49,23 +56,23 @@ module dct_vecRot_coeff #(parameter
 	wire [wDataOut-1:0] 	source_cos1, source_cos2;
 	wire [wDataOut-1:0] 	source_sin1, source_sin2;
 
-	ROM_cos_dct_vecRot ROM_cos_dct_vecRot_inst (
+	ROM_cos_idct_vecRot ROM_cos_idct_vecRot_inst (
 		.address (address_cos), //  rom_input.address
 		.clock   (clk),   //           .clk
 		.q       (source_cos1)        // rom_output.dataout
 	);
-	ROM_sin_dct_vecRot ROM_sin_dct_vecRot_inst (
+	ROM_sin_idct_vecRot ROM_sin_idct_vecRot_inst (
 		.address (address_sin), //  rom_input.address
 		.clock   (clk),   //           .clk
 		.q       (source_sin1)        // rom_output.dataout
 	);
 
-	ROM2_cos_dct_vecRot ROM2_cos_dct_vecRot_inst (
+	ROM2_cos_idct_vecRot ROM2_cos_idct_vecRot_inst (
 		.address (address_cos), //  rom_input.address
 		.clock   (clk),   //           .clk
 		.q       (source_cos2)        // rom_output.dataout
 	);
-	ROM2_sin_dct_vecRot ROM2_sin_dct_vecRot_inst (
+	ROM2_sin_idct_vecRot ROM2_sin_idct_vecRot_inst (
 		.address (address_sin), //  rom_input.address
 		.clock   (clk),   //           .clk
 		.q       (source_sin2)        // rom_output.dataout
