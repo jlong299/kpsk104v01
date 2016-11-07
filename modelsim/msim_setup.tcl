@@ -84,6 +84,14 @@ if ![info exists USER_DEFINED_ELAB_OPTIONS] {
 }
 
 # ----------------------------------------
+# Initialize simulation properties - DO NOT MODIFY!
+set ELAB_OPTIONS ""
+set SIM_OPTIONS ""
+if ![ string match "*-64 vsim*" [ vsim -version ] ] {
+} else {
+}
+
+# ----------------------------------------
 # Copy ROM/RAM files to simulation directory
 alias file_copy {
   echo "\[exec\] file_copy"

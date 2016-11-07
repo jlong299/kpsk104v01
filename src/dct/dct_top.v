@@ -72,6 +72,8 @@ module dct_top #(parameter
 	output wire        source_eop,   //       .source_eop
 	output wire [wDataOut-1:0] source_real,  //       .source_real
 	output wire [wDataOut-1:0] source_imag,  //       .source_imag
+	output wire [wDataOut-1:0] source_real_rev,  //       .source_real
+	output wire [wDataOut-1:0] source_imag_rev,  //       .source_imag
 	output wire [11:0] fftpts_out    //       .fftpts_out
 	);
 
@@ -359,6 +361,8 @@ dct_vecRot_inst
 	.source_eop		(source_eop),   
 	.source_real	(source_real),  
 	.source_imag	(source_imag),  
+	.source_real_rev	(source_real_rev),  
+	.source_imag_rev	(source_imag_rev),  
 	.fftpts_out()
 );
 

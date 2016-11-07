@@ -28,13 +28,15 @@ module dct_tb (
 	wire        source_eop;   //       .source_eop
 	wire [15:0] source_real;  //       .source_real
 	wire [15:0] source_imag;  //       .source_imag
+	wire [15:0] source_real_rev;  //       .source_real
+	wire [15:0] source_imag_rev;  //       .source_imag
 
 	reg [15:0] cnt_rd, cnt_file_end;
 	integer 	data_file, scan_file, wr_file;
 	reg [31:0] 	captured_data, captured_data_imag;
 	localparam reg [15:0] cnt_rd_end = 16'd2048;
 	localparam reg [11:0] fftpts_cnst = 12'd2048;
-	localparam reg [15:0] param_cnt_file_end = 16'd6;  //Number of frames to be processed.
+	localparam reg [15:0] param_cnt_file_end = 16'd2;  //Number of frames to be processed.
 
 	initial	begin
 		rst_n = 0;
@@ -137,6 +139,8 @@ module dct_tb (
 		.source_eop		(source_eop),   
 		.source_real	(source_real),  
 		.source_imag	(source_imag),  
+		.source_real_rev	(source_real_rev),  
+		.source_imag_rev	(source_imag_rev),  
 		.fftpts_out()
 	);
 

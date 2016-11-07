@@ -7,6 +7,8 @@
 //  Version 0.1
 //  Description :  First version 
 //  2016-10-24
+//  Change log : Ouput reverse data to reduce latency when cooperate 
+//               with IDCT. 2016-11-7
 //  ----------------------------------------------------------------
 //  Detail :  (Matlab Code)
 //
@@ -27,6 +29,11 @@
 //          65536*sqrt(2)*(sin(pi*(k-1)/2/N)    k=2:N
 //  --------------------------------------------------------------------------------------------------
 //  Twiddle :
+//
+//  --------
+//  D1(k)
+//  --------
+//
 //                           +    *sink_cos      +           /2/65536/sqrt(N/2)
 //  R(F(k))     ---------------- -----------> ------- Real ------------------>
 //  sink_real    \          + /                  + /       
@@ -51,13 +58,49 @@
 //               /          + \   *sink_cos   /         
 //  I(F(N+2-k)) ---------------- ----------->   
 //  sink_imag_rev
+//
+//
+//
+//  ---------
+//  D1(N+2-k)
+//  ---------
+//
+//                           +    *sink_sin      +           /2/65536/sqrt(N/2)
+//  R(F(k))     ---------------- -----------> ------- Real ------------------>
+//  sink_real    \          + /                  + /       
+//                \          /                    /      
+//                 \        /                    /     
+//                  \      /                    /    
+//                   \    /                    /   
+//                    \  /  -     *sink_cos   /        
+//  I(F(k))     ---------------- ----------->   
+//  sink_imag   \     / \   + /  
+//               \   /   \   /   
+//                \ /     \ /   
+//                 / \     / \  
+//                /   \   /   \ +
+//               /     \ /   - \  *sink_cos       +          /2/65536/sqrt(N/2)
+//  R(F(N+2-k)) ---------------- -----------> ------- Imag ------------------> 
+//  sink_real_rev     /  \                       + /            
+//                   /    \                       /           
+//                  /      \                     /           
+//                 /        \                   /          
+//                /          \ +               /           
+//               /          + \   *sink_sin   /         
+//  I(F(N+2-k)) ---------------- ----------->   
+//  sink_imag_rev
+//  ---------------------------------------------------------------------------- 
+//  Output : 
+//         D(1), D(2), ... D(k),  ...,    D(N)
+//         0,    D(N), ... D(N+2-k), ..., D(2)
+//     k = 1, 2, ... , N
 //  ---------------------------------------------------------------------------- 
 //  Note :  (1) N = fftpts_in : The number of FFT points is power of 2
 
 
 module dct_vecRot_twiddle #(parameter  
 		wDataIn =28,
-		wDataOut =22,  
+		wDataOut =16,  
 		wCoeff =18  
 	)
 	(
@@ -88,6 +131,8 @@ module dct_vecRot_twiddle #(parameter
 	output reg         	source_eop,   //       .source_eop
 	output reg [wDataOut-1:0] source_real,  //       .source_real
 	output reg [wDataOut-1:0] source_imag,  //       .source_imag
+	output reg [wDataOut-1:0] source_real_rev,  //       .source_real
+	output reg [wDataOut-1:0] source_imag_rev,  //       .source_imag
 	output wire [11:0] fftpts_out    //       .fftpts_out
 	);
 
@@ -101,6 +146,11 @@ reg signed [wDataIn+wCoeff+1:0] 	p3 [1:0];
 
 reg [2:0] 	valid_r, sop_r, eop_r;
 
+reg signed [wDataIn:0] 	p1_rev [3:0];
+reg signed [wDataIn+wCoeff:0] 	p2_rev [3:0];
+reg signed [wDataIn+wCoeff+1:0] 	p3_rev [1:0];
+
+// ---------- PART 1 :  forward direction -------------
 // ---------------- Pipeline 1 -------------------------
 always@(posedge clk)
 begin
@@ -167,49 +217,161 @@ begin
 		case (fftpts_in)
 		12'd2048:
 		begin
-			source_real <= p3[0][wDataIn+wCoeff-3:22]+p3[0][21]; //rounding
-			source_imag <= p3[1][wDataIn+wCoeff-3:22]+p3[1][21]; //rounding
+			source_real <= p3[0][wDataOut+21:22]+p3[0][21]; //rounding
+			source_imag <= p3[1][wDataOut+21:22]+p3[1][21]; //rounding
 		end
 		12'd1024:
 		begin
-			source_real <= p3[0][wDataIn+wCoeff-3:22]+p3[0][21]; //rounding
-			source_imag <= p3[1][wDataIn+wCoeff-3:22]+p3[1][21]; //rounding
+			source_real <= p3[0][wDataOut+21:22]+p3[0][21]; //rounding
+			source_imag <= p3[1][wDataOut+21:22]+p3[1][21]; //rounding
 		end
 		12'd512:
 		begin
-			source_real <= p3[0][wDataIn+wCoeff-4:21]+p3[0][20]; //rounding
-			source_imag <= p3[1][wDataIn+wCoeff-4:21]+p3[1][20]; //rounding
+			source_real <= p3[0][wDataOut+20:21]+p3[0][20]; //rounding
+			source_imag <= p3[1][wDataOut+20:21]+p3[1][20]; //rounding
 		end
 		12'd256:
 		begin
-			source_real <= p3[0][wDataIn+wCoeff-4:21]+p3[0][20]; //rounding
-			source_imag <= p3[1][wDataIn+wCoeff-4:21]+p3[1][20]; //rounding
+			source_real <= p3[0][wDataOut+20:21]+p3[0][20]; //rounding
+			source_imag <= p3[1][wDataOut+20:21]+p3[1][20]; //rounding
 		end
 		12'd128:
 		begin
-			source_real <= p3[0][wDataIn+wCoeff-5:20]+p3[0][19]; //rounding
-			source_imag <= p3[1][wDataIn+wCoeff-5:20]+p3[1][19]; //rounding
+			source_real <= p3[0][wDataOut+19:20]+p3[0][19]; //rounding
+			source_imag <= p3[1][wDataOut+19:20]+p3[1][19]; //rounding
 		end
 		12'd64:
 		begin
-			source_real <= p3[0][wDataIn+wCoeff-5:20]+p3[0][19]; //rounding
-			source_imag <= p3[1][wDataIn+wCoeff-5:20]+p3[1][19]; //rounding
+			source_real <= p3[0][wDataOut+19:20]+p3[0][19]; //rounding
+			source_imag <= p3[1][wDataOut+19:20]+p3[1][19]; //rounding
 		end
 		12'd32:
 		begin
-			source_real <= p3[0][wDataIn+wCoeff-6:19]+p3[0][18]; //rounding
-			source_imag <= p3[1][wDataIn+wCoeff-6:19]+p3[1][18]; //rounding
+			source_real <= p3[0][wDataOut+18:19]+p3[0][18]; //rounding
+			source_imag <= p3[1][wDataOut+18:19]+p3[1][18]; //rounding
 		end
 		default:
 		begin
-			source_real <= p3[0][wDataIn+wCoeff-3:22]+p3[0][21]; //rounding
-			source_imag <= p3[1][wDataIn+wCoeff-3:22]+p3[1][21]; //rounding
+			source_real <= p3[0][wDataOut+21:22]+p3[0][21]; //rounding
+			source_imag <= p3[1][wDataOut+21:22]+p3[1][21]; //rounding
 		end
 		endcase
 	end
 end
 
-// -----------------------------------------------
+
+// ---------- PART 2 :  reverse direction -------------
+// ---------------- Pipeline 1 -------------------------
+always@(posedge clk)
+begin
+	if (!rst_n_sync)
+	begin
+		p1_rev[0] <= 0;
+		p1_rev[1] <= 0;
+		p1_rev[2] <= 0;
+		p1_rev[3] <= 0; 
+	end
+	else
+	begin
+		p1_rev[0] <= sink_real + sink_real_rev;
+		p1_rev[1] <= -sink_imag + sink_imag_rev;
+		p1_rev[2] <= sink_real - sink_real_rev;
+		p1_rev[3] <= sink_imag + sink_imag_rev;
+	end
+end
+
+// ---------------- Pipeline 2 -------------------------
+always@(posedge clk)
+begin
+	if (!rst_n_sync)
+	begin
+		p2_rev[0] <= 0;
+		p2_rev[1] <= 0;
+		p2_rev[2] <= 0;
+		p2_rev[3] <= 0;
+	end
+	else
+	begin
+		p2_rev[0] <= p1_rev[0]*sink_sin;
+		p2_rev[1] <= p1_rev[1]*sink_cos;
+		p2_rev[2] <= p1_rev[2]*sink_cos;
+		p2_rev[3] <= p1_rev[3]*sink_sin;
+	end
+end
+
+// ---------------- Pipeline 3 -------------------------
+always@(posedge clk)
+begin
+	if (!rst_n_sync)
+	begin
+		p3_rev[0] <= 0;
+		p3_rev[1] <= 0;
+	end
+	else
+	begin
+		p3_rev[0] <= p2_rev[0]+p2_rev[1];
+		p3_rev[1] <= p2_rev[2]+p2_rev[3];
+	end
+end
+
+// ---------------- Pipeline 4 -------------------------
+always@(posedge clk)
+begin
+	if (!rst_n_sync)
+	begin
+		source_real_rev <= 0;
+		source_imag_rev <= 0;
+	end
+	else
+	begin
+		case (fftpts_in)
+		12'd2048:
+		begin
+			source_real_rev <= p3_rev[0][wDataOut+21:22]+p3_rev[0][21]; //rounding
+			source_imag_rev <= p3_rev[1][wDataOut+21:22]+p3_rev[1][21]; //rounding
+		end
+		12'd1024:
+		begin
+			source_real_rev <= p3_rev[0][wDataOut+21:22]+p3_rev[0][21]; //rounding
+			source_imag_rev <= p3_rev[1][wDataOut+21:22]+p3_rev[1][21]; //rounding
+		end
+		12'd512:
+		begin
+			source_real_rev <= p3_rev[0][wDataOut+20:21]+p3_rev[0][20]; //rounding
+			source_imag_rev <= p3_rev[1][wDataOut+20:21]+p3_rev[1][20]; //rounding
+		end
+		12'd256:
+		begin
+			source_real_rev <= p3_rev[0][wDataOut+20:21]+p3_rev[0][20]; //rounding
+			source_imag_rev <= p3_rev[1][wDataOut+20:21]+p3_rev[1][20]; //rounding
+		end
+		12'd128:
+		begin
+			source_real_rev <= p3_rev[0][wDataOut+19:20]+p3_rev[0][19]; //rounding
+			source_imag_rev <= p3_rev[1][wDataOut+19:20]+p3_rev[1][19]; //rounding
+		end
+		12'd64:
+		begin
+			source_real_rev <= p3_rev[0][wDataOut+19:20]+p3_rev[0][19]; //rounding
+			source_imag_rev <= p3_rev[1][wDataOut+19:20]+p3_rev[1][19]; //rounding
+		end
+		12'd32:
+		begin
+			source_real_rev <= p3_rev[0][wDataOut+18:19]+p3_rev[0][18]; //rounding
+			source_imag_rev <= p3_rev[1][wDataOut+18:19]+p3_rev[1][18]; //rounding
+		end
+		default:
+		begin
+			source_real_rev <= p3_rev[0][wDataOut+21:22]+p3_rev[0][21]; //rounding
+			source_imag_rev <= p3_rev[1][wDataOut+21:22]+p3_rev[1][21]; //rounding
+		end
+		endcase
+	end
+end
+
+
+
+// ------------- PART 3 :  output  ----------------
 always@(posedge clk)
 begin
 	valid_r[0] <= sink_valid;

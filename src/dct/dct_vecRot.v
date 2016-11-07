@@ -75,13 +75,15 @@ module dct_vecRot #(parameter
 	output wire        source_eop,   //       .source_eop
 	output wire [wDataOut-1:0] source_real,  //       .source_real
 	output wire [wDataOut-1:0] source_imag,  //       .source_imag
+	output wire [wDataOut-1:0] source_real_rev,  //       .source_real
+	output wire [wDataOut-1:0] source_imag_rev,  //       .source_imag
 	output wire [11:0] fftpts_out    //       .fftpts_out
 	);
 
 
 
 localparam 	wDataOut_t0 = 28;
-localparam 	wDataOut_t1 = 22;
+localparam 	wDataOut_t1 = 16;
 localparam 	wCoeff = 18;
 
 reg        source_valid_t0; // source.source_valid
@@ -101,6 +103,8 @@ wire        source_sop_t1;   //       .source_sop
 wire        source_eop_t1;   //       .source_eop
 wire [wDataOut_t1-1:0] source_real_t1;  //       .source_real
 wire [wDataOut_t1-1:0] source_imag_t1;  //       .source_imag
+wire [wDataOut_t1-1:0] source_real_rev_t1;  //       .source_real
+wire [wDataOut_t1-1:0] source_imag_rev_t1;  //       .source_imag
 
 wire [wCoeff-1:0] 	coeff_cos, coeff_sin;
 
@@ -368,6 +372,8 @@ dct_vecRot_twiddle_inst (
 	.source_eop 	(source_eop_t1 ),   
 	.source_real 	(source_real_t1 ),  
 	.source_imag 	(source_imag_t1 ),  
+	.source_real_rev 	(source_real_rev_t1),  
+	.source_imag_rev 	(source_imag_rev_t1),  
 	.fftpts_out 	( )   
 
 	);
@@ -420,6 +426,37 @@ dct_vecRot_scaling_inst (
 	.source_eop 	(source_eop ),   
 	.source_real 	(source_real ),  
 	.source_imag 	(source_imag ),  
+	.fftpts_out 	( )   
+
+	);
+
+dct_vecRot_scaling #(
+	.wDataIn (wDataOut_t1),  
+	.wDataOut (wDataOut)  
+	)
+dct_vecRot_scaling_inst2 (
+	// left side
+	.rst_n_sync 	(rst_n_sync),
+	.clk 			(clk),
+
+	.sink_valid 	(source_valid_t1),
+	.sink_ready 	( ),
+	.sink_error 	(source_error_t1),
+	.sink_sop 		(source_sop_t1 ),    
+	.sink_eop 		(source_eop_t1 ),    
+	.sink_real 		(source_real_rev_t1 ), 
+	.sink_imag 		(source_imag_rev_t1 ), 
+
+	.fftpts_in 		(fftpts_in),
+
+	// right side
+	.source_valid 	( ), 
+	.source_ready 	(source_ready), 
+	.source_error 	( ), 
+	.source_sop 	( ),   
+	.source_eop 	( ),   
+	.source_real 	(source_real_rev ),  
+	.source_imag 	(source_imag_rev ),  
 	.fftpts_out 	( )   
 
 	);
