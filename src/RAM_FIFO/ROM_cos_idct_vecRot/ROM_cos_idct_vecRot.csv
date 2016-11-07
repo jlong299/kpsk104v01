@@ -1,0 +1,18 @@
+# system info ROM_cos_idct_vecRot on 2016.11.07.16:22:18
+system_info:
+name,value
+DEVICE,10AX115U3F45E2SGE3
+DEVICE_FAMILY,Arria 10
+GENERATION_ID,1478506938
+#
+#
+# Files generated for ROM_cos_idct_vecRot on 2016.11.07.16:22:18
+files:
+filepath,kind,attributes,module,is_top
+sim/ROM_cos_idct_vecRot.v,VERILOG,CONTAINS_INLINE_CONFIGURATION,ROM_cos_idct_vecRot,true
+rom_1port_151/sim/ROM_cos_idct_vecRot_rom_1port_151_g2udz5i.v,VERILOG,,ROM_cos_idct_vecRot_rom_1port_151_g2udz5i,false
+#
+# Map from instance-path to kind of module
+instances:
+instancePath,module
+ROM_cos_idct_vecRot.rom_1port_0,ROM_cos_idct_vecRot_rom_1port_151_g2udz5i

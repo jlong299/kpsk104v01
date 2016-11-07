@@ -1,0 +1,5 @@
+config ROM_cos_idct_vecRot_cfg;
+		design ROM_cos_idct_vecRot;
+		instance ROM_cos_idct_vecRot.rom_1port_0 use ROM_cos_idct_vecRot_rom_1port_151.ROM_cos_idct_vecRot_rom_1port_151_g2udz5i;
+endconfig
+

@@ -67,30 +67,33 @@ module idct_vecRot_coeff #(parameter
 		.q       (source_sin1)        // rom_output.dataout
 	);
 
-	ROM2_cos_idct_vecRot ROM2_cos_idct_vecRot_inst (
-		.address (address_cos), //  rom_input.address
-		.clock   (clk),   //           .clk
-		.q       (source_cos2)        // rom_output.dataout
-	);
-	ROM2_sin_idct_vecRot ROM2_sin_idct_vecRot_inst (
-		.address (address_sin), //  rom_input.address
-		.clock   (clk),   //           .clk
-		.q       (source_sin2)        // rom_output.dataout
-	);
+	// ROM2_cos_idct_vecRot ROM2_cos_idct_vecRot_inst (
+	// 	.address (address_cos), //  rom_input.address
+	// 	.clock   (clk),   //           .clk
+	// 	.q       (source_cos2)        // rom_output.dataout
+	// );
+	// ROM2_sin_idct_vecRot ROM2_sin_idct_vecRot_inst (
+	// 	.address (address_sin), //  rom_input.address
+	// 	.clock   (clk),   //           .clk
+	// 	.q       (source_sin2)        // rom_output.dataout
+	// );
 
-	always@(*)
-	begin
-		if (fftpts_in==12'd2048 || fftpts_in==12'd512 || fftpts_in==12'd128 || fftpts_in==12'd32)
-		begin
+	// always@(*)
+	// begin
+	// 	if (fftpts_in==12'd2048 || fftpts_in==12'd512 || fftpts_in==12'd128 || fftpts_in==12'd32)
+	// 	begin
+	// 		source_cos = source_cos1;
+	// 		source_sin = source_sin1;
+	// 	end
+	// 	else
+	// 	begin
+	// 		source_cos = source_cos2;
+	// 		source_sin = source_sin2;
+	// 	end
+	// end
+
 			source_cos = source_cos1;
 			source_sin = source_sin1;
-		end
-		else
-		begin
-			source_cos = source_cos2;
-			source_sin = source_sin2;
-		end
-	end
 
 	always@(posedge clk)
 	begin
