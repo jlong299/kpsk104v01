@@ -5,3 +5,4 @@ modelsim/vsim.wlf
 modelsim/*.hex
 modelsim/*.ver
 modelsim/dct_result.dat
+modelsim/dct_src.dat

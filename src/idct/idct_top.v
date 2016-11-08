@@ -90,6 +90,14 @@ wire        source_eop_t1;   //       .source_eop
 wire [wData_t1-1:0] source_real_t1;  //       .source_real
 wire [wData_t1-1:0] source_imag_t1;  //       .source_imag
 
+wire        source_valid_t2; // source.source_valid
+reg        source_ready_t2; //       .source_ready
+wire [1:0]  source_error_t2; //       .source_error
+wire        source_sop_t2;   //       .source_sop
+wire        source_eop_t2;   //       .source_eop
+wire [wDataOut-1:0] source_real_t2;  //       .source_real
+wire [wDataOut-1:0] source_imag_t2;  //       .source_imag
+
 reg is_pong_sink, is_pong_source;
 
 reg        sink_valid_ping, sink_valid_pong; // sink.sink_valid
@@ -123,15 +131,15 @@ idct_vecRot_inst
 	.rst_n_sync (rst_n_sync),  // clk synchronous reset active low
 	.clk (clk),    
 	
-	.sink_valid (source_valid), 
-	.sink_ready (source_ready), 
-	.sink_error (source_error), 
-	.sink_sop 	(source_sop  ),   
-	.sink_eop 	(source_eop  ),   
-	.sink_real 	(source_real ),  
-	.sink_imag 	(source_imag ),  
-	.sink_real_rev 	(source_real_rev ),  
-	.sink_imag_rev 	(source_imag_rev ),  
+	.sink_valid (sink_valid), 
+	.sink_ready (sink_ready), 
+	.sink_error (sink_error), 
+	.sink_sop 	(sink_sop  ),   
+	.sink_eop 	(sink_eop  ),   
+	.sink_real 	(sink_real ),  
+	.sink_imag 	(sink_imag ),  
+	.sink_real_rev 	(sink_real_rev ),  
+	.sink_imag_rev 	(sink_imag_rev ),  
 	
 	.fftpts_in (fftpts_in),    
 	
@@ -149,7 +157,7 @@ idct_vecRot_inst
 
 
 //-----------------------------------------------------
-//-----------  Part 2 :  FFT    -----------------------
+//-----------  Part 2 :  IFFT    -----------------------
 //-----------------------------------------------------
 dct_fft idct_ifft_inst (
 	.clk          (clk),          //    clk.clk
@@ -162,9 +170,11 @@ dct_fft idct_ifft_inst (
 	.sink_real    (source_real_t0),    //       .sink_real
 	.sink_imag    (source_imag_t0),    //       .sink_imag
 	.fftpts_in    (fftpts_in),    //       .fftpts_in
-	.inverse      (1'b1),      //       .inverse
+	//------- IFFT -----------
+	.inverse      (1'b1),      //       .inverse   
+	//------------------------
 	.source_valid (source_valid_t1), // source.source_valid
-	.source_ready (source_ready_t1), //       .source_ready
+	.source_ready (1'b1), //       .source_ready
 	.source_error (source_error_t1), //       .source_error
 	.source_sop   (source_sop_t1),   //       .source_sop
 	.source_eop   (source_eop_t1),   //       .source_eop
@@ -173,10 +183,43 @@ dct_fft idct_ifft_inst (
 	.fftpts_out   ()    //       .fftpts_out
 );
 
+//-----------------------------------------------------
+//-----------  Part 3 :  idct_aftIFFT_scaling -----------
+//-----------------------------------------------------
+idct_aftIFFT_scaling #(
+	.wDataIn (wData_t1),  
+	.wDataOut (wDataOut)  
+	)
+idct_aftIFFT_scaling_inst (
+	// left side
+	.rst_n_sync 	(rst_n_sync),
+	.clk 			(clk),
+
+	.sink_valid 	(source_valid_t1),
+	.sink_ready 	(source_ready_t1),
+	.sink_error 	(source_error_t1),
+	.sink_sop 		(source_sop_t1 ),    
+	.sink_eop 		(source_eop_t1 ),    
+	.sink_real 		(source_real_t1 ), 
+	.sink_imag 		(source_imag_t1 ), 
+
+	.fftpts_in 		(fftpts_in),
+
+	// right side
+	.source_valid 	(source_valid_t2), 
+	.source_ready 	(source_ready_t2), 
+	.source_error 	(source_error_t2 ), 
+	.source_sop 	(source_sop_t2 ),   
+	.source_eop 	(source_eop_t2 ),   
+	.source_real 	(source_real_t2 ),  
+	.source_imag 	(source_imag_t2 ),  
+	.fftpts_out 	( )   
+
+	);
 
 
 //-----------------------------------------------------
-//-----------  Part 3 :  idct_aftFFT_reod   ------------
+//-----------  Part 4 :  idct_aftFFT_reod   ------------
 //-----------------------------------------------------
 //---- ping-pong mode to increase throughput  ----
 //start----------  Ping Pong  --------------
@@ -185,7 +228,7 @@ begin
 	if (!rst_n_sync)
 	begin
 		is_pong_sink <= 0;
-		source_ready_t1 <= 0;
+		source_ready_t2 <= 0;
 	end
 	else 
 	begin
@@ -194,7 +237,7 @@ begin
 		else if (is_pong_sink==1'b1 && sink_eop_pong==1'b1)
 			is_pong_sink <= 1'b0;
 
-		source_ready_t1 <= (is_pong_sink==1'b0)? sink_ready_ping : sink_ready_pong;
+		source_ready_t2 <= (is_pong_sink==1'b0)? sink_ready_ping : sink_ready_pong;
 	end
 end
 
@@ -219,12 +262,12 @@ begin
 	begin
 		if (is_pong_sink==1'b0)
 		begin
-			sink_valid_ping <= source_valid_t1;
-			sink_error_ping <= source_error_t1;
-			sink_sop_ping <= source_sop_t1; 	
-			sink_eop_ping <= source_eop_t1; 	
-			sink_real_ping <= source_real_t1; 
-			sink_imag_ping <= source_imag_t1; 
+			sink_valid_ping <= source_valid_t2;
+			sink_error_ping <= source_error_t2;
+			sink_sop_ping <= source_sop_t2; 	
+			sink_eop_ping <= source_eop_t2; 	
+			sink_real_ping <= source_real_t2; 
+			sink_imag_ping <= source_imag_t2; 
 			sink_valid_pong <= 0;
 			sink_error_pong <= 0;
 			sink_sop_pong <= 0; 	
@@ -240,19 +283,19 @@ begin
 			sink_eop_ping <= 0; 	
 			sink_real_ping <= 0; 
 			sink_imag_ping <= 0; 
-			sink_valid_pong <= source_valid_t1;
-			sink_error_pong <= source_error_t1;
-			sink_sop_pong <= source_sop_t1; 	
-			sink_eop_pong <= source_eop_t1; 	
-			sink_real_pong <= source_real_t1; 
-			sink_imag_pong <= source_imag_t1;
+			sink_valid_pong <= source_valid_t2;
+			sink_error_pong <= source_error_t2;
+			sink_sop_pong <= source_sop_t2; 	
+			sink_eop_pong <= source_eop_t2; 	
+			sink_real_pong <= source_real_t2; 
+			sink_imag_pong <= source_imag_t2;
 		end
 	end
 end
-idct_aftFFT_reod #(
+idct_aftIFFT_reod #(
 	.wDataInOut (wDataIn) 
 	)
-idct_aftFFT_reod_ping (
+idct_aftIFFT_reod_ping (
 	// left side
 	.rst_n_sync 	(rst_n_sync),
 	.clk 			(clk),
@@ -279,10 +322,10 @@ idct_aftFFT_reod_ping (
 
 	);
 
-idct_aftFFT_reod #(
+idct_aftIFFT_reod #(
 	.wDataInOut (wDataIn) 
 	)
-idct_aftFFT_reod_pong (
+idct_aftIFFT_reod_pong (
 	// left side
 	.rst_n_sync 	(rst_n_sync),
 	.clk 			(clk),

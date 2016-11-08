@@ -28,14 +28,24 @@ module dct_tb (
 	wire        source_eop;   //       .source_eop
 	wire [15:0] source_real;  //       .source_real
 	wire [15:0] source_imag;  //       .source_imag
-	wire [15:0] source_real_rev;  //       .source_real
-	wire [15:0] source_imag_rev;  //       .source_imag
+	//wire [15:0] source_real_rev;  //       .source_real
+	//wire [15:0] source_imag_rev;  //       .source_imag
+
+	wire        source_valid_t0; // source.source_valid
+	reg         source_ready_t0; //       .source_ready
+	wire [1:0]  source_error_t0; //       .source_error
+	wire        source_sop_t0;   //       .source_sop
+	wire        source_eop_t0;   //       .source_eop
+	wire [15:0] source_real_t0;  //       .source_real
+	wire [15:0] source_imag_t0;  //       .source_imag
+	wire [15:0] source_real_rev_t0;  //       .source_real
+	wire [15:0] source_imag_rev_t0;  //       .source_imag
 
 	reg [15:0] cnt_rd, cnt_file_end;
 	integer 	data_file, scan_file, wr_file;
 	reg [31:0] 	captured_data, captured_data_imag;
-	localparam reg [15:0] cnt_rd_end = 16'd2048;
-	localparam reg [11:0] fftpts_cnst = 12'd2048;
+	localparam reg [15:0] cnt_rd_end = 16'd512;
+	localparam reg [11:0] fftpts_cnst = 12'd512;
 	localparam reg [15:0] param_cnt_file_end = 16'd2;  //Number of frames to be processed.
 
 	initial	begin
@@ -132,6 +142,37 @@ module dct_tb (
 		.fftpts_in    (fftpts_in),    //       .fftpts_in
 
 		//right side
+		.source_valid	(source_valid_t0), 
+		.source_ready	(source_ready_t0), 
+		.source_error	(source_error_t0), 
+		.source_sop		(source_sop_t0),   
+		.source_eop		(source_eop_t0),   
+		.source_real	(source_real_t0),  
+		.source_imag	(source_imag_t0),  
+		.source_real_rev	(source_real_rev_t0),  
+		.source_imag_rev	(source_imag_rev_t0),  
+		.fftpts_out()
+	);
+
+	idct_top  #(
+		.wDataIn  (16),  
+		.wDataOut  (16) 	)
+	idct_top_inst
+	(
+		.clk          (clk),          //    clk.clk
+		.rst_n_sync   (rst_n),      //    rst.reset_n
+		.sink_valid   (source_valid_t0),   //   sink.sink_valid
+		.sink_ready   (source_ready_t0),   //       .sink_ready
+		.sink_error   (source_error_t0),   //       .sink_error
+		.sink_sop     (source_sop_t0),     //       .sink_sop
+		.sink_eop     (source_eop_t0),     //       .sink_eop
+		.sink_real    (source_real_t0),    //       .sink_real
+		.sink_imag    (source_imag_t0),    //       .sink_imag
+		.sink_real_rev    (source_real_rev_t0),    //       .sink_real
+		.sink_imag_rev    (source_imag_rev_t0),    //       .sink_imag
+		.fftpts_in    (fftpts_in),    //       .fftpts_in
+
+		//right side
 		.source_valid	(source_valid), 
 		.source_ready	(source_ready), 
 		.source_error	(source_error), 
@@ -139,8 +180,6 @@ module dct_tb (
 		.source_eop		(source_eop),   
 		.source_real	(source_real),  
 		.source_imag	(source_imag),  
-		.source_real_rev	(source_real_rev),  
-		.source_imag_rev	(source_imag_rev),  
 		.fftpts_out()
 	);
 

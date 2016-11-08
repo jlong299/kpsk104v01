@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------
-// Module Name:        	idct_vecRot_scaling.v
+// Module Name:        	idct_aftIFFT_scaling.v
 // Project:             CE RTL
 // Description:         
 // Author:				Long Jiang
@@ -10,8 +10,8 @@
 //  ----------------------------------------------------------------
 
 
-module idct_vecRot_scaling #(parameter  
-		wDataIn = 36,  
+module idct_aftIFFT_scaling #(parameter  
+		wDataIn = 28,  
 		wDataOut =16  
 	)
 	(
@@ -40,7 +40,7 @@ module idct_vecRot_scaling #(parameter
 	output wire [11:0] fftpts_out    //       .fftpts_out
 	);
 
-localparam 	divide_width = 16;    //   /65536
+localparam 	divide_width = 5;    //   /32
 
 assign 	source_error = 2'b00;
 assign  fftpts_out = fftpts_in;

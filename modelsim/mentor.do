@@ -47,7 +47,12 @@ vlog -sv ../src/idct/idct_vecRot_coeff.v
 vlog -sv ../src/idct/idct_vecRot.v 
 vlog -sv ../src/idct/idct_vecRot_twiddle.v 
 vlog -sv ../src/idct/idct_vecRot_scaling.v 
-vlog -sv ../src/idct/idct_aftFFt_reod.v 
+vlog -sv ../src/idct/idct_aftIFFt_reod.v 
+vlog -sv ../src/RAM_FIFO/ROM_cos_idct_vecRot/sim/ROM_cos_idct_vecRot.v
+vlog -sv ../src/RAM_FIFO/ROM_cos_idct_vecRot/rom_1port_151/sim/ROM_cos_idct_vecRot_rom_1port_151_g2udz5i.v
+vlog -sv ../src/RAM_FIFO/ROM_sin_idct_vecRot/sim/ROM_sin_idct_vecRot.v
+vlog -sv ../src/RAM_FIFO/ROM_sin_idct_vecRot/rom_1port_151/sim/ROM_sin_idct_vecRot_rom_1port_151_hi2hr3i.v
+vlog -sv ../src/idct/idct_aftIFFt_scaling.v 
 
 
 # Elaborate the design.
@@ -57,10 +62,10 @@ elab
 view wave
 add wave *
 add wave sim:/dct_tb/u0/*
-add wave sim:/dct_tb/u0/dct_vecRot_inst/dct_vecRot_twiddle_inst/*
+add wave sim:/dct_tb/idct_top_inst/*
 view structure
 view signals
-run 100us
+run 30us
 # Report success to the shell
 # exit -code 0
 # End of template
