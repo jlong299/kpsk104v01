@@ -4,3 +4,4 @@ modelsim/modelsim.ini
 modelsim/vsim.wlf
 modelsim/*.hex
 modelsim/*.ver
+modelsim/dct_result.dat

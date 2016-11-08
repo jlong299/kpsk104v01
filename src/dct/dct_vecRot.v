@@ -421,7 +421,7 @@ dct_vecRot_scaling_inst (
 	// right side
 	.source_valid 	(source_valid), 
 	.source_ready 	(source_ready), 
-	.source_error 	(source_error), 
+	.source_error 	( ), 
 	.source_sop 	(source_sop ),   
 	.source_eop 	(source_eop ),   
 	.source_real 	(source_real ),  

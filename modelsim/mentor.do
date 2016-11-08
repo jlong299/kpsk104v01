@@ -44,6 +44,10 @@ vlog -sv ../src/RAM_FIFO/ROM2_sin_dct_vecRot/rom_1port_151/sim/ROM2_sin_dct_vecR
 #-------- IDCT ------------
 vlog -sv ../src/idct/idct_top.v 
 vlog -sv ../src/idct/idct_vecRot_coeff.v 
+vlog -sv ../src/idct/idct_vecRot.v 
+vlog -sv ../src/idct/idct_vecRot_twiddle.v 
+vlog -sv ../src/idct/idct_vecRot_scaling.v 
+vlog -sv ../src/idct/idct_aftFFt_reod.v 
 
 
 # Elaborate the design.
