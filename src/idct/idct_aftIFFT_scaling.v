@@ -8,7 +8,7 @@
 //  Description :  First version 
 //  2016-11-8
 //  ----------------------------------------------------------------
-
+//   /256*sqrt(N/2)
 
 module idct_aftIFFT_scaling #(parameter  
 		wDataIn = 28,  
@@ -40,7 +40,7 @@ module idct_aftIFFT_scaling #(parameter
 	output wire [11:0] fftpts_out    //       .fftpts_out
 	);
 
-localparam 	divide_width = 5;    //   /32
+localparam 	divide_width = 10;    //   
 
 assign 	source_error = 2'b00;
 assign  fftpts_out = fftpts_in;
@@ -73,9 +73,12 @@ begin
 	end
 	else
 	begin
+		case (fftpts_in)
+		12'd2048 :
+		begin
 			if ( sink_real[wDataIn-1:wDataOut+divide_width-1] == {(wDataIn - wDataOut -divide_width+1){1'b0}} ||
 				 sink_real[wDataIn-1:wDataOut+divide_width-1] == {(wDataIn - wDataOut -divide_width+1){1'b1}} )
-				source_real <= sink_real[wDataOut+divide_width-1:divide_width]+sink_real[divide_width-1]; //rounding (/65536)
+				source_real <= sink_real[wDataOut+divide_width-1:divide_width]+sink_real[divide_width-1]; //rounding 
 			else if ( sink_real[wDataIn-1] == 1'b0) // saturating
 				source_real <= { 1'b0, {(wDataOut-1){1'b1}} };
 			else
@@ -83,11 +86,49 @@ begin
 
 			if ( sink_imag[wDataIn-1:wDataOut+divide_width-1] == {(wDataIn - wDataOut -divide_width+1){1'b0}} ||
 				 sink_imag[wDataIn-1:wDataOut+divide_width-1] == {(wDataIn - wDataOut -divide_width+1){1'b1}} )
-				source_imag <= sink_imag[wDataOut+divide_width-1:divide_width]+sink_imag[divide_width-1]; //rounding (/65536)
+				source_imag <= sink_imag[wDataOut+divide_width-1:divide_width]+sink_imag[divide_width-1]; //rounding 
 			else if ( sink_imag[wDataIn-1] == 1'b0) // saturating
 				source_imag <= { 1'b0, {(wDataOut-1){1'b1}} };
 			else
 				source_imag <= { 1'b1, {(wDataOut-1){1'b0}} };
+		end
+		12'd512 :
+		begin
+			if ( sink_real[wDataIn-1:wDataOut+divide_width-2] == {(wDataIn - wDataOut -divide_width+2){1'b0}} ||
+				 sink_real[wDataIn-1:wDataOut+divide_width-2] == {(wDataIn - wDataOut -divide_width+2){1'b1}} )
+				source_real <= sink_real[wDataOut+divide_width-2:divide_width-1]+sink_real[divide_width-2]; //rounding 
+			else if ( sink_real[wDataIn-1] == 1'b0) // saturating
+				source_real <= { 1'b0, {(wDataOut-1){1'b1}} };
+			else
+				source_real <= { 1'b1, {(wDataOut-1){1'b0}} };
+
+			if ( sink_imag[wDataIn-1:wDataOut+divide_width-2] == {(wDataIn - wDataOut -divide_width+2){1'b0}} ||
+				 sink_imag[wDataIn-1:wDataOut+divide_width-2] == {(wDataIn - wDataOut -divide_width+2){1'b1}} )
+				source_imag <= sink_imag[wDataOut+divide_width-2:divide_width-1]+sink_imag[divide_width-2]; //rounding 
+			else if ( sink_imag[wDataIn-1] == 1'b0) // saturating
+				source_imag <= { 1'b0, {(wDataOut-1){1'b1}} };
+			else
+				source_imag <= { 1'b1, {(wDataOut-1){1'b0}} };
+		end
+		default :
+		begin
+			if ( sink_real[wDataIn-1:wDataOut+divide_width-1] == {(wDataIn - wDataOut -divide_width+1){1'b0}} ||
+				 sink_real[wDataIn-1:wDataOut+divide_width-1] == {(wDataIn - wDataOut -divide_width+1){1'b1}} )
+				source_real <= sink_real[wDataOut+divide_width-1:divide_width]+sink_real[divide_width-1]; //rounding 
+			else if ( sink_real[wDataIn-1] == 1'b0) // saturating
+				source_real <= { 1'b0, {(wDataOut-1){1'b1}} };
+			else
+				source_real <= { 1'b1, {(wDataOut-1){1'b0}} };
+
+			if ( sink_imag[wDataIn-1:wDataOut+divide_width-1] == {(wDataIn - wDataOut -divide_width+1){1'b0}} ||
+				 sink_imag[wDataIn-1:wDataOut+divide_width-1] == {(wDataIn - wDataOut -divide_width+1){1'b1}} )
+				source_imag <= sink_imag[wDataOut+divide_width-1:divide_width]+sink_imag[divide_width-1]; //rounding 
+			else if ( sink_imag[wDataIn-1] == 1'b0) // saturating
+				source_imag <= { 1'b0, {(wDataOut-1){1'b1}} };
+			else
+				source_imag <= { 1'b1, {(wDataOut-1){1'b0}} };
+		end
+		endcase
 	end
 end
 

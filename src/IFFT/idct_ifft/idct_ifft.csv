@@ -1,0 +1,28 @@
+# system info idct_ifft on 2016.11.10.14:49:34
+system_info:
+name,value
+DEVICE,10AX115U3F45E2SGE3
+DEVICE_FAMILY,Arria 10
+GENERATION_ID,1478760511
+#
+#
+# Files generated for idct_ifft on 2016.11.10.14:49:34
+files:
+filepath,kind,attributes,module,is_top
+sim/idct_ifft.v,VERILOG,CONTAINS_INLINE_CONFIGURATION,idct_ifft,true
+altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twr4.hex,HEX,,idct_ifft_altera_fft_ii_151_7z74xyy,false
+altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twi1.hex,HEX,,idct_ifft_altera_fft_ii_151_7z74xyy,false
+altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twi5.hex,HEX,,idct_ifft_altera_fft_ii_151_7z74xyy,false
+altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twr5.hex,HEX,,idct_ifft_altera_fft_ii_151_7z74xyy,false
+altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twr1.hex,HEX,,idct_ifft_altera_fft_ii_151_7z74xyy,false
+altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twi2.hex,HEX,,idct_ifft_altera_fft_ii_151_7z74xyy,false
+altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twi3.hex,HEX,,idct_ifft_altera_fft_ii_151_7z74xyy,false
+altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twr2.hex,HEX,,idct_ifft_altera_fft_ii_151_7z74xyy,false
+altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twr3.hex,HEX,,idct_ifft_altera_fft_ii_151_7z74xyy,false
+altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twi4.hex,HEX,,idct_ifft_altera_fft_ii_151_7z74xyy,false
+altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy.vo,VERILOG,,idct_ifft_altera_fft_ii_151_7z74xyy,false
+#
+# Map from instance-path to kind of module
+instances:
+instancePath,module
+idct_ifft.fft_ii_0,idct_ifft_altera_fft_ii_151_7z74xyy

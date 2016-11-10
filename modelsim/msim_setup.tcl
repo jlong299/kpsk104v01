@@ -72,6 +72,10 @@ if ![info exists QSYS_SIMDIR] {
   set QSYS_SIMDIR "./../src/FFT/dct_fft/sim/"
 }
 
+if ![info exists QSYS_SIMDIR_2] { 
+  set QSYS_SIMDIR_2 "./../src/IFFT/idct_ifft/sim/"
+}
+
 if ![info exists QUARTUS_INSTALL_DIR] { 
   set QUARTUS_INSTALL_DIR "C:/altera/15.1/quartus/"
 }
@@ -105,6 +109,17 @@ alias file_copy {
   file copy -force $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_c7dyz3i_opt_twr5.hex ./
   file copy -force $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_c7dyz3i_opt_twr2.hex ./
   file copy -force $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_c7dyz3i_opt_twi3.hex ./
+
+  file copy -force $QSYS_SIMDIR_2/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twr4.hex ./
+  file copy -force $QSYS_SIMDIR_2/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twi1.hex ./
+  file copy -force $QSYS_SIMDIR_2/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twi5.hex ./
+  file copy -force $QSYS_SIMDIR_2/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twr5.hex ./
+  file copy -force $QSYS_SIMDIR_2/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twr1.hex ./
+  file copy -force $QSYS_SIMDIR_2/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twi2.hex ./
+  file copy -force $QSYS_SIMDIR_2/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twi3.hex ./
+  file copy -force $QSYS_SIMDIR_2/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twr2.hex ./
+  file copy -force $QSYS_SIMDIR_2/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twr3.hex ./
+  file copy -force $QSYS_SIMDIR_2/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twi4.hex ./
 }
 
 # ----------------------------------------
@@ -135,6 +150,9 @@ if ![ string match "*ModelSim ALTERA*" [ vsim -version ] ] {
 ensure_lib                           ./libraries/dct_fft_altera_fft_ii_151/
 vmap       dct_fft_altera_fft_ii_151 ./libraries/dct_fft_altera_fft_ii_151/
 
+ensure_lib                             ./libraries/idct_ifft_altera_fft_ii_151/
+vmap       idct_ifft_altera_fft_ii_151 ./libraries/idct_ifft_altera_fft_ii_151/
+
 # ----------------------------------------
 # Compile device library files
 alias dev_com {
@@ -160,20 +178,23 @@ alias com {
   echo "\[exec\] com"
   eval  vlog $USER_DEFINED_COMPILE_OPTIONS "$QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_c7dyz3i.vo" -work dct_fft_altera_fft_ii_151
   eval  vlog $USER_DEFINED_COMPILE_OPTIONS "$QSYS_SIMDIR/dct_fft.v"                                                                                    
+
+  eval  vlog $USER_DEFINED_COMPILE_OPTIONS "$QSYS_SIMDIR_2/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy.vo" -work idct_ifft_altera_fft_ii_151
+  eval  vlog $USER_DEFINED_COMPILE_OPTIONS "$QSYS_SIMDIR_2/idct_ifft.v" 
 }
 
 # ----------------------------------------
 # Elaborate top level design
 alias elab {
   echo "\[exec\] elab"
-  eval vsim -t ps $ELAB_OPTIONS $USER_DEFINED_ELAB_OPTIONS -L work -L work_lib -L dct_fft_altera_fft_ii_151 -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L twentynm_ver -L twentynm_hssi_ver -L twentynm_hip_ver $TOP_LEVEL_NAME
+  eval vsim -t ps $ELAB_OPTIONS $USER_DEFINED_ELAB_OPTIONS -L work -L work_lib -L idct_ifft_altera_fft_ii_151 -L dct_fft_altera_fft_ii_151 -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L twentynm_ver -L twentynm_hssi_ver -L twentynm_hip_ver $TOP_LEVEL_NAME
 }
 
 # ----------------------------------------
 # Elaborate the top level design with novopt option
 alias elab_debug {
   echo "\[exec\] elab_debug"
-  eval vsim -novopt -t ps $ELAB_OPTIONS $USER_DEFINED_ELAB_OPTIONS -L work -L work_lib -L dct_fft_altera_fft_ii_151 -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L twentynm_ver -L twentynm_hssi_ver -L twentynm_hip_ver $TOP_LEVEL_NAME
+  eval vsim -novopt -t ps $ELAB_OPTIONS $USER_DEFINED_ELAB_OPTIONS -L work -L work_lib -L idct_ifft_altera_fft_ii_151 -L dct_fft_altera_fft_ii_151 -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L twentynm_ver -L twentynm_hssi_ver -L twentynm_hip_ver $TOP_LEVEL_NAME
 }
 
 # ----------------------------------------

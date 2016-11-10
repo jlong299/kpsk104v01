@@ -27,3 +27,5 @@ for k=1:repeat_times
 end
 
 max(max(abs(FPGA_out(:,1:repeat_times*N) - x1_repeat)) )
+
+sum(sum(abs(FPGA_out(:,1:repeat_times*N) - x1_repeat)))/(repeat_times*N)

@@ -72,15 +72,15 @@ module idct_top #(parameter
 	output wire [11:0] fftpts_out    //       .fftpts_out
 	);
 
-localparam 	wData_t0 = 16;
-localparam 	wData_t1 = 28;
+localparam 	wData_t0 = 24;
+localparam 	wData_t1 = 32;
 reg        source_valid_t0; // source.source_valid
 reg        source_ready_t0; //       .source_ready
 reg [1:0]  source_error_t0; //       .source_error
 reg        source_sop_t0;   //       .source_sop
 reg        source_eop_t0;   //       .source_eop
-reg [wDataIn-1:0] source_real_t0;  //       .source_real
-reg [wDataIn-1:0] source_imag_t0;  //       .source_imag
+reg [wData_t0-1:0] source_real_t0;  //       .source_real
+reg [wData_t0-1:0] source_imag_t0;  //       .source_imag
 
 wire        source_valid_t1; // source.source_valid
 reg        source_ready_t1; //       .source_ready
@@ -155,11 +155,10 @@ idct_vecRot_inst
 ); 
 
 
-
 //-----------------------------------------------------
 //-----------  Part 2 :  IFFT    -----------------------
 //-----------------------------------------------------
-dct_fft idct_ifft_inst (
+idct_ifft idct_ifft_inst (
 	.clk          (clk),          //    clk.clk
 	.reset_n      (rst_n_sync),      //    rst.reset_n
 	.sink_valid   (source_valid_t0),   //   sink.sink_valid

@@ -328,7 +328,7 @@ begin
 		begin
 			if (duty_cycle) 
 			begin
-				rdaddress0 <= rdaddress0 + 1'd1; 
+				rdaddress0 <= (rdaddress0 == (fftpts_divd2-1'd1)) ? (fftpts_divd2-1'd1) : rdaddress0 + 1'd1; 
 				rdaddress1 <= rdaddress1 - 1'd1;
 			end
 			else
