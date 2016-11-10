@@ -52,7 +52,9 @@ vlog -sv ../src/RAM_FIFO/ROM_cos_idct_vecRot/sim/ROM_cos_idct_vecRot.v
 vlog -sv ../src/RAM_FIFO/ROM_cos_idct_vecRot/rom_1port_151/sim/ROM_cos_idct_vecRot_rom_1port_151_g2udz5i.v
 vlog -sv ../src/RAM_FIFO/ROM_sin_idct_vecRot/sim/ROM_sin_idct_vecRot.v
 vlog -sv ../src/RAM_FIFO/ROM_sin_idct_vecRot/rom_1port_151/sim/ROM_sin_idct_vecRot_rom_1port_151_hi2hr3i.v
-vlog -sv ../src/idct/idct_aftIFFt_scaling.v 
+vlog -sv ../src/idct/idct_aftIFFt_scaling.v
+vlog -sv ../src/RAM_FIFO/RAM_idct_aftIFFT/sim/RAM_idct_aftIFFT.v 
+vlog -sv ../src/RAM_FIFO/RAM_idct_aftIFFT/ram_2port_151/sim/RAM_idct_aftIFFT_ram_2port_151_65vwdsi.v
 
 
 # Elaborate the design.
@@ -66,7 +68,7 @@ add wave sim:/dct_tb/idct_top_inst/*
 add wave sim:/dct_tb/idct_top_inst/idct_aftIFFT_reod_ping/*
 view structure
 view signals
-run 160us
+run 40us
 # Report success to the shell
 # exit -code 0
 # End of template

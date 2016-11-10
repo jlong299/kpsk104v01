@@ -44,7 +44,7 @@ module dct_tb (
 	reg [15:0] cnt_rd, cnt_file_end;
 	integer 	data_file, scan_file, wr_file;
 	reg [31:0] 	captured_data, captured_data_imag;
-	localparam reg [11:0] fftpts_cnst = 12'd2048;
+	localparam reg [11:0] fftpts_cnst = 12'd512;
 	localparam reg [15:0] cnt_rd_end = {{4{1'b0}}, fftpts_cnst};
 	localparam reg [15:0] param_cnt_file_end = 16'd2;  //Number of frames to be processed.
 

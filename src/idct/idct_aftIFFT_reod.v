@@ -81,7 +81,7 @@ assign  fftpts_out = fftpts_in;
 
 
 //--------------  2 RAMs (Each RAM only stores half of the data)-----------------
-RAM_dct_vecRot u0 (
+RAM_idct_aftIFFT u0 (
 	.data      (data),      //  ram_input.datain
 	.wraddress (wraddress0), //           .wraddress
 	.rdaddress (rdaddress0), //           .rdaddress
@@ -90,7 +90,7 @@ RAM_dct_vecRot u0 (
 	.q         (q0)          // ram_output.dataout
 ); //constant width
 
-RAM_dct_vecRot u1 (
+RAM_idct_aftIFFT u1 (
 	.data      (data),      //  ram_input.datain
 	.wraddress (wraddress1), //           .wraddress
 	.rdaddress (rdaddress1), //           .rdaddress

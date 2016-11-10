@@ -1,5 +1,5 @@
 Info: Starting: Create simulation model
-Info: qsys-generate c:\work\pj104\code\1611\CE\src\FFT\dct_fft.qsys --simulation=VERILOG --output-directory=C:\work\pj104\code\1611\CE\src\FFT\dct_fft --family="Arria 10" --part=10AX115U3F45E2SGE3
+Info: qsys-generate C:\work\pj104\code\1611\CE\src\FFT\dct_fft.qsys --simulation=VERILOG --output-directory=C:\work\pj104\code\1611\CE\src\FFT\dct_fft --family="Arria 10" --part=10AX115U3F45E2SGE3
 Progress: Loading FFT/dct_fft.qsys
 Progress: Reading input file
 Progress: Adding fft_ii_0 [altera_fft_ii 15.1]
@@ -14,12 +14,12 @@ Info: dct_fft: Running transform generation_view_transform took 0.000s
 Info: fft_ii_0: Running transform generation_view_transform
 Info: fft_ii_0: Running transform generation_view_transform took 0.000s
 Info: dct_fft: Running transform merlin_avalon_transform
-Info: dct_fft: Running transform merlin_avalon_transform took 0.069s
+Info: dct_fft: Running transform merlin_avalon_transform took 0.038s
 Info: dct_fft: "Naming system components in system: dct_fft"
 Info: dct_fft: "Processing generation queue"
 Info: dct_fft: "Generating: dct_fft"
-Info: dct_fft: "Generating: dct_fft_altera_fft_ii_151_gocahoy"
-Info: fft_ii_0: Created simgen file at: C:/Users/longjia1/AppData/Local/Temp/alt7106_2227308082113299682.dir/0001_fft_ii_0_gen/dct_fft_altera_fft_ii_151_gocahoy.vo
+Info: dct_fft: "Generating: dct_fft_altera_fft_ii_151_2xmofsy"
+Info: fft_ii_0: Created simgen file at: C:/Users/longjia1/AppData/Local/Temp/alt7107_8834236320076505134.dir/0001_fft_ii_0_gen/dct_fft_altera_fft_ii_151_2xmofsy.vo
 Info: dct_fft: Done "dct_fft" with 2 modules, 12 files
 Info: qsys-generate succeeded.
 Info: Finished: Create simulation model
@@ -44,7 +44,7 @@ Info: For information on how to simulate your IP, see the explanatory comments i
 Info: Finished: Create Modelsim Project.
 Info: 
 Info: Starting: Create HDL design files for synthesis
-Info: qsys-generate c:\work\pj104\code\1611\CE\src\FFT\dct_fft.qsys --synthesis=VERILOG --output-directory=C:\work\pj104\code\1611\CE\src\FFT\dct_fft --family="Arria 10" --part=10AX115U3F45E2SGE3
+Info: qsys-generate C:\work\pj104\code\1611\CE\src\FFT\dct_fft.qsys --synthesis=VERILOG --output-directory=C:\work\pj104\code\1611\CE\src\FFT\dct_fft --family="Arria 10" --part=10AX115U3F45E2SGE3
 Progress: Loading FFT/dct_fft.qsys
 Progress: Reading input file
 Progress: Adding fft_ii_0 [altera_fft_ii 15.1]
@@ -59,11 +59,11 @@ Info: dct_fft: Running transform generation_view_transform took 0.000s
 Info: fft_ii_0: Running transform generation_view_transform
 Info: fft_ii_0: Running transform generation_view_transform took 0.000s
 Info: dct_fft: Running transform merlin_avalon_transform
-Info: dct_fft: Running transform merlin_avalon_transform took 0.022s
+Info: dct_fft: Running transform merlin_avalon_transform took 0.007s
 Info: dct_fft: "Naming system components in system: dct_fft"
 Info: dct_fft: "Processing generation queue"
 Info: dct_fft: "Generating: dct_fft"
-Info: dct_fft: "Generating: dct_fft_altera_fft_ii_151_gocahoy"
+Info: dct_fft: "Generating: dct_fft_altera_fft_ii_151_2xmofsy"
 Info: dct_fft: Done "dct_fft" with 2 modules, 56 files
 Info: qsys-generate succeeded.
 Info: Finished: Create HDL design files for synthesis
