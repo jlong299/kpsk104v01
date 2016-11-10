@@ -50,7 +50,7 @@
 
 module dct_vecRot #(parameter  
 		wDataIn = 28,  
-		wDataOut =16  
+		wDataOut =24  
 	)
 	(
 	// left side
@@ -83,7 +83,7 @@ module dct_vecRot #(parameter
 
 
 localparam 	wDataOut_t0 = 28;
-localparam 	wDataOut_t1 = 16;
+localparam 	wDataOut_t1 = 24;
 localparam 	wCoeff = 18;
 
 reg        source_valid_t0; // source.source_valid

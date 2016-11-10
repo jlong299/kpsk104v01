@@ -100,7 +100,7 @@
 
 module dct_vecRot_twiddle #(parameter  
 		wDataIn =28,
-		wDataOut =16,  
+		wDataOut =16+8,  
 		wCoeff =18  
 	)
 	(
@@ -227,8 +227,8 @@ begin
 		end
 		12'd512:
 		begin
-			source_real <= p3[0][wDataOut+20:21]+p3[0][20]; //rounding
-			source_imag <= p3[1][wDataOut+20:21]+p3[1][20]; //rounding
+			source_real <= p3[0][wDataOut+20-8:21-8]+p3[0][20-8]; //rounding
+			source_imag <= p3[1][wDataOut+20-8:21-8]+p3[1][20-8]; //rounding
 		end
 		12'd256:
 		begin
@@ -337,8 +337,8 @@ begin
 		end
 		12'd512:
 		begin
-			source_real_rev <= p3_rev[0][wDataOut+20:21]+p3_rev[0][20]; //rounding
-			source_imag_rev <= p3_rev[1][wDataOut+20:21]+p3_rev[1][20]; //rounding
+			source_real_rev <= p3_rev[0][wDataOut+20-8:21-8]+p3_rev[0][20-8]; //rounding
+			source_imag_rev <= p3_rev[1][wDataOut+20-8:21-8]+p3_rev[1][20-8]; //rounding
 		end
 		12'd256:
 		begin

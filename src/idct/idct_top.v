@@ -41,7 +41,7 @@
 
 
 module idct_top #(parameter  
-		wDataIn = 16,  
+		wDataIn = 24,  
 		wDataOut = 16  
 	)
 	(
@@ -105,16 +105,16 @@ reg        sink_ready_ping, sink_ready_pong; //       .sink_ready
 reg [1:0]  sink_error_ping, sink_error_pong; //       .sink_error
 reg        sink_sop_ping, sink_sop_pong;   //       .sink_sop
 reg        sink_eop_ping, sink_eop_pong;   //       .sink_eop
-reg [wDataIn-1:0] sink_real_ping, sink_real_pong;  //       .sink_real
-reg [wDataIn-1:0] sink_imag_ping, sink_imag_pong;  //       .sink_imag
+reg [wDataOut-1:0] sink_real_ping, sink_real_pong;  //       .sink_real
+reg [wDataOut-1:0] sink_imag_ping, sink_imag_pong;  //       .sink_imag
 
 reg        source_valid_ping, source_valid_pong; // source.source_valid
 reg        source_ready_ping, source_ready_pong; //       .source_ready
 reg [1:0]  source_error_ping, source_error_pong; //       .source_error
 reg        source_sop_ping, source_sop_pong;   //       .source_sop
 reg        source_eop_ping, source_eop_pong;   //       .source_eop
-reg [wDataIn-1:0] source_real_ping, source_real_pong;  //       .source_real
-reg [wDataIn-1:0] source_imag_ping, source_imag_pong;  //       .source_imag
+reg [wDataOut-1:0] source_real_ping, source_real_pong;  //       .source_real
+reg [wDataOut-1:0] source_imag_ping, source_imag_pong;  //       .source_imag
 
 assign fftpts_out = fftpts_in;
 
@@ -292,7 +292,7 @@ begin
 	end
 end
 idct_aftIFFT_reod #(
-	.wDataInOut (wDataIn) 
+	.wDataInOut (wDataOut) 
 	)
 idct_aftIFFT_reod_ping (
 	// left side
@@ -322,7 +322,7 @@ idct_aftIFFT_reod_ping (
 	);
 
 idct_aftIFFT_reod #(
-	.wDataInOut (wDataIn) 
+	.wDataInOut (wDataOut) 
 	)
 idct_aftIFFT_reod_pong (
 	// left side

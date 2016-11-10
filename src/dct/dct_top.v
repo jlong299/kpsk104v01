@@ -52,7 +52,7 @@
 
 module dct_top #(parameter  
 		wDataIn = 16,  
-		wDataOut = 16  
+		wDataOut = 24  
 	)
 	(
 	// left side

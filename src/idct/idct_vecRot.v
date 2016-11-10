@@ -39,8 +39,8 @@
 
 
 module idct_vecRot #(parameter  
-		wDataIn = 16,  
-		wDataOut =16  
+		wDataIn = 24,  
+		wDataOut =24  
 	)
 	(
 	// left side
@@ -73,7 +73,7 @@ module idct_vecRot #(parameter
 
 
 
-localparam 	wData_t0 = 34;
+//localparam 	wData_t0 = 34;
 localparam 	wCoeff = 18;
 
 reg        source_valid_t0; // source.source_valid

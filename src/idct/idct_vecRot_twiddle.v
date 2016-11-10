@@ -73,8 +73,8 @@
 
 
 module idct_vecRot_twiddle #(parameter  
-		wDataIn =16,
-		wDataOut =36,  
+		wDataIn =24,
+		wDataOut =24+18,  
 		wCoeff =18  
 	)
 	(
