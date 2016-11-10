@@ -174,7 +174,7 @@ dct_fft idct_ifft_inst (
 	.inverse      (1'b1),      //       .inverse   
 	//------------------------
 	.source_valid (source_valid_t1), // source.source_valid
-	.source_ready (1'b1), //       .source_ready
+	.source_ready (source_ready_t1), //       .source_ready
 	.source_error (source_error_t1), //       .source_error
 	.source_sop   (source_sop_t1),   //       .source_sop
 	.source_eop   (source_eop_t1),   //       .source_eop

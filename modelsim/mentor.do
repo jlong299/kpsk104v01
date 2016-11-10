@@ -63,9 +63,10 @@ view wave
 add wave *
 add wave sim:/dct_tb/u0/*
 add wave sim:/dct_tb/idct_top_inst/*
+add wave sim:/dct_tb/idct_top_inst/idct_aftIFFT_reod_ping/*
 view structure
 view signals
-run 30us
+run 160us
 # Report success to the shell
 # exit -code 0
 # End of template

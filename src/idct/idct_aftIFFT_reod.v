@@ -26,7 +26,7 @@
 //  x1(2:2:N) = x1_reod(N:-1:N/2+1);
 //  --------------------------------------------------------------------------------------------------
 //                      |          |
-//  bit reverse  -->    |  reoder  | --> x0,x2047,x1,x2046,x2,x2045,...,x1023,x1024
+//  bit reverse  -->    |  reorder | --> x0,x2047,x1,x2046,x2,x2045,...,x1023,x1024
 //                      |          |
 //  ---------------------------------------------------------------------------- 
 //  Note :  (1) fftpts_in : The number of FFT points is power of 2
@@ -55,8 +55,8 @@ module idct_aftIFFT_reod #(parameter
 	output	[1:0]	source_error,
 	output reg		source_sop,
 	output reg		source_eop,
-	output 	[wDataInOut-1:0]	source_real,
-	output 	[wDataInOut-1:0]	source_imag,
+	output reg [wDataInOut-1:0]	source_real,
+	output reg [wDataInOut-1:0]	source_imag,
 	output	[11:0]	fftpts_out
 	);
 
@@ -69,9 +69,10 @@ reg	 [9:0]	wraddress0, rdaddress0, wraddress1, rdaddress1;	//constant width
 reg [1:0] 	fsm;
 reg [2*wDataInOut-1:0] 	data;
 reg [11:0] 		cnt_sink_valid;
-reg 	read_latter_half, read_latter_half_r;
 
 reg [11:0] 	cnt_sink_valid_rev;
+
+reg 		duty_cycle;
 
 assign 	source_error = 2'b00;
 assign 	fftpts_divd2 = {1'b0,fftpts_in[11:1]};
@@ -304,12 +305,11 @@ end
 
 
 //-----------------  Read RAM ------------------------
-//  Expected output : 
-//  F(1),  F(2), ...  F(N/2),   F(N/2+1), | F(N/2+2), ... F(N)
-//  F(1),  F(N), ...  F(N/2+2), F(N/2+1), | F(N/2),   ... F(2)
-//                                    |
-//       read_latter_half == 1'b0     |    read_latter_half == 1'b1
-//----------------------------------------------------
+//  --------------------------------------------------------------------------------------------------
+//                      |          |
+//  bit reverse  -->    |  reorder | --> x0,x2047,x1,x2046,x2,x2045,...,x1023,x1024
+//                      |          |
+//  ---------------------------------------------------------------------------- 
 
 always@(posedge clk)
 begin
@@ -320,41 +320,35 @@ begin
 		source_sop <= 0;
 		source_eop <= 0;
 		source_valid <= 0;
-		read_latter_half <= 0;
+		duty_cycle <= 0;
 	end
 	else
 	begin
 		if (fsm==2'd3)
-			if (rdaddress0==(fftpts_divd2-1'd1))
-				read_latter_half <= 1'b1;
-			else
-				read_latter_half <= read_latter_half;
-		else
-			read_latter_half <= 1'b0;
-
-		if (fsm==2'd3)
 		begin
-			if (read_latter_half == 1'b0) 
+			if (duty_cycle) 
 			begin
 				rdaddress0 <= rdaddress0 + 1'd1; 
 				rdaddress1 <= rdaddress1 - 1'd1;
 			end
 			else
-			begin
-				rdaddress0 <= rdaddress0 - 1'd1; 
-				rdaddress1 <= rdaddress1 + 1'd1;
+			begin 
+				rdaddress0 <= rdaddress0; 
+				rdaddress1 <= rdaddress1;
 			end
+			duty_cycle <= !duty_cycle;
 		end
 		else
 		begin
 			rdaddress0 <= 0;
 			rdaddress1 <= fftpts_divd2;
+			duty_cycle <= 0;
 		end
 
 		if (fsm==2'd3)
 		begin
-			source_sop <= (read_latter_half==1'b0 && rdaddress0==1'd1)? 1'b1 : 1'b0;
-			source_eop <= (read_latter_half_r==1'b1 && rdaddress0==1'd0)? 1'b1 : 1'b0;
+			source_sop <= (duty_cycle==1'b0 && rdaddress0==1'd1)? 1'b1 : 1'b0;
+			source_eop <= (duty_cycle==1'b1 && rdaddress1==1'd0 && source_valid==1'b1)? 1'b1 : 1'b0;
 		end
 		else 
 		begin
@@ -362,7 +356,7 @@ begin
 			source_eop <= 0;
 		end
 
-		if (read_latter_half==1'b0 && rdaddress0==1'd1)
+		if (duty_cycle==1'b0 && rdaddress0==1'd1)
 			source_valid <= 1'b1;
 		else if (source_eop)
 			source_valid <= 1'b0;
@@ -377,44 +371,20 @@ begin
 	begin
 		source_real <= 0;
 		source_imag <= 0;
-		source_real_rev <= 0;
-		source_imag_rev <= 0;
-		read_latter_half_r <= 0;
 	end
 	else
 	begin
-		read_latter_half_r <= read_latter_half;
-
-		if (read_latter_half==1'b0 && rdaddress0==1'd1)
+		if (duty_cycle)
 		begin
-			source_real <= q0[2*wDataOut-1:wDataOut];
-			source_imag <= q0[wDataOut-1:0];
-			source_real_rev <= q0[2*wDataOut-1:wDataOut];
-			source_imag_rev <= q0[wDataOut-1:0];
+			source_real <= q1[2*wDataInOut-1:wDataInOut];
+			source_imag <= q1[wDataInOut-1:0];
 		end
-		else if (read_latter_half==1'b1 && rdaddress0==(fftpts_divd2-1'd1))
+		else 
 		begin
-			source_real <= q1[2*wDataOut-1:wDataOut];
-			source_imag <= q1[wDataOut-1:0];
-			source_real_rev <= q1[2*wDataOut-1:wDataOut];
-			source_imag_rev <= q1[wDataOut-1:0];
-		end
-		else if (read_latter_half_r == 1'b0)
-		begin
-			source_real <= q0[2*wDataOut-1:wDataOut];
-			source_imag <= q0[wDataOut-1:0];
-			source_real_rev <= q1[2*wDataOut-1:wDataOut];
-			source_imag_rev <= q1[wDataOut-1:0];
-		end
-		else
-		begin
-			source_real <= q1[2*wDataOut-1:wDataOut];
-			source_imag <= q1[wDataOut-1:0];
-			source_real_rev <= q0[2*wDataOut-1:wDataOut];
-			source_imag_rev <= q0[wDataOut-1:0];		
-		end
+			source_real <= q0[2*wDataInOut-1:wDataInOut];
+			source_imag <= q0[wDataInOut-1:0];
 		end
 	end
-
+end
 
 endmodule

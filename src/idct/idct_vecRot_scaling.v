@@ -44,19 +44,18 @@ localparam 	divide_width = 16;    //   /65536
 
 assign 	source_error = 2'b00;
 assign  fftpts_out = fftpts_in;
+assign  sink_ready = source_ready;
 
 always@(posedge clk)
 begin
 	if (!rst_n_sync)
 	begin
-		sink_ready <= 0;
 		source_valid <= 0;
 		source_sop <= 0;
 		source_eop <= 0;
 	end
 	else
 	begin
-		sink_ready <= source_ready;
 		source_valid <= sink_valid;
 		source_sop <= sink_sop;
 		source_eop <= sink_eop;
@@ -73,6 +72,27 @@ begin
 	end
 	else
 	begin
+		case (fftpts_in)
+		12'd2048 : 
+		begin
+			if ( sink_real[wDataIn-1:wDataOut+divide_width] == {(wDataIn - wDataOut -divide_width){1'b0}} ||
+				 sink_real[wDataIn-1:wDataOut+divide_width] == {(wDataIn - wDataOut -divide_width){1'b1}} )
+				source_real <= sink_real[wDataOut+divide_width:divide_width+1]+sink_real[divide_width]; //rounding (/65536)
+			else if ( sink_real[wDataIn-1] == 1'b0) // saturating
+				source_real <= { 1'b0, {(wDataOut-1){1'b1}} };
+			else
+				source_real <= { 1'b1, {(wDataOut-1){1'b0}} };
+
+			if ( sink_imag[wDataIn-1:wDataOut+divide_width] == {(wDataIn - wDataOut -divide_width){1'b0}} ||
+				 sink_imag[wDataIn-1:wDataOut+divide_width] == {(wDataIn - wDataOut -divide_width){1'b1}} )
+				source_imag <= sink_imag[wDataOut+divide_width:divide_width+1]+sink_imag[divide_width]; //rounding (/65536)
+			else if ( sink_imag[wDataIn-1] == 1'b0) // saturating
+				source_imag <= { 1'b0, {(wDataOut-1){1'b1}} };
+			else
+				source_imag <= { 1'b1, {(wDataOut-1){1'b0}} };
+		end
+		12'd512 :
+		begin
 			if ( sink_real[wDataIn-1:wDataOut+divide_width-1] == {(wDataIn - wDataOut -divide_width+1){1'b0}} ||
 				 sink_real[wDataIn-1:wDataOut+divide_width-1] == {(wDataIn - wDataOut -divide_width+1){1'b1}} )
 				source_real <= sink_real[wDataOut+divide_width-1:divide_width]+sink_real[divide_width-1]; //rounding (/65536)
@@ -88,6 +108,26 @@ begin
 				source_imag <= { 1'b0, {(wDataOut-1){1'b1}} };
 			else
 				source_imag <= { 1'b1, {(wDataOut-1){1'b0}} };
+		end
+		default :	
+		begin
+			if ( sink_real[wDataIn-1:wDataOut+divide_width] == {(wDataIn - wDataOut -divide_width){1'b0}} ||
+				 sink_real[wDataIn-1:wDataOut+divide_width] == {(wDataIn - wDataOut -divide_width){1'b1}} )
+				source_real <= sink_real[wDataOut+divide_width:divide_width+1]+sink_real[divide_width]; //rounding (/65536)
+			else if ( sink_real[wDataIn-1] == 1'b0) // saturating
+				source_real <= { 1'b0, {(wDataOut-1){1'b1}} };
+			else
+				source_real <= { 1'b1, {(wDataOut-1){1'b0}} };
+
+			if ( sink_imag[wDataIn-1:wDataOut+divide_width] == {(wDataIn - wDataOut -divide_width){1'b0}} ||
+				 sink_imag[wDataIn-1:wDataOut+divide_width] == {(wDataIn - wDataOut -divide_width){1'b1}} )
+				source_imag <= sink_imag[wDataOut+divide_width:divide_width+1]+sink_imag[divide_width]; //rounding (/65536)
+			else if ( sink_imag[wDataIn-1] == 1'b0) // saturating
+				source_imag <= { 1'b0, {(wDataOut-1){1'b1}} };
+			else
+				source_imag <= { 1'b1, {(wDataOut-1){1'b0}} };
+		end
+		endcase
 	end
 end
 

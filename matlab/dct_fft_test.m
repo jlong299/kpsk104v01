@@ -1,6 +1,6 @@
 clear 
 complex_sig = 1;
-N = 512;
+N = 2048;
 
 x_real=round((2*rand(1,N)-1)*8192);
 x_imag=round((2*rand(1,N)-1)*8192);
