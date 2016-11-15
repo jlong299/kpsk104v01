@@ -217,8 +217,8 @@ begin
 		case (fftpts_in)
 		12'd2048:
 		begin
-			source_real <= p3[0][wDataOut+21:22]+p3[0][21]; //rounding
-			source_imag <= p3[1][wDataOut+21:22]+p3[1][21]; //rounding
+			source_real <= p3[0][wDataOut+21-8:22-8]+p3[0][21-8]; //rounding
+			source_imag <= p3[1][wDataOut+21-8:22-8]+p3[1][21-8]; //rounding
 		end
 		12'd1024:
 		begin
@@ -327,8 +327,8 @@ begin
 		case (fftpts_in)
 		12'd2048:
 		begin
-			source_real_rev <= p3_rev[0][wDataOut+21:22]+p3_rev[0][21]; //rounding
-			source_imag_rev <= p3_rev[1][wDataOut+21:22]+p3_rev[1][21]; //rounding
+			source_real_rev <= p3_rev[0][wDataOut+21-8:22-8]+p3_rev[0][21-8]; //rounding
+			source_imag_rev <= p3_rev[1][wDataOut+21-8:22-8]+p3_rev[1][21-8]; //rounding
 		end
 		12'd1024:
 		begin

@@ -19,13 +19,25 @@ repeat_times = floor(len_fpga_out/N);
 % max(max(abs(FPGA_out(:,1:repeat_times*N) - D1_repeat)) )
 
 %% IDCT output
-x1_repeat = zeros(2,repeat_times*N);
+% x1_repeat = zeros(2,repeat_times*N);
+% 
+% for k=1:repeat_times
+%     x1_repeat(1, (N*(k-1)+1):(N*k)) = real(x1(1:N));
+%     x1_repeat(2, (N*(k-1)+1):(N*k)) = imag(x1(1:N));
+% end
+% 
+% max(max(abs(FPGA_out(:,1:repeat_times*N) - x1_repeat)) )
+% 
+% sum(sum(abs(FPGA_out(:,1:repeat_times*N) - x1_repeat)))/(repeat_times*N)
+
+
+x_repeat = zeros(2,repeat_times*N);
 
 for k=1:repeat_times
-    x1_repeat(1, (N*(k-1)+1):(N*k)) = real(x1(1:N));
-    x1_repeat(2, (N*(k-1)+1):(N*k)) = imag(x1(1:N));
+    x_repeat(1, (N*(k-1)+1):(N*k)) = real(x(1:N));
+    x_repeat(2, (N*(k-1)+1):(N*k)) = imag(x(1:N));
 end
 
-max(max(abs(FPGA_out(:,1:repeat_times*N) - x1_repeat)) )
+max(max(abs(FPGA_out(:,1:repeat_times*N) - x_repeat)) )
 
-sum(sum(abs(FPGA_out(:,1:repeat_times*N) - x1_repeat)))/(repeat_times*N)
+sum(sum(abs(FPGA_out(:,1:repeat_times*N) - x_repeat)))/(repeat_times*N)
