@@ -1,0 +1,18 @@
+# system info ROM_RS_tx_UE0_imag on 2016.11.17.14:08:47
+system_info:
+name,value
+DEVICE,10AX115U3F45E2SGE3
+DEVICE_FAMILY,Arria 10
+GENERATION_ID,1479362927
+#
+#
+# Files generated for ROM_RS_tx_UE0_imag on 2016.11.17.14:08:47
+files:
+filepath,kind,attributes,module,is_top
+sim/ROM_RS_tx_UE0_imag.v,VERILOG,CONTAINS_INLINE_CONFIGURATION,ROM_RS_tx_UE0_imag,true
+rom_1port_151/sim/ROM_RS_tx_UE0_imag_rom_1port_151_2ceuyda.v,VERILOG,,ROM_RS_tx_UE0_imag_rom_1port_151_2ceuyda,false
+#
+# Map from instance-path to kind of module
+instances:
+instancePath,module
+ROM_RS_tx_UE0_imag.rom_1port_0,ROM_RS_tx_UE0_imag_rom_1port_151_2ceuyda

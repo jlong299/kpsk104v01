@@ -1,0 +1,5 @@
+config ROM_RS_tx_UE0_imag_cfg;
+		design ROM_RS_tx_UE0_imag;
+		instance ROM_RS_tx_UE0_imag.rom_1port_0 use ROM_RS_tx_UE0_imag_rom_1port_151.ROM_RS_tx_UE0_imag_rom_1port_151_2ceuyda;
+endconfig
+

@@ -11,7 +11,7 @@
 
 
 module ce_LS_scaling #(parameter  
-		wDataIn = 36,  
+		wDataIn = 35,  
 		wDataOut =16  
 	)
 	(

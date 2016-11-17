@@ -1,0 +1,5 @@
+config ROM_RS_tx_UE0_real_cfg;
+		design ROM_RS_tx_UE0_real;
+		instance ROM_RS_tx_UE0_real.rom_1port_0 use ROM_RS_tx_UE0_real_rom_1port_151.ROM_RS_tx_UE0_real_rom_1port_151_gplsvky;
+endconfig
+

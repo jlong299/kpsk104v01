@@ -55,11 +55,14 @@ module ce_LS #(parameter
 
 localparam 	wCoeff = 18;
 
+reg [wDataIn-1:0] 	p1 [1:0];
+reg [wDataIn+wCoeff-1:0] 	p2 [3:0];
+
 reg        source_valid_t0; // source.source_valid
 reg        source_sop_t0;   //       .source_sop
 reg        source_eop_t0;   //       .source_eop
-reg [wDataIn+wCoeff+2-1:0] source_real_t0;  //       .source_real
-reg [wDataIn+wCoeff+2-1:0] source_imag_t0;  //       .source_imag
+reg [wDataIn+wCoeff:0] source_real_t0;  //       .source_real
+reg [wDataIn+wCoeff:0] source_imag_t0;  //       .source_imag
 
 wire [wCoeff-1:0] 	LS_RS_tx_real, LS_RS_tx_imag;
 
@@ -77,6 +80,21 @@ always@(posedge clk)
 begin
 	if (!rst_n_sync)
 	begin
+		p1[0] <= 0;
+		p1[1] <= 0;
+	end
+	else
+	begin
+		p1[0] <= sink_real;
+		p1[1] <= sink_imag;
+	end
+end
+
+// ---------------- Pipeline 2 -------------------------
+always@(posedge clk)
+begin
+	if (!rst_n_sync)
+	begin
 		p2[0] <= 0;
 		p2[1] <= 0;
 		p2[2] <= 0;
@@ -84,14 +102,14 @@ begin
 	end
 	else
 	begin
-		p1[0] <= sink_real * LS_RS_tx_real;
-		p1[1] <= sink_imag * LS_RS_tx_imag;
-		p1[2] <= sink_real * LS_RS_tx_imag;
-		p1[3] <= sink_imag * LS_RS_tx_real;
+		p2[0] <= p1[0] * LS_RS_tx_real;
+		p2[1] <= p1[1] * LS_RS_tx_imag;
+		p2[2] <= p1[0] * LS_RS_tx_imag;
+		p2[3] <= p1[1] * LS_RS_tx_real;
 	end
 end
 
-// ---------------- Pipeline 2 -------------------------
+// ---------------- Pipeline 3 -------------------------
 always@(posedge clk)
 begin
 	if (!rst_n_sync)
@@ -101,8 +119,8 @@ begin
 	end
 	else
 	begin
-		source_real_t0 <= p1[0]+p1[1];
-		source_imag_t0 <= -p1[2]+p1[3];
+		source_real_t0 <= p2[0]+p2[1];
+		source_imag_t0 <= -p2[2]+p2[3];
 	end
 end
 
@@ -127,10 +145,10 @@ ce_LS_RS_tx_inst (
 	);
 
 //-----------------------------------------------------
-//-----------  Part 2 :  scaling -----------
+//-----------  Part 2 :  scaling   /65536  -----------
 //-----------------------------------------------------
 ce_LS_scaling #(
-	.wDataIn (wDataIn+wCoeff+2),  
+	.wDataIn (wDataIn+wCoeff+1),  
 	.wDataOut (wDataOut)  
 	)
 ce_LS_scaling_inst (

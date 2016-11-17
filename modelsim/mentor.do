@@ -16,12 +16,12 @@ source msim_setup.tcl
 # Compile eda/sim_lib contents first
 dev_com
 # Override the top-level name (so that elab is useful)
-set TOP_LEVEL_NAME dct_tb
+set TOP_LEVEL_NAME ce_tb
 # Compile the standalone IP.
 com
 # Compile the user top-level
 #------ DCT -----------
-vlog -sv ../tb/dct_tb.v
+#vlog -sv ../tb/dct_tb.v
 vlog -sv ../src/dct/dct_vecRot_ram.v 
 vlog -sv ../src/RAM_FIFO/RAM_dct_vecRot/sim/RAM_dct_vecRot.v
 vlog -sv ../src/RAM_FIFO/RAM_dct_vecRot/ram_2port_151/sim/RAM_dct_vecRot_ram_2port_151_byb7zvy.v
@@ -55,20 +55,28 @@ vlog -sv ../src/RAM_FIFO/ROM_sin_idct_vecRot/rom_1port_151/sim/ROM_sin_idct_vecR
 vlog -sv ../src/idct/idct_aftIFFt_scaling.v
 vlog -sv ../src/RAM_FIFO/RAM_idct_aftIFFT/sim/RAM_idct_aftIFFT.v 
 vlog -sv ../src/RAM_FIFO/RAM_idct_aftIFFT/ram_2port_151/sim/RAM_idct_aftIFFT_ram_2port_151_65vwdsi.v
-
-
+#-------- CE ------------
+vlog -sv ../tb/ce_tb.v
+vlog -sv ../src/ce/ce_window.v
+vlog -sv ../src/ce/ce_LS.v
+vlog -sv ../src/ce/ce_LS_scaling.v
+vlog -sv ../src/ce/ce_LS_RS_tx.v
+vlog -sv ../src/RAM_FIFO/ROM_RS_tx_UE0_real/sim/ROM_RS_tx_UE0_real.v
+vlog -sv ../src/RAM_FIFO/ROM_RS_tx_UE0_real/rom_1port_151/sim/ROM_RS_tx_UE0_real_rom_1port_151_gplsvky.v
+vlog -sv ../src/RAM_FIFO/ROM_RS_tx_UE0_imag/sim/ROM_RS_tx_UE0_imag.v
+vlog -sv ../src/RAM_FIFO/ROM_RS_tx_UE0_imag/rom_1port_151/sim/ROM_RS_tx_UE0_imag_rom_1port_151_2ceuyda.v
 # Elaborate the design.
 elab
 # Run the simulation
 
 view wave
 add wave *
-add wave sim:/dct_tb/dct_top_inst/*
-add wave sim:/dct_tb/idct_top_inst/*
+add wave sim:/ce_tb/dct_top_inst/*
+add wave sim:/ce_tb/idct_top_inst/*
 #add wave sim:/dct_tb/idct_top_inst/idct_aftIFFT_reod_ping/*
 view structure
 view signals
-run 160us
+run 40us
 # Report success to the shell
 # exit -code 0
 # End of template

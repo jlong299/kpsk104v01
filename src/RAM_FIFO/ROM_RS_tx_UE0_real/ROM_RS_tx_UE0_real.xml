@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deploy
+ date="2016.11.17.14:02:51"
+ outputDirectory="C:/work/pj104/code/1611/CE/src/RAM_FIFO/ROM_RS_tx_UE0_real/">
+ <perimeter>
+  <parameter
+     name="AUTO_GENERATION_ID"
+     type="Integer"
+     defaultValue="0"
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_UNIQUE_ID"
+     type="String"
+     defaultValue=""
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_DEVICE_FAMILY"
+     type="String"
+     defaultValue="Arria 10"
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_DEVICE"
+     type="String"
+     defaultValue="10AX115U3F45E2SGE3"
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_DEVICE_SPEEDGRADE"
+     type="String"
+     defaultValue="2"
+     onHdl="0"
+     affectsHdl="1" />
+  <interface name="rom_input" kind="conduit" start="0">
+   <property name="associatedClock" value="" />
+   <property name="associatedReset" value="" />
+   <port name="address" direction="input" role="address" width="11" />
+   <port name="clock" direction="input" role="clk" width="1" />
+  </interface>
+  <interface name="rom_output" kind="conduit" start="0">
+   <property name="associatedClock" value="" />
+   <property name="associatedReset" value="" />
+   <port name="q" direction="output" role="dataout" width="18" />
+  </interface>
+ </perimeter>
+ <entity kind="ROM_RS_tx_UE0_real" version="1.0" name="ROM_RS_tx_UE0_real">
+  <parameter name="AUTO_GENERATION_ID" value="1479362571" />
+  <parameter name="AUTO_DEVICE" value="10AX115U3F45E2SGE3" />
+  <parameter name="AUTO_DEVICE_FAMILY" value="Arria 10" />
+  <parameter name="AUTO_UNIQUE_ID" value="" />
+  <parameter name="AUTO_DEVICE_SPEEDGRADE" value="2" />
+  <generatedFiles>
+   <file
+       path="C:\work\pj104\code\1611\CE\src\RAM_FIFO\ROM_RS_tx_UE0_real\synth\ROM_RS_tx_UE0_real.v"
+       attributes="CONTAINS_INLINE_CONFIGURATION" />
+   <file
+       path="C:\work\pj104\code\1611\CE\src\RAM_FIFO\ROM_RS_tx_UE0_real\synth\ROM_RS_tx_UE0_real_cfg.v"
+       attributes="CONTAINS_INLINE_CONFIGURATION" />
+  </generatedFiles>
+  <childGeneratedFiles>
+   <file
+       path="C:\work\pj104\code\1611\CE\src\RAM_FIFO\ROM_RS_tx_UE0_real\synth\ROM_RS_tx_UE0_real.v"
+       attributes="CONTAINS_INLINE_CONFIGURATION" />
+   <file
+       path="C:\work\pj104\code\1611\CE\src\RAM_FIFO\ROM_RS_tx_UE0_real\synth\ROM_RS_tx_UE0_real_cfg.v"
+       attributes="CONTAINS_INLINE_CONFIGURATION" />
+  </childGeneratedFiles>
+  <sourceFiles>
+   <file
+       path="C:/work/pj104/code/1611/CE/src/RAM_FIFO/ROM_RS_tx_UE0_real.qsys" />
+  </sourceFiles>
+  <childSourceFiles>
+   <file
+       path="C:/altera/15.1/ip/altera/megafunctions/rom_1port/rom_1_port_hw.tcl" />
+  </childSourceFiles>
+  <messages>
+   <message level="Info" culprit="ROM_RS_tx_UE0_real">"Generating: ROM_RS_tx_UE0_real"</message>
+   <message level="Info" culprit="ROM_RS_tx_UE0_real">"Generating: ROM_RS_tx_UE0_real_rom_1port_151_gplsvky"</message>
+  </messages>
+ </entity>
+ <entity
+   kind="rom_1port"
+   version="15.1"
+   name="ROM_RS_tx_UE0_real_rom_1port_151_gplsvky">
+  <parameter
+     name="GUI_MIFfilename"
+     value="C:/work/pj104/code/1611/CE/src/RAM_FIFO/coeff_RS_tx_UE0_real.mif" />
+  <parameter name="GUI_CLOCK_ENABLE_INPUT_A" value="false" />
+  <parameter name="GUI_NUMWORDS_A" value="2048" />
+  <parameter name="DEVICE_FAMILY" value="Arria 10" />
+  <parameter name="GUI_RegAddr" value="true" />
+  <parameter name="GUI_RAM_BLOCK_TYPE" value="Auto" />
+  <parameter name="GUI_SingleClock" value="0" />
+  <parameter name="GUI_JTAG_ENABLED" value="false" />
+  <parameter name="GUI_INIT_TO_SIM_X" value="false" />
+  <parameter name="GUI_AclrAddr" value="false" />
+  <parameter name="GUI_AclrOutput" value="false" />
+  <parameter name="GUI_INIT_FILE_LAYOUT" value="PORT_A" />
+  <parameter name="GUI_MAXIMUM_DEPTH" value="0" />
+  <parameter name="GUI_WIDTHAD_A" value="11" />
+  <parameter name="GUI_ADDRESSSTALL_A" value="false" />
+  <parameter name="GUI_FILE_REFERENCE" value="0" />
+  <parameter name="GUI_RegOutput" value="false" />
+  <parameter name="GUI_CLOCK_ENABLE_OUTPUT_A" value="false" />
+  <parameter name="GUI_SclrOutput" value="false" />
+  <parameter name="GUI_rden" value="false" />
+  <parameter name="GUI_MODULE_NAME" value="altera_syncram" />
+  <parameter name="GUI_BlankMemory" value="1" />
+  <parameter name="GUI_JTAG_ID" value="NONE" />
+  <parameter name="GUI_WIDTH_A" value="18" />
+  <generatedFiles>
+   <file
+       path="C:\work\pj104\code\1611\CE\src\RAM_FIFO\ROM_RS_tx_UE0_real\rom_1port_151\synth\ROM_RS_tx_UE0_real_rom_1port_151_gplsvky.v"
+       attributes="" />
+  </generatedFiles>
+  <childGeneratedFiles>
+   <file
+       path="C:\work\pj104\code\1611\CE\src\RAM_FIFO\ROM_RS_tx_UE0_real\rom_1port_151\synth\ROM_RS_tx_UE0_real_rom_1port_151_gplsvky.v"
+       attributes="" />
+  </childGeneratedFiles>
+  <sourceFiles>
+   <file
+       path="C:/altera/15.1/ip/altera/megafunctions/rom_1port/rom_1_port_hw.tcl" />
+  </sourceFiles>
+  <childSourceFiles/>
+  <instantiator instantiator="ROM_RS_tx_UE0_real" as="rom_1port_0" />
+  <messages>
+   <message level="Info" culprit="ROM_RS_tx_UE0_real">"Generating: ROM_RS_tx_UE0_real_rom_1port_151_gplsvky"</message>
+  </messages>
+ </entity>
+</deploy>
