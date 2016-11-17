@@ -193,10 +193,10 @@ begin
 		end
 	end
 end
-dct_preFFT_reod #(
+dct_preFFT_reod_1200in #(
 	.wDataInOut (wDataIn) 
 	)
-dct_preFFT_reod_ping (
+dct_preFFT_reod_1200in_ping (
 	// left side
 	.rst_n_sync 	(rst_n_sync),
 	.clk 			(clk),
@@ -223,10 +223,10 @@ dct_preFFT_reod_ping (
 
 	);
 
-dct_preFFT_reod #(
+dct_preFFT_reod_1200in #(
 	.wDataInOut (wDataIn) 
 	)
-dct_preFFT_reod_pong (
+dct_preFFT_reod_1200in_pong (
 	// left side
 	.rst_n_sync 	(rst_n_sync),
 	.clk 			(clk),

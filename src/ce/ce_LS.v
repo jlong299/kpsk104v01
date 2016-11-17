@@ -36,8 +36,8 @@ module ce_LS #(parameter
 	input wire [1:0]  sink_error, //       .sink_error
 	input wire        sink_sop,   //       .sink_sop
 	input wire        sink_eop,   //       .sink_eop
-	input wire [wDataIn-1:0] sink_real,  //       .sink_real
-	input wire [wDataIn-1:0] sink_imag,  //       .sink_imag
+	input wire signed [wDataIn-1:0] sink_real,  //       .sink_real
+	input wire signed [wDataIn-1:0] sink_imag,  //       .sink_imag
 
 	input wire [11:0] fftpts_in,    //       .fftpts_in
 
@@ -55,16 +55,16 @@ module ce_LS #(parameter
 
 localparam 	wCoeff = 18;
 
-reg [wDataIn-1:0] 	p1 [1:0];
-reg [wDataIn+wCoeff-1:0] 	p2 [3:0];
+reg signed [wDataIn-1:0] 	p1 [1:0];
+reg signed [wDataIn+wCoeff-1:0] 	p2 [3:0];
 
 reg        source_valid_t0; // source.source_valid
 reg        source_sop_t0;   //       .source_sop
 reg        source_eop_t0;   //       .source_eop
-reg [wDataIn+wCoeff:0] source_real_t0;  //       .source_real
-reg [wDataIn+wCoeff:0] source_imag_t0;  //       .source_imag
+reg signed [wDataIn+wCoeff:0] source_real_t0;  //       .source_real
+reg signed [wDataIn+wCoeff:0] source_imag_t0;  //       .source_imag
 
-wire [wCoeff-1:0] 	LS_RS_tx_real, LS_RS_tx_imag;
+wire signed [wCoeff-1:0] 	LS_RS_tx_real, LS_RS_tx_imag;
 
 assign fftpts_out = fftpts_in;
 assign source_error = 2'b00;
