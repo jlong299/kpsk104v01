@@ -20,7 +20,6 @@
 //  Note :  (1) fftpts_in : The number of FFT points is power of 2
 //  
 
-
 module ce_top #(parameter  
 		wDataIn = 16,  
 		wDataOut = 16  
@@ -48,8 +47,6 @@ module ce_top #(parameter
 	output wire        source_eop,   //       .source_eop
 	output wire [wDataOut-1:0] source_real,  //       .source_real
 	output wire [wDataOut-1:0] source_imag,  //       .source_imag
-	output wire [wDataOut-1:0] source_real_rev,  //       .source_real
-	output wire [wDataOut-1:0] source_imag_rev,  //       .source_imag
 	output wire [11:0] fftpts_out    //       .fftpts_out
 	);
 
@@ -79,10 +76,10 @@ wire        source_ready_t2; //       .source_ready
 wire [1:0]  source_error_t2; //       .source_error
 wire        source_sop_t2;   //       .source_sop
 wire        source_eop_t2;   //       .source_eop
-wire [wData_t2-1:0] source_real_t2;  //       .source_real
-wire [wData_t2-1:0] source_imag_t2;  //       .source_imag
-wire [wData_t2-1:0] source_real_rev_t2;  //       .source_real
-wire [wData_t2-1:0] source_imag_rev_t2;  //       .source_imag
+wire [wData_t1-1:0] source_real_t2;  //       .source_real
+wire [wData_t1-1:0] source_imag_t2;  //       .source_imag
+wire [wData_t1-1:0] source_real_rev_t2;  //       .source_real
+wire [wData_t1-1:0] source_imag_rev_t2;  //       .source_imag
 
 assign fftpts_out = fftpts_in;
 
@@ -95,7 +92,7 @@ ce_LS #(
 	)
 ce_LS_inst (
 	.clk          (clk),          //    clk.clk
-	.rst_n_sync   (rst_n),      //    rst.reset_n
+	.rst_n_sync   (rst_n_sync),      //    rst.reset_n
 	.sink_valid   (sink_valid),   //   sink.sink_valid
 	.sink_ready   (sink_ready),   //       .sink_ready
 	.sink_error   (sink_error),   //       .sink_error
@@ -122,14 +119,14 @@ ce_LS_inst (
 
 dct_top dct_top_inst (
 	.clk          (clk),          //    clk.clk
-	.rst_n_sync   (rst_n),      //    rst.reset_n
-	.sink_valid   (sink_valid_t0),   //   sink.sink_valid
-	.sink_ready   (sink_ready_t0),   //       .sink_ready
-	.sink_error   (sink_error_t0),   //       .sink_error
-	.sink_sop     (sink_sop_t0),     //       .sink_sop
-	.sink_eop     (sink_eop_t0),     //       .sink_eop
-	.sink_real    (sink_real_t0),    //       .sink_real
-	.sink_imag    (sink_imag_t0),    //       .sink_imag
+	.rst_n_sync   (rst_n_sync),      //    rst.reset_n
+	.sink_valid   (source_valid_t0),   //   sink.sink_valid
+	.sink_ready   (source_ready_t0),   //       .sink_ready
+	.sink_error   (source_error_t0),   //       .sink_error
+	.sink_sop     (source_sop_t0),     //       .sink_sop
+	.sink_eop     (source_eop_t0),     //       .sink_eop
+	.sink_real    (source_real_t0),    //       .sink_real
+	.sink_imag    (source_imag_t0),    //       .sink_imag
 	.fftpts_in    (fftpts_in),    //       .fftpts_in
 
 	//right side
@@ -155,7 +152,7 @@ ce_window  #(
 ce_window_inst
 (
 	.clk          (clk),          //    clk.clk
-	.rst_n_sync   (rst_n),      //    rst.reset_n
+	.rst_n_sync   (rst_n_sync),      //    rst.reset_n
 	.sink_valid   (source_valid_t1),   //   sink.sink_valid
 	.sink_ready   (source_ready_t1),   //       .sink_ready
 	.sink_error   (source_error_t1),   //       .sink_error
@@ -190,7 +187,7 @@ idct_top  #(
 idct_top_inst
 (
 	.clk          (clk),          //    clk.clk
-	.rst_n_sync   (rst_n),      //    rst.reset_n
+	.rst_n_sync   (rst_n_sync),      //    rst.reset_n
 	.sink_valid   (source_valid_t2),   //   sink.sink_valid
 	.sink_ready   (source_ready_t2),   //       .sink_ready
 	.sink_error   (source_error_t2),   //       .sink_error

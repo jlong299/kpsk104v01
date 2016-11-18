@@ -31,31 +31,11 @@ module ce_tb (
 	//wire [15:0] source_real_rev;  //       .source_real
 	//wire [15:0] source_imag_rev;  //       .source_imag
 
-	wire        source_valid_t0; // source.source_valid
-	reg         source_ready_t0; //       .source_ready
-	wire [1:0]  source_error_t0; //       .source_error
-	wire        source_sop_t0;   //       .source_sop
-	wire        source_eop_t0;   //       .source_eop
-	wire [23:0] source_real_t0;  //       .source_real
-	wire [23:0] source_imag_t0;  //       .source_imag
-	wire [23:0] source_real_rev_t0;  //       .source_real
-	wire [23:0] source_imag_rev_t0;  //       .source_imag
-
-	wire        source_valid_t2; // source.source_valid
-	reg         source_ready_t2; //       .source_ready
-	wire [1:0]  source_error_t2; //       .source_error
-	wire        source_sop_t2;   //       .source_sop
-	wire        source_eop_t2;   //       .source_eop
-	wire [23:0] source_real_t2;  //       .source_real
-	wire [23:0] source_imag_t2;  //       .source_imag
-	wire [23:0] source_real_rev_t2;  //       .source_real
-	wire [23:0] source_imag_rev_t2;  //       .source_imag
-
 	reg [15:0] cnt_rd, cnt_file_end;
 	integer 	data_file, scan_file, wr_file;
 	reg [31:0] 	captured_data, captured_data_imag;
-	localparam reg [11:0] fftpts_cnst = 12'd512;
-	localparam reg [15:0] cnt_rd_end = {{4{1'b0}}, fftpts_cnst};
+	localparam reg [11:0] fftpts_cnst = 12'd2048;
+	localparam reg [15:0] cnt_rd_end = 16'd1200;
 	localparam reg [15:0] param_cnt_file_end = 16'd2;  //Number of frames to be processed.
 
 	initial	begin
@@ -68,14 +48,14 @@ module ce_tb (
 	end
 
 	initial begin
-		data_file = $fopen("dct_src.dat","r");
+		data_file = $fopen("ce_src.dat","r");
 		if (data_file == 0) begin
-			$display("fft_src handle was NULL");
+			$display("ce_src handle was NULL");
 			$finish;
 		end
-		wr_file = $fopen("dct_result.dat","w");
+		wr_file = $fopen("ce_result.dat","w");
 		if (wr_file == 0) begin
-			$display("fft_result handle was NULL");
+			$display("ce_result handle was NULL");
 			$finish;
 		end
 	end
@@ -139,7 +119,11 @@ module ce_tb (
 	end
 
 
-	dct_top dct_top_inst (
+	ce_top #(
+		.wDataIn (16),
+		.wDataOut (16)
+		)
+	ce_top_inst (
 		.clk          (clk),          //    clk.clk
 		.rst_n_sync   (rst_n),      //    rst.reset_n
 		.sink_valid   (sink_valid),   //   sink.sink_valid
@@ -152,68 +136,6 @@ module ce_tb (
 		.fftpts_in    (fftpts_in),    //       .fftpts_in
 
 		//right side
-		.source_valid	(source_valid_t0), 
-		.source_ready	(source_ready_t0), 
-		.source_error	(source_error_t0), 
-		.source_sop		(source_sop_t0),   
-		.source_eop		(source_eop_t0),   
-		.source_real	(source_real_t0),  
-		.source_imag	(source_imag_t0),  
-		.source_real_rev	(source_real_rev_t0),  
-		.source_imag_rev	(source_imag_rev_t0),  
-		.fftpts_out()
-	);
-
-	ce_window  #(
-		.wDataInOut  (24)  
-			)
-	ce_window_inst
-	(
-		.clk          (clk),          //    clk.clk
-		.rst_n_sync   (rst_n),      //    rst.reset_n
-		.sink_valid   (source_valid_t0),   //   sink.sink_valid
-		.sink_ready   (source_ready_t0),   //       .sink_ready
-		.sink_error   (source_error_t0),   //       .sink_error
-		.sink_sop     (source_sop_t0),     //       .sink_sop
-		.sink_eop     (source_eop_t0),     //       .sink_eop
-		.sink_real    (source_real_t0),    //       .sink_real
-		.sink_imag    (source_imag_t0),    //       .sink_imag
-		.sink_real_rev    (source_real_rev_t0),    //       .sink_real
-		.sink_imag_rev    (source_imag_rev_t0),    //       .sink_imag
-		.fftpts_in    (fftpts_in),    //       .fftpts_in
-
-		//right side
-		.source_valid	(source_valid_t2), 
-		.source_ready	(source_ready_t2), 
-		.source_error	(source_error_t2), 
-		.source_sop		(source_sop_t2),   
-		.source_eop		(source_eop_t2),   
-		.source_real	(source_real_t2),  
-		.source_imag	(source_imag_t2),  
-		.source_real_rev	(source_real_rev_t2),  
-		.source_imag_rev	(source_imag_rev_t2),  
-		.fftpts_out()
-	);
-
-	idct_top  #(
-		.wDataIn  (24),  
-		.wDataOut  (16) 	)
-	idct_top_inst
-	(
-		.clk          (clk),          //    clk.clk
-		.rst_n_sync   (rst_n),      //    rst.reset_n
-		.sink_valid   (source_valid_t2),   //   sink.sink_valid
-		.sink_ready   (source_ready_t2),   //       .sink_ready
-		.sink_error   (source_error_t2),   //       .sink_error
-		.sink_sop     (source_sop_t2),     //       .sink_sop
-		.sink_eop     (source_eop_t2),     //       .sink_eop
-		.sink_real    (source_real_t2),    //       .sink_real
-		.sink_imag    (source_imag_t2),    //       .sink_imag
-		.sink_real_rev    (source_real_rev_t2),    //       .sink_real
-		.sink_imag_rev    (source_imag_rev_t2),    //       .sink_imag
-		.fftpts_in    (fftpts_in),    //       .fftpts_in
-
-		//right side
 		.source_valid	(source_valid), 
 		.source_ready	(source_ready), 
 		.source_error	(source_error), 
@@ -223,6 +145,7 @@ module ce_tb (
 		.source_imag	(source_imag),  
 		.fftpts_out()
 	);
+
 
 	reg signed [15:0] source_real_r, source_imag_r;
 	reg [15:0] 	cnt_source_eop;

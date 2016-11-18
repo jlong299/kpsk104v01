@@ -56,9 +56,9 @@ wire wren;
 wire [2*wDataInOut-1:0] 	data, q;
 reg  read_latter_half;
 
-reg		source_valid_pre,
-reg		source_sop_pre,
-reg		source_eop_pre,
+reg		source_valid_pre;
+reg		source_sop_pre;
+reg		source_eop_pre;
 
 assign fftpts_out = fftpts_in;
 assign source_error = 2'b00;

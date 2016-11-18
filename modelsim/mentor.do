@@ -65,18 +65,21 @@ vlog -sv ../src/RAM_FIFO/ROM_RS_tx_UE0_real/sim/ROM_RS_tx_UE0_real.v
 vlog -sv ../src/RAM_FIFO/ROM_RS_tx_UE0_real/rom_1port_151/sim/ROM_RS_tx_UE0_real_rom_1port_151_gplsvky.v
 vlog -sv ../src/RAM_FIFO/ROM_RS_tx_UE0_imag/sim/ROM_RS_tx_UE0_imag.v
 vlog -sv ../src/RAM_FIFO/ROM_RS_tx_UE0_imag/rom_1port_151/sim/ROM_RS_tx_UE0_imag_rom_1port_151_2ceuyda.v
+vlog -sv ../src/ce/ce_top.v
+vlog -sv ../src/dct/dct_preFFT_reod_1200in.v
 # Elaborate the design.
 elab
 # Run the simulation
 
 view wave
 add wave *
-add wave sim:/ce_tb/dct_top_inst/*
-add wave sim:/ce_tb/idct_top_inst/*
+add wave sim:/ce_tb/ce_top_inst/*
+add wave sim:/ce_tb/ce_top_inst/ce_LS_inst/*
+
 #add wave sim:/dct_tb/idct_top_inst/idct_aftIFFT_reod_ping/*
 view structure
 view signals
-run 40us
+run 160us
 # Report success to the shell
 # exit -code 0
 # End of template

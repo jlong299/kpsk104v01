@@ -23,8 +23,8 @@ module ce_LS_RS_tx #(parameter
 	input wire [11:0] 		fftpts_in, 		
 	// right side
 	// 1 clks delay with sink_valid
-	output reg [wDataOut-1:0] 	source_real,
-	output reg [wDataOut-1:0] 	source_imag
+	output wire signed [wDataOut-1:0] 	source_real,
+	output wire signed [wDataOut-1:0] 	source_imag
 	);
 
 	reg [10:0] address_real, address_imag;

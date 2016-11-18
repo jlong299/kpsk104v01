@@ -63,6 +63,9 @@ reg        source_sop_t0;   //       .source_sop
 reg        source_eop_t0;   //       .source_eop
 reg signed [wDataIn+wCoeff:0] source_real_t0;  //       .source_real
 reg signed [wDataIn+wCoeff:0] source_imag_t0;  //       .source_imag
+reg [1:0]  source_valid_t0_r; // source.source_valid
+reg [1:0]  source_sop_t0_r;   //       .source_sop
+reg [1:0]  source_eop_t0_r;   //       .source_eop
 
 wire signed [wCoeff-1:0] 	LS_RS_tx_real, LS_RS_tx_imag;
 
@@ -143,6 +146,28 @@ ce_LS_RS_tx_inst (
 	.source_real 	(LS_RS_tx_real ),  
 	.source_imag 	(LS_RS_tx_imag )
 	);
+
+always@(posedge clk)
+begin
+	if (!rst_n_sync)
+	begin
+		source_valid_t0 <= 0;
+		source_sop_t0 <= 0;
+		source_eop_t0 <= 0;
+	end
+	else
+	begin
+		source_valid_t0_r[0] <= sink_valid;
+		source_valid_t0_r[1] <= source_valid_t0_r[0];
+		source_valid_t0 <= source_valid_t0_r[1];
+		source_sop_t0_r[0] <= sink_sop;
+		source_sop_t0_r[1] <= source_sop_t0_r[0];
+		source_sop_t0 <= source_sop_t0_r[1];
+		source_eop_t0_r[0] <= sink_eop;
+		source_eop_t0_r[1] <= source_eop_t0_r[0];
+		source_eop_t0 <= source_eop_t0_r[1];
+	end
+end
 
 //-----------------------------------------------------
 //-----------  Part 2 :  scaling   /65536  -----------
