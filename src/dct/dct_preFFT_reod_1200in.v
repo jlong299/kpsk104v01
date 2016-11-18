@@ -124,7 +124,7 @@ begin
 		wraddress <= 0;
 	else
 	begin
-		if (fsm==2'd0)
+		if (fsm==2'd0 && sink_sop==1'b0)
 			wraddress <= wraddress_start;
 		else if (wren==1'b1)
 		begin

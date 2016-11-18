@@ -40,7 +40,7 @@ module idct_aftIFFT_scaling #(parameter
 	output wire [11:0] fftpts_out    //       .fftpts_out
 	);
 
-localparam 	divide_width = 10;    //   
+localparam 	divide_width = 10-2;    //   
 
 assign 	source_error = 2'b00;
 assign  fftpts_out = fftpts_in;

@@ -74,7 +74,7 @@ elab
 view wave
 add wave *
 add wave sim:/ce_tb/ce_top_inst/*
-add wave sim:/ce_tb/ce_top_inst/ce_LS_inst/*
+add wave sim:/ce_tb/ce_top_inst/idct_top_inst/*
 
 #add wave sim:/dct_tb/idct_top_inst/idct_aftIFFT_reod_ping/*
 view structure
