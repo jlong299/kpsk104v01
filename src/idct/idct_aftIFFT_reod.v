@@ -67,7 +67,7 @@ reg	 [9:0]	wraddress0, rdaddress0, wraddress1, rdaddress1;	//constant width
  wire [2*wDataInOut -1:0]  	q0, q1;
 //wire [55:0]  	q0, q1;
 reg [1:0] 	fsm;
-reg [2*wDataInOut-1:0] 	data;
+wire [2*wDataInOut-1:0] 	data;
 reg [11:0] 		cnt_sink_valid;
 
 reg [11:0] 	cnt_sink_valid_rev;
@@ -299,8 +299,8 @@ end
 
 always@(*)
 begin
-	wraddress0 = (cnt_sink_valid_rev < fftpts_divd2) ? cnt_sink_valid_rev : 0;
-	wraddress1 = (cnt_sink_valid_rev >= fftpts_divd2) ? (cnt_sink_valid_rev - fftpts_divd2) : 0;
+	wraddress0 = (cnt_sink_valid_rev < fftpts_divd2) ? cnt_sink_valid_rev : 10'd0;
+	wraddress1 = (cnt_sink_valid_rev >= fftpts_divd2) ? (cnt_sink_valid_rev - fftpts_divd2) : 10'd0;
 end
 
 

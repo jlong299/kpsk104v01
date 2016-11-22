@@ -30,7 +30,7 @@ module ce_top #(parameter
 	input wire				clk,    
 
 	input wire        sink_valid, // sink.sink_valid
-	output reg       sink_ready, //       .sink_ready
+	output wire       sink_ready, //       .sink_ready
 	input wire [1:0]  sink_error, //       .sink_error
 	input wire        sink_sop,   //       .sink_sop
 	input wire        sink_eop,   //       .sink_eop
@@ -49,19 +49,19 @@ module ce_top #(parameter
 	output wire [wDataOut-1:0] source_imag,  //       .source_imag
 	output wire [11:0] fftpts_out,    //       .fftpts_out
 
-	output reg 			overflow
+	output  			overflow
 	);
 
 localparam  wData_t0 = 16;
 localparam  wData_t1 = 24;
 
-reg        source_valid_t0; // source.source_valid
+wire        source_valid_t0; // source.source_valid
 wire        source_ready_t0; //       .source_ready
-reg [1:0]  source_error_t0; //       .source_error
-reg        source_sop_t0;   //       .source_sop
-reg        source_eop_t0;   //       .source_eop
-reg [wData_t0-1:0] source_real_t0;  //       .source_real
-reg [wData_t0-1:0] source_imag_t0;  //       .source_imag
+wire [1:0]  source_error_t0; //       .source_error
+wire        source_sop_t0;   //       .source_sop
+wire        source_eop_t0;   //       .source_eop
+wire [wData_t0-1:0] source_real_t0;  //       .source_real
+wire [wData_t0-1:0] source_imag_t0;  //       .source_imag
 
 wire        source_valid_t1; // source.source_valid
 wire        source_ready_t1; //       .source_ready

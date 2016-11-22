@@ -46,8 +46,8 @@ module idct_vecRot_coeff #(parameter
 	input wire [11:0] 		fftpts_in, 		
 	// right side
 	// 1 clks delay with sink_valid
-	output reg [wDataOut-1:0] 	source_cos,
-	output reg [wDataOut-1:0] 	source_sin
+	output wire [wDataOut-1:0] 	source_cos,
+	output wire [wDataOut-1:0] 	source_sin
 	);
 
 

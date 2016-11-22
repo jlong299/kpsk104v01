@@ -20,7 +20,7 @@ module idct_vecRot_scaling #(parameter
 	input 					clk,    
 
 	input wire        	sink_valid, // sink.sink_valid
-	output reg        	sink_ready, //       .sink_ready
+	output wire        	sink_ready, //       .sink_ready
 	input wire [1:0]  	sink_error, //       .sink_error
 	input wire        	sink_sop,   //       .sink_sop
 	input wire        	sink_eop,   //       .sink_eop

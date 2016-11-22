@@ -6,3 +6,4 @@ modelsim/*.hex
 modelsim/*.ver
 modelsim/*.dat
 matlab/*.asv
+src/*/*/*/*.qicache

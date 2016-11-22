@@ -104,20 +104,20 @@ wire [wData_t1-1:0] source_imag_t1;  //       .source_imag
 reg is_pong_sink, is_pong_source;
 
 reg        sink_valid_ping, sink_valid_pong; // sink.sink_valid
-reg        sink_ready_ping, sink_ready_pong; //       .sink_ready
+wire        sink_ready_ping, sink_ready_pong; //       .sink_ready
 reg [1:0]  sink_error_ping, sink_error_pong; //       .sink_error
 reg        sink_sop_ping, sink_sop_pong;   //       .sink_sop
 reg        sink_eop_ping, sink_eop_pong;   //       .sink_eop
 reg [wDataIn-1:0] sink_real_ping, sink_real_pong;  //       .sink_real
 reg [wDataIn-1:0] sink_imag_ping, sink_imag_pong;  //       .sink_imag
 
-reg        source_valid_ping, source_valid_pong; // source.source_valid
+wire        source_valid_ping, source_valid_pong; // source.source_valid
 reg        source_ready_ping, source_ready_pong; //       .source_ready
-reg [1:0]  source_error_ping, source_error_pong; //       .source_error
-reg        source_sop_ping, source_sop_pong;   //       .source_sop
-reg        source_eop_ping, source_eop_pong;   //       .source_eop
-reg [wDataIn-1:0] source_real_ping, source_real_pong;  //       .source_real
-reg [wDataIn-1:0] source_imag_ping, source_imag_pong;  //       .source_imag
+wire [1:0]  source_error_ping, source_error_pong; //       .source_error
+wire        source_sop_ping, source_sop_pong;   //       .source_sop
+wire        source_eop_ping, source_eop_pong;   //       .source_eop
+wire [wDataIn-1:0] source_real_ping, source_real_pong;  //       .source_real
+wire [wDataIn-1:0] source_imag_ping, source_imag_pong;  //       .source_imag
 
 assign fftpts_out = fftpts_in;
 

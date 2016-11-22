@@ -50,7 +50,7 @@ module idct_top #(parameter
 	input wire				clk,    
 
 	input wire        sink_valid, // sink.sink_valid
-	output reg       sink_ready, //       .sink_ready
+	output wire       sink_ready, //       .sink_ready
 	input wire [1:0]  sink_error, //       .sink_error
 	input wire        sink_sop,   //       .sink_sop
 	input wire        sink_eop,   //       .sink_eop
@@ -71,21 +71,21 @@ module idct_top #(parameter
 	output reg [wDataOut-1:0] source_imag,  //       .source_imag
 	output wire [11:0] fftpts_out,    //       .fftpts_out
 
-	output reg 			overflow
+	output  			overflow
 	);
 
 localparam 	wData_t0 = 24;
 localparam 	wData_t1 = 32;
-reg        source_valid_t0; // source.source_valid
+wire        source_valid_t0; // source.source_valid
 reg        source_ready_t0; //       .source_ready
-reg [1:0]  source_error_t0; //       .source_error
-reg        source_sop_t0;   //       .source_sop
-reg        source_eop_t0;   //       .source_eop
-reg [wData_t0-1:0] source_real_t0;  //       .source_real
-reg [wData_t0-1:0] source_imag_t0;  //       .source_imag
+wire [1:0]  source_error_t0; //       .source_error
+wire        source_sop_t0;   //       .source_sop
+wire        source_eop_t0;   //       .source_eop
+wire [wData_t0-1:0] source_real_t0;  //       .source_real
+wire [wData_t0-1:0] source_imag_t0;  //       .source_imag
 
 wire        source_valid_t1; // source.source_valid
-reg        source_ready_t1; //       .source_ready
+wire        source_ready_t1; //       .source_ready
 wire [1:0]  source_error_t1; //       .source_error
 wire        source_sop_t1;   //       .source_sop
 wire        source_eop_t1;   //       .source_eop
@@ -103,20 +103,20 @@ wire [wDataOut-1:0] source_imag_t2;  //       .source_imag
 reg is_pong_sink, is_pong_source;
 
 reg        sink_valid_ping, sink_valid_pong; // sink.sink_valid
-reg        sink_ready_ping, sink_ready_pong; //       .sink_ready
+wire        sink_ready_ping, sink_ready_pong; //       .sink_ready
 reg [1:0]  sink_error_ping, sink_error_pong; //       .sink_error
 reg        sink_sop_ping, sink_sop_pong;   //       .sink_sop
 reg        sink_eop_ping, sink_eop_pong;   //       .sink_eop
 reg [wDataOut-1:0] sink_real_ping, sink_real_pong;  //       .sink_real
 reg [wDataOut-1:0] sink_imag_ping, sink_imag_pong;  //       .sink_imag
 
-reg        source_valid_ping, source_valid_pong; // source.source_valid
+wire        source_valid_ping, source_valid_pong; // source.source_valid
 reg        source_ready_ping, source_ready_pong; //       .source_ready
-reg [1:0]  source_error_ping, source_error_pong; //       .source_error
-reg        source_sop_ping, source_sop_pong;   //       .source_sop
-reg        source_eop_ping, source_eop_pong;   //       .source_eop
-reg [wDataOut-1:0] source_real_ping, source_real_pong;  //       .source_real
-reg [wDataOut-1:0] source_imag_ping, source_imag_pong;  //       .source_imag
+wire [1:0]  source_error_ping, source_error_pong; //       .source_error
+wire        source_sop_ping, source_sop_pong;   //       .source_sop
+wire        source_eop_ping, source_eop_pong;   //       .source_eop
+wire [wDataOut-1:0] source_real_ping, source_real_pong;  //       .source_real
+wire [wDataOut-1:0] source_imag_ping, source_imag_pong;  //       .source_imag
 
 wire overflow1, overflow2;
 

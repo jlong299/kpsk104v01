@@ -44,7 +44,7 @@ module ce_window #(parameter
 	//right side
 	output reg        source_valid, // source.source_valid
 	input  wire        source_ready, //       .source_ready
-	output reg [1:0]  source_error, //       .source_error
+	output wire [1:0]  source_error, //       .source_error
 	output reg        source_sop,   //       .source_sop
 	output reg        source_eop,   //       .source_eop
 	output reg [wDataInOut-1:0] source_real,  //       .source_real

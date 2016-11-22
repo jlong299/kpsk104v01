@@ -78,13 +78,13 @@ module idct_vecRot #(parameter
 //localparam 	wData_t0 = 34;
 localparam 	wCoeff = 18;
 
-reg        source_valid_t0; // source.source_valid
+wire        source_valid_t0; // source.source_valid
 wire        source_ready_t0; //       .source_ready
-reg [1:0]  source_error_t0; //       .source_error
-reg        source_sop_t0;   //       .source_sop
-reg        source_eop_t0;   //       .source_eop
-reg [wDataIn+wCoeff+2-1:0] source_real_t0;  //       .source_real
-reg [wDataIn+wCoeff+2-1:0] source_imag_t0;  //       .source_imag
+wire [1:0]  source_error_t0; //       .source_error
+wire        source_sop_t0;   //       .source_sop
+wire        source_eop_t0;   //       .source_eop
+wire [wDataIn+wCoeff+2-1:0] source_real_t0;  //       .source_real
+wire [wDataIn+wCoeff+2-1:0] source_imag_t0;  //       .source_imag
 
 wire [wCoeff-1:0] 	coeff_cos, coeff_sin;
 
