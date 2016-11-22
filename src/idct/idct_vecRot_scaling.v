@@ -37,10 +37,14 @@ module idct_vecRot_scaling #(parameter
 	output reg        	source_eop,   //       .source_eop
 	output reg [wDataOut-1:0] source_real,  //       .source_real
 	output reg [wDataOut-1:0] source_imag,  //       .source_imag
-	output wire [11:0] fftpts_out    //       .fftpts_out
+	output wire [11:0] fftpts_out,    //       .fftpts_out
+
+	output reg 	overflow
 	);
 
 localparam 	divide_width = 16;    //   /256/256
+
+reg overflow_real, overflow_imag;
 
 assign 	source_error = 2'b00;
 assign  fftpts_out = fftpts_in;
@@ -91,6 +95,25 @@ begin
 		end
 		
 	end
+end
+
+always@(*)
+begin
+	if ( source_real == {1'b0, {(wDataOut-1){1'b1}}} || source_real == {1'b1, {(wDataOut-1){1'b0}}} )
+		overflow_real <= 1'b1;
+	else
+		overflow_real <= 1'b0;
+end
+always@(*)
+begin
+	if ( source_imag == {1'b0, {(wDataOut-1){1'b1}}} || source_imag == {1'b1, {(wDataOut-1){1'b0}}} )
+		overflow_imag <= 1'b1;
+	else
+		overflow_imag <= 1'b0;
+end
+always@(*)
+begin
+	overflow <= (overflow_real | overflow_imag) & source_valid ;
 end
 
 endmodule

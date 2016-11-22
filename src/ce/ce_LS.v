@@ -50,7 +50,9 @@ module ce_LS #(parameter
 	output wire [wDataOut-1:0] source_real,  //       .source_real
 	output wire [wDataOut-1:0] source_imag,  //       .source_imag
 
-	output wire [11:0] fftpts_out    //       .fftpts_out
+	output wire [11:0] fftpts_out,    //       .fftpts_out
+
+	output wire 		overflow
 	);
 
 localparam 	wCoeff = 18;
@@ -199,7 +201,9 @@ ce_LS_scaling_inst (
 	.source_eop 	(source_eop ),   
 	.source_real 	(source_real ),  
 	.source_imag 	(source_imag ),  
-	.fftpts_out 	( )   
+	.fftpts_out 	( ),
+
+	.overflow 		(overflow)   
 
 	);
 

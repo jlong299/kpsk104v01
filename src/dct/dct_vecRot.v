@@ -77,7 +77,9 @@ module dct_vecRot #(parameter
 	output wire [wDataOut-1:0] source_imag,  //       .source_imag
 	output wire [wDataOut-1:0] source_real_rev,  //       .source_real
 	output wire [wDataOut-1:0] source_imag_rev,  //       .source_imag
-	output wire [11:0] fftpts_out    //       .fftpts_out
+	output wire [11:0] fftpts_out,    //       .fftpts_out
+
+	output reg 		overflow
 	);
 
 
@@ -127,6 +129,9 @@ reg [wDataIn-1:0] source_imag_ping, source_imag_pong;  //       .source_imag
 reg [wDataIn-1:0] source_real_rev_ping, source_real_rev_pong;  //       .source_real_rev
 reg [wDataIn-1:0] source_imag_rev_ping, source_imag_rev_pong;  //       .source_imag_rev
 
+wire overflow1, overflow2;
+
+assign overflow = overflow1 | overflow2;
 
 assign fftpts_out = fftpts_in;
 assign source_error = 2'b00;
@@ -425,7 +430,9 @@ dct_vecRot_scaling_inst (
 	.source_eop 	(source_eop ),   
 	.source_real 	(source_real ),  
 	.source_imag 	(source_imag ),  
-	.fftpts_out 	( )   
+	.fftpts_out 	( ),
+
+	.overflow		(overflow1)   
 
 	);
 
@@ -456,7 +463,9 @@ dct_vecRot_scaling_inst2 (
 	.source_eop 	( ),   
 	.source_real 	(source_real_rev ),  
 	.source_imag 	(source_imag_rev ),  
-	.fftpts_out 	( )   
+	.fftpts_out 	( ),
+
+	.overflow 		(overflow2)   
 
 	);
 

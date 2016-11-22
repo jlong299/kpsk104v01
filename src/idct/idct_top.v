@@ -69,7 +69,9 @@ module idct_top #(parameter
 	output reg        source_eop,   //       .source_eop
 	output reg [wDataOut-1:0] source_real,  //       .source_real
 	output reg [wDataOut-1:0] source_imag,  //       .source_imag
-	output wire [11:0] fftpts_out    //       .fftpts_out
+	output wire [11:0] fftpts_out,    //       .fftpts_out
+
+	output reg 			overflow
 	);
 
 localparam 	wData_t0 = 24;
@@ -116,6 +118,10 @@ reg        source_eop_ping, source_eop_pong;   //       .source_eop
 reg [wDataOut-1:0] source_real_ping, source_real_pong;  //       .source_real
 reg [wDataOut-1:0] source_imag_ping, source_imag_pong;  //       .source_imag
 
+wire overflow1, overflow2;
+
+assign overflow = overflow1 | overflow2;
+
 assign fftpts_out = fftpts_in;
 
 //-----------------------------------------------------
@@ -151,7 +157,8 @@ idct_vecRot_inst
 	.source_eop		(source_eop_t0),   
 	.source_real	(source_real_t0),  
 	.source_imag	(source_imag_t0),  
-	.fftpts_out()
+	.fftpts_out 	( ),
+	.overflow 		(overflow1)
 ); 
 
 
@@ -212,7 +219,9 @@ idct_aftIFFT_scaling_inst (
 	.source_eop 	(source_eop_t2 ),   
 	.source_real 	(source_real_t2 ),  
 	.source_imag 	(source_imag_t2 ),  
-	.fftpts_out 	( )   
+	.fftpts_out 	( ),   
+
+	.overflow 		(overflow2)
 
 	);
 

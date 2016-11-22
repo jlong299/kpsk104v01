@@ -47,7 +47,9 @@ module ce_top #(parameter
 	output wire        source_eop,   //       .source_eop
 	output wire [wDataOut-1:0] source_real,  //       .source_real
 	output wire [wDataOut-1:0] source_imag,  //       .source_imag
-	output wire [11:0] fftpts_out    //       .fftpts_out
+	output wire [11:0] fftpts_out,    //       .fftpts_out
+
+	output reg 			overflow
 	);
 
 localparam  wData_t0 = 16;
@@ -81,6 +83,10 @@ wire [wData_t1-1:0] source_imag_t2;  //       .source_imag
 wire [wData_t1-1:0] source_real_rev_t2;  //       .source_real
 wire [wData_t1-1:0] source_imag_rev_t2;  //       .source_imag
 
+wire overflow1, overflow2, overflow3;
+
+assign overflow = overflow1 | overflow2 | overflow3;
+
 assign fftpts_out = fftpts_in;
 
 //-----------------------------------------------------
@@ -110,7 +116,9 @@ ce_LS_inst (
 	.source_eop		(source_eop_t0),   
 	.source_real	(source_real_t0),  
 	.source_imag	(source_imag_t0),  
-	.fftpts_out()
+	.fftpts_out 	( ),
+
+	.overflow 		(overflow1)
 );
 
 //-----------------------------------------------------
@@ -139,7 +147,9 @@ dct_top dct_top_inst (
 	.source_imag	(source_imag_t1),  
 	.source_real_rev	(source_real_rev_t1),  
 	.source_imag_rev	(source_imag_rev_t1),  
-	.fftpts_out()
+	.fftpts_out 	( ),
+
+	.overflow 		(overflow2)
 );
 
 //-----------------------------------------------------
@@ -207,7 +217,9 @@ idct_top_inst
 	.source_eop		(source_eop),   
 	.source_real	(source_real),  
 	.source_imag	(source_imag),  
-	.fftpts_out()
+	.fftpts_out 	( ),
+
+	.overflow 		(overflow3)
 );
 
 endmodule

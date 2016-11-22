@@ -5,3 +5,4 @@ modelsim/vsim.wlf
 modelsim/*.hex
 modelsim/*.ver
 modelsim/*.dat
+matlab/*.asv

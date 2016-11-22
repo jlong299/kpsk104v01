@@ -79,7 +79,9 @@ module dct_top #(parameter
 	output wire [wDataOut-1:0] source_imag,  //       .source_imag
 	output wire [wDataOut-1:0] source_real_rev,  //       .source_real
 	output wire [wDataOut-1:0] source_imag_rev,  //       .source_imag
-	output wire [11:0] fftpts_out    //       .fftpts_out
+	output wire [11:0] fftpts_out,    //       .fftpts_out
+
+	output wire 		overflow
 	);
 
 localparam 	wData_t1 = 28;
@@ -368,7 +370,9 @@ dct_vecRot_inst
 	.source_imag	(source_imag),  
 	.source_real_rev	(source_real_rev),  
 	.source_imag_rev	(source_imag_rev),  
-	.fftpts_out()
+	.fftpts_out 	( ),
+
+	.overflow 		(overflow)
 );
 
 

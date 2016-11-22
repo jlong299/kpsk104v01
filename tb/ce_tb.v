@@ -38,6 +38,9 @@ module ce_tb (
 	localparam reg [15:0] cnt_rd_end = 16'd1200;
 	localparam reg [15:0] param_cnt_file_end = 16'd2;  //Number of frames to be processed.
 
+	wire overflow;
+	reg  overflow_latch;
+
 	initial	begin
 		rst_n = 0;
 		clk = 0;
@@ -143,7 +146,9 @@ module ce_tb (
 		.source_eop		(source_eop),   
 		.source_real	(source_real),  
 		.source_imag	(source_imag),  
-		.fftpts_out()
+		.fftpts_out 	( ),
+
+		.overflow		(overflow)
 	);
 
 
@@ -172,6 +177,15 @@ module ce_tb (
 
 	end
 
-
+	always@(posedge clk)
+	begin
+		if (!rst_n)
+			overflow_latch <= 0;
+		else
+			if (overflow==1'b1)
+				overflow_latch <= 1'b1;
+			else
+				overflow_latch <= overflow_latch;
+	end
 
 endmodule
