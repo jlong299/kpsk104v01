@@ -83,7 +83,6 @@ module dct_vecRot #(parameter
 
 
 localparam 	wDataOut_t0 = 28;
-localparam 	wDataOut_t1 = 24;
 localparam 	wCoeff = 18;
 
 reg        source_valid_t0; // source.source_valid
@@ -101,10 +100,10 @@ wire        source_ready_t1; //       .source_ready
 wire [1:0]  source_error_t1; //       .source_error
 wire        source_sop_t1;   //       .source_sop
 wire        source_eop_t1;   //       .source_eop
-wire [wDataOut_t1-1:0] source_real_t1;  //       .source_real
-wire [wDataOut_t1-1:0] source_imag_t1;  //       .source_imag
-wire [wDataOut_t1-1:0] source_real_rev_t1;  //       .source_real
-wire [wDataOut_t1-1:0] source_imag_rev_t1;  //       .source_imag
+wire [wDataOut_t0+wCoeff+2-1:0] source_real_t1;  //       .source_real
+wire [wDataOut_t0+wCoeff+2-1:0] source_imag_t1;  //       .source_imag
+wire [wDataOut_t0+wCoeff+2-1:0] source_real_rev_t1;  //       .source_real
+wire [wDataOut_t0+wCoeff+2-1:0] source_imag_rev_t1;  //       .source_imag
 
 wire [wCoeff-1:0] 	coeff_cos, coeff_sin;
 
@@ -340,7 +339,7 @@ end
 //-----------------------------------------------------
 dct_vecRot_twiddle #(
 	.wDataIn (wDataOut_t0),  
-	.wDataOut (wDataOut_t1),
+	.wDataOut (wDataOut_t0+wCoeff+2),
 	.wCoeff (wCoeff)  
 	)
 dct_vecRot_twiddle_inst (
@@ -400,7 +399,7 @@ dct_vecRot_coeff_inst (
 //-----------  Part 3 :  dct_vecRot_scaling -----------
 //-----------------------------------------------------
 dct_vecRot_scaling #(
-	.wDataIn (wDataOut_t1),  
+	.wDataIn (wDataOut_t0+wCoeff+2),  
 	.wDataOut (wDataOut)  
 	)
 dct_vecRot_scaling_inst (
@@ -431,7 +430,7 @@ dct_vecRot_scaling_inst (
 	);
 
 dct_vecRot_scaling #(
-	.wDataIn (wDataOut_t1),  
+	.wDataIn (wDataOut_t0+wCoeff+2),  
 	.wDataOut (wDataOut)  
 	)
 dct_vecRot_scaling_inst2 (
