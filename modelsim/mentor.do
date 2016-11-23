@@ -67,6 +67,13 @@ vlog -sv ../src/RAM_FIFO/ROM_RS_tx_UE0_imag/sim/ROM_RS_tx_UE0_imag.v
 vlog -sv ../src/RAM_FIFO/ROM_RS_tx_UE0_imag/rom_1port_151/sim/ROM_RS_tx_UE0_imag_rom_1port_151_2ceuyda.v
 vlog -sv ../src/ce/ce_top.v
 vlog -sv ../src/dct/dct_preFFT_reod_1200in.v
+vlog -sv ../src/IP/lpm_mult_29_18/sim/lpm_mult_29_18.v
+vlog -sv ../src/IP/lpm_mult_29_18/lpm_mult_151/sim/lpm_mult_29_18_lpm_mult_151_qp6wzaq.v
+vlog -sv ../src/IP/lpm_mult_25_18/sim/lpm_mult_25_18.v
+vlog -sv ../src/IP/lpm_mult_25_18/lpm_mult_151/sim/lpm_mult_25_18_lpm_mult_151_lnncfha.v
+vlog -sv ../src/IP/lpm_mult_16_18/sim/lpm_mult_16_18.v
+vlog -sv ../src/IP/lpm_mult_16_18/lpm_mult_151/sim/lpm_mult_16_18_lpm_mult_151_epm7eay.v
+
 # Elaborate the design.
 elab
 # Run the simulation
@@ -74,8 +81,8 @@ elab
 view wave
 add wave *
 add wave sim:/ce_tb/ce_top_inst/*
-# add wave sim:/ce_tb/ce_top_inst/dct_top_inst/dct_vecRot_inst/dct_vecRot_scaling_inst/*
-# add wave sim:/ce_tb/ce_top_inst/dct_top_inst/dct_vecRot_inst/dct_vecRot_scaling_inst2/*
+add wave sim:/ce_tb/ce_top_inst/dct_top_inst/*
+add wave sim:/ce_tb/ce_top_inst/dct_top_inst/dct_vecRot_inst/dct_vecRot_twiddle_inst/*
 
 
 #add wave sim:/dct_tb/idct_top_inst/idct_aftIFFT_reod_ping/*

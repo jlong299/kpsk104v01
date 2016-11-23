@@ -57,6 +57,7 @@ module ce_LS #(parameter
 
 localparam 	wCoeff = 18;
 
+reg signed [wDataIn-1:0] 	p0 [1:0];
 reg signed [wDataIn-1:0] 	p1 [1:0];
 reg signed [wDataIn+wCoeff-1:0] 	p2 [3:0];
 
@@ -65,9 +66,9 @@ reg        source_sop_t0;   //       .source_sop
 reg        source_eop_t0;   //       .source_eop
 reg signed [wDataIn+wCoeff:0] source_real_t0;  //       .source_real
 reg signed [wDataIn+wCoeff:0] source_imag_t0;  //       .source_imag
-reg [1:0]  source_valid_t0_r; // source.source_valid
-reg [1:0]  source_sop_t0_r;   //       .source_sop
-reg [1:0]  source_eop_t0_r;   //       .source_eop
+reg [3:0]  source_valid_t0_r; // source.source_valid
+reg [3:0]  source_sop_t0_r;   //       .source_sop
+reg [3:0]  source_eop_t0_r;   //       .source_eop
 
 wire signed [wCoeff-1:0] 	LS_RS_tx_real, LS_RS_tx_imag;
 
@@ -80,6 +81,21 @@ assign sink_ready = source_ready;
 //-----------------------------------------------------
 //  (sink_real + j*sink_imag) * (LS_RS_tx_real - j*LS_RS_tx_imag) / 63336
 
+// ---------------- Pipeline 0 -------------------------
+always@(posedge clk)
+begin
+	if (!rst_n_sync)
+	begin
+		p0[0] <= 0;
+		p0[1] <= 0;
+	end
+	else
+	begin
+		p0[0] <= sink_real;
+		p0[1] <= sink_imag;
+	end
+end
+
 // ---------------- Pipeline 1 -------------------------
 always@(posedge clk)
 begin
@@ -90,29 +106,54 @@ begin
 	end
 	else
 	begin
-		p1[0] <= sink_real;
-		p1[1] <= sink_imag;
+		p1[0] <= p0[0];
+		p1[1] <= p0[1];
 	end
 end
 
 // ---------------- Pipeline 2 -------------------------
-always@(posedge clk)
-begin
-	if (!rst_n_sync)
-	begin
-		p2[0] <= 0;
-		p2[1] <= 0;
-		p2[2] <= 0;
-		p2[3] <= 0;
-	end
-	else
-	begin
-		p2[0] <= p1[0] * LS_RS_tx_real;
-		p2[1] <= p1[1] * LS_RS_tx_imag;
-		p2[2] <= p1[0] * LS_RS_tx_imag;
-		p2[3] <= p1[1] * LS_RS_tx_real;
-	end
-end
+// always@(posedge clk)
+// begin
+// 	if (!rst_n_sync)
+// 	begin
+// 		p2[0] <= 0;
+// 		p2[1] <= 0;
+// 		p2[2] <= 0;
+// 		p2[3] <= 0;
+// 	end
+// 	else
+// 	begin
+// 		p2[0] <= p1[0] * LS_RS_tx_real;
+// 		p2[1] <= p1[1] * LS_RS_tx_imag;
+// 		p2[2] <= p1[0] * LS_RS_tx_imag;
+// 		p2[3] <= p1[1] * LS_RS_tx_real;
+// 	end
+// end
+
+lpm_mult_16_18 lpm_mult_16_18_inst0(
+	.dataa  (p1[0]),
+	.datab  (LS_RS_tx_real),
+	.clock  (clk),
+	.result (p2[0])
+	);
+lpm_mult_16_18 lpm_mult_16_18_inst1(
+	.dataa  (p1[1]),
+	.datab  (LS_RS_tx_imag),
+	.clock  (clk),
+	.result (p2[1])
+	);
+lpm_mult_16_18 lpm_mult_16_18_inst2(
+	.dataa  (p1[0]),
+	.datab  (LS_RS_tx_imag),
+	.clock  (clk),
+	.result (p2[2])
+	);
+lpm_mult_16_18 lpm_mult_16_18_inst3(
+	.dataa  (p1[1]),
+	.datab  (LS_RS_tx_real),
+	.clock  (clk),
+	.result (p2[3])
+	);
 
 // ---------------- Pipeline 3 -------------------------
 always@(posedge clk)
@@ -160,14 +201,20 @@ begin
 	else
 	begin
 		source_valid_t0_r[0] <= sink_valid;
-		source_valid_t0_r[1] <= source_valid_t0_r[0];
-		source_valid_t0 <= source_valid_t0_r[1];
 		source_sop_t0_r[0] <= sink_sop;
-		source_sop_t0_r[1] <= source_sop_t0_r[0];
-		source_sop_t0 <= source_sop_t0_r[1];
 		source_eop_t0_r[0] <= sink_eop;
+		source_valid_t0_r[1] <= source_valid_t0_r[0];
+		source_sop_t0_r[1] <= source_sop_t0_r[0];
 		source_eop_t0_r[1] <= source_eop_t0_r[0];
-		source_eop_t0 <= source_eop_t0_r[1];
+		source_valid_t0_r[2] <= source_valid_t0_r[1];
+		source_sop_t0_r[2] <= source_sop_t0_r[1];
+		source_eop_t0_r[2] <= source_eop_t0_r[1];
+		source_valid_t0_r[3] <= source_valid_t0_r[2];
+		source_sop_t0_r[3] <= source_sop_t0_r[2];
+		source_eop_t0_r[3] <= source_eop_t0_r[2];
+		source_valid_t0 <= source_valid_t0_r[3];
+		source_sop_t0 <= source_sop_t0_r[3];
+		source_eop_t0 <= source_eop_t0_r[3];
 	end
 end
 

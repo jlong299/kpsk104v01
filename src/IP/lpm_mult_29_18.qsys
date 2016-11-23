@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<system name="$${FILENAME}">
+ <component
+   name="$${FILENAME}"
+   displayName="$${FILENAME}"
+   version="1.0"
+   description=""
+   tags="INTERNAL_COMPONENT=true"
+   categories="" />
+ <parameter name="bonusData"><![CDATA[bonusData 
+{
+   element lpm_mult_0
+   {
+      datum _sortIndex
+      {
+         value = "0";
+         type = "int";
+      }
+   }
+}
+]]></parameter>
+ <parameter name="clockCrossingAdapter" value="HANDSHAKE" />
+ <parameter name="device" value="10AX115U3F45E2SGE3" />
+ <parameter name="deviceFamily" value="Arria 10" />
+ <parameter name="deviceSpeedGrade" value="2" />
+ <parameter name="fabricMode" value="QSYS" />
+ <parameter name="generateLegacySim" value="false" />
+ <parameter name="generationId" value="0" />
+ <parameter name="globalResetBus" value="false" />
+ <parameter name="hdlLanguage" value="VERILOG" />
+ <parameter name="hideFromIPCatalog" value="true" />
+ <parameter name="lockedInterfaceDefinition" value="" />
+ <parameter name="maxAdditionalLatency" value="1" />
+ <parameter name="projectName" value="" />
+ <parameter name="sopcBorderPoints" value="false" />
+ <parameter name="systemHash" value="0" />
+ <parameter name="testBenchDutName" value="" />
+ <parameter name="timeStamp" value="0" />
+ <parameter name="useTestBenchNamingPattern" value="false" />
+ <instanceScript></instanceScript>
+ <interface
+   name="mult_input"
+   internal="lpm_mult_0.mult_input"
+   type="conduit"
+   dir="end">
+  <port name="dataa" internal="dataa" />
+  <port name="datab" internal="datab" />
+  <port name="clock" internal="clock" />
+ </interface>
+ <interface
+   name="mult_output"
+   internal="lpm_mult_0.mult_output"
+   type="conduit"
+   dir="end">
+  <port name="result" internal="result" />
+ </interface>
+ <module
+   name="lpm_mult_0"
+   kind="lpm_mult"
+   version="15.1"
+   enabled="1"
+   autoexport="1">
+  <parameter name="DEVICE_FAMILY" value="Arria 10" />
+  <parameter name="GUI_ACLR" value="false" />
+  <parameter name="GUI_AUTO_SIZE_RESULT" value="1" />
+  <parameter name="GUI_B_IS_CONSTANT" value="0" />
+  <parameter name="GUI_CLKEN" value="false" />
+  <parameter name="GUI_CONSTANT_B" value="0" />
+  <parameter name="GUI_IMPLEMENTATION" value="0" />
+  <parameter name="GUI_LATENCY" value="2" />
+  <parameter name="GUI_OPTIMIZE" value="1" />
+  <parameter name="GUI_PIPELINE" value="1" />
+  <parameter name="GUI_SIGNED_MULT" value="1" />
+  <parameter name="GUI_USE_MULT" value="1" />
+  <parameter name="GUI_WIDTH_A" value="29" />
+  <parameter name="GUI_WIDTH_B" value="18" />
+  <parameter name="GUI_WIDTH_P" value="47" />
+ </module>
+ <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />
+ <interconnectRequirement for="$system" name="qsys_mm.enableEccProtection" value="FALSE" />
+ <interconnectRequirement for="$system" name="qsys_mm.insertDefaultSlave" value="FALSE" />
+ <interconnectRequirement for="$system" name="qsys_mm.maxAdditionalLatency" value="1" />
+</system>

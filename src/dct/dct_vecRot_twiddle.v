@@ -143,17 +143,38 @@ assign 	source_error = 2'b00;
 assign  fftpts_out = fftpts_in;
 assign 	sink_ready = source_ready;
 
+reg signed [wDataIn:0] 	p0 [3:0];
 reg signed [wDataIn:0] 	p1 [3:0];
 reg signed [wDataIn+wCoeff:0] 	p2 [3:0];
 //reg signed [wDataIn+wCoeff+1:0] 	p3 [1:0];
 
-reg [1:0] 	valid_r, sop_r, eop_r;
+reg [3:0] 	valid_r, sop_r, eop_r;
 
+reg signed [wDataIn:0] 	p0_rev [3:0];
 reg signed [wDataIn:0] 	p1_rev [3:0];
 reg signed [wDataIn+wCoeff:0] 	p2_rev [3:0];
 //reg signed [wDataIn+wCoeff+1:0] 	p3_rev [1:0];
 
 // ---------- PART 1 :  forward direction -------------
+// ---------------- Pipeline 0 -------------------------
+always@(posedge clk)
+begin
+	if (!rst_n_sync)
+	begin
+		p0[0] <= 0;
+		p0[1] <= 0;
+		p0[2] <= 0;
+		p0[3] <= 0;
+	end
+	else
+	begin
+		p0[0] <= sink_real + sink_real_rev;
+		p0[1] <= sink_imag - sink_imag_rev;
+		p0[2] <= -sink_real + sink_real_rev;
+		p0[3] <= sink_imag + sink_imag_rev;
+	end
+end
+
 // ---------------- Pipeline 1 -------------------------
 always@(posedge clk)
 begin
@@ -166,31 +187,56 @@ begin
 	end
 	else
 	begin
-		p1[0] <= sink_real + sink_real_rev;
-		p1[1] <= sink_imag - sink_imag_rev;
-		p1[2] <= -sink_real + sink_real_rev;
-		p1[3] <= sink_imag + sink_imag_rev;
+		p1[0] <= p0[0];
+		p1[1] <= p0[1];
+		p1[2] <= p0[2];
+		p1[3] <= p0[3];
 	end
 end
 
 // ---------------- Pipeline 2 -------------------------
-always@(posedge clk)
-begin
-	if (!rst_n_sync)
-	begin
-		p2[0] <= 0;
-		p2[1] <= 0;
-		p2[2] <= 0;
-		p2[3] <= 0;
-	end
-	else
-	begin
-		p2[0] <= p1[0]*sink_cos;
-		p2[1] <= p1[1]*sink_sin;
-		p2[2] <= p1[2]*sink_sin;
-		p2[3] <= p1[3]*sink_cos;
-	end
-end
+// always@(posedge clk)
+// begin
+// 	if (!rst_n_sync)
+// 	begin
+// 		p2[0] <= 0;
+// 		p2[1] <= 0;
+// 		p2[2] <= 0;
+// 		p2[3] <= 0;
+// 	end
+// 	else
+// 	begin
+// 		p2[0] <= p1[0]*sink_cos;
+// 		p2[1] <= p1[1]*sink_sin;
+// 		p2[2] <= p1[2]*sink_sin;
+// 		p2[3] <= p1[3]*sink_cos;
+// 	end
+// end
+
+lpm_mult_29_18 lpm_mult_29_18_inst0 (
+	.dataa 	(p1[0]),
+	.datab 	(sink_cos),
+	.clock 	(clk),
+	.result 	(p2[0])
+	);
+lpm_mult_29_18 lpm_mult_29_18_inst1 (
+	.dataa 	(p1[1]),
+	.datab 	(sink_sin),
+	.clock 	(clk),
+	.result 	(p2[1])
+	);
+lpm_mult_29_18 lpm_mult_29_18_inst2 (
+	.dataa 	(p1[2]),
+	.datab 	(sink_sin),
+	.clock 	(clk),
+	.result 	(p2[2])
+	);
+lpm_mult_29_18 lpm_mult_29_18_inst3 (
+	.dataa 	(p1[3]),
+	.datab 	(sink_cos),
+	.clock 	(clk),
+	.result 	(p2[3])
+	);
 
 // ---------------- Pipeline 3 -------------------------
 always@(posedge clk)
@@ -208,6 +254,25 @@ begin
 end
 
 // ---------- PART 2 :  reverse direction -------------
+// ---------------- Pipeline 0 -------------------------
+always@(posedge clk)
+begin
+	if (!rst_n_sync)
+	begin
+		p0_rev[0] <= 0;
+		p0_rev[1] <= 0;
+		p0_rev[2] <= 0;
+		p0_rev[3] <= 0; 
+	end
+	else
+	begin
+		p0_rev[0] <= sink_real + sink_real_rev;
+		p0_rev[1] <= -sink_imag + sink_imag_rev;
+		p0_rev[2] <= sink_real - sink_real_rev;
+		p0_rev[3] <= sink_imag + sink_imag_rev;
+	end
+end
+
 // ---------------- Pipeline 1 -------------------------
 always@(posedge clk)
 begin
@@ -220,31 +285,56 @@ begin
 	end
 	else
 	begin
-		p1_rev[0] <= sink_real + sink_real_rev;
-		p1_rev[1] <= -sink_imag + sink_imag_rev;
-		p1_rev[2] <= sink_real - sink_real_rev;
-		p1_rev[3] <= sink_imag + sink_imag_rev;
+		p1_rev[0] <= p0_rev[0];
+		p1_rev[1] <= p0_rev[1];
+		p1_rev[2] <= p0_rev[2];
+		p1_rev[3] <= p0_rev[3];
 	end
 end
 
 // ---------------- Pipeline 2 -------------------------
-always@(posedge clk)
-begin
-	if (!rst_n_sync)
-	begin
-		p2_rev[0] <= 0;
-		p2_rev[1] <= 0;
-		p2_rev[2] <= 0;
-		p2_rev[3] <= 0;
-	end
-	else
-	begin
-		p2_rev[0] <= p1_rev[0]*sink_sin;
-		p2_rev[1] <= p1_rev[1]*sink_cos;
-		p2_rev[2] <= p1_rev[2]*sink_cos;
-		p2_rev[3] <= p1_rev[3]*sink_sin;
-	end
-end
+// always@(posedge clk)
+// begin
+// 	if (!rst_n_sync)
+// 	begin
+// 		p2_rev[0] <= 0;
+// 		p2_rev[1] <= 0;
+// 		p2_rev[2] <= 0;
+// 		p2_rev[3] <= 0;
+// 	end
+// 	else
+// 	begin
+// 		p2_rev[0] <= p1_rev[0]*sink_sin;
+// 		p2_rev[1] <= p1_rev[1]*sink_cos;
+// 		p2_rev[2] <= p1_rev[2]*sink_cos;
+// 		p2_rev[3] <= p1_rev[3]*sink_sin;
+// 	end
+// end
+
+lpm_mult_29_18 lpm_mult_29_18_inst4 (
+	.dataa 	(p1_rev[0]),
+	.datab 	(sink_sin),
+	.clock 	(clk),
+	.result 	(p2_rev[0])
+	);
+lpm_mult_29_18 lpm_mult_29_18_inst5 (
+	.dataa 	(p1_rev[1]),
+	.datab 	(sink_cos),
+	.clock 	(clk),
+	.result 	(p2_rev[1])
+	);
+lpm_mult_29_18 lpm_mult_29_18_inst6 (
+	.dataa 	(p1_rev[2]),
+	.datab 	(sink_cos),
+	.clock 	(clk),
+	.result 	(p2_rev[2])
+	);
+lpm_mult_29_18 lpm_mult_29_18_inst7 (
+	.dataa 	(p1_rev[3]),
+	.datab 	(sink_sin),
+	.clock 	(clk),
+	.result 	(p2_rev[3])
+	);
 
 // ---------------- Pipeline 3 -------------------------
 always@(posedge clk)
@@ -270,12 +360,15 @@ begin
 	valid_r[1] <= valid_r[0];
 	sop_r[1] <= sop_r[0];
 	eop_r[1] <= eop_r[0];
-	// valid_r[2] <= valid_r[1];
-	// sop_r[2] <= sop_r[1];
-	// eop_r[2] <= eop_r[1];
-	source_valid <= valid_r[1];
-	source_sop <= sop_r[1];
-	source_eop <= eop_r[1];
+	valid_r[2] <= valid_r[1];
+	sop_r[2] <= sop_r[1];
+	eop_r[2] <= eop_r[1];
+	valid_r[3] <= valid_r[2];
+	sop_r[3] <= sop_r[2];
+	eop_r[3] <= eop_r[2];
+	source_valid <= valid_r[3];
+	source_sop <= sop_r[3];
+	source_eop <= eop_r[3];
 end
 
 endmodule

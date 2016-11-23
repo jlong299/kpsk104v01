@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simPackage>
+ <file
+   path="lpm_mult_151/sim/lpm_mult_16_18_lpm_mult_151_epm7eay.v"
+   type="VERILOG"
+   library="lpm_mult_16_18_lpm_mult_151" />
+ <file
+   path="sim/lpm_mult_16_18.v"
+   type="VERILOG"
+   hasInlineConfiguration="true" />
+ <topLevel name="lpm_mult_16_18" />
+ <deviceFamily name="arria10" />
+</simPackage>

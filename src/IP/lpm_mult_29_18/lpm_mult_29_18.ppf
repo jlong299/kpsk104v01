@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pinplan
+ variation_name="lpm_mult_0"
+ megafunction_name="LPM_MULT"
+ intended_family="Arria 10"
+ specifies="all_ports">
+ <global>
+  <pin name="dataa[28..0]" direction="input" scope="external" />
+  <pin name="datab[17..0]" direction="input" scope="external" />
+  <pin name="clock" direction="input" scope="external" />
+  <pin name="result[46..0]" direction="output" scope="external" />
+ </global>
+</pinplan>

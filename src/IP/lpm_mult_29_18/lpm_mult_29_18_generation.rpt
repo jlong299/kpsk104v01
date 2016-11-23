@@ -1,0 +1,72 @@
+Info: Starting: Create simulation model
+Info: qsys-generate C:\work\pj104\code\1611\CE\src\IP\lpm_mult_29_18.qsys --simulation=VERILOG --output-directory=C:\work\pj104\code\1611\CE\src\IP\lpm_mult_29_18 --family="Arria 10" --part=10AX115U3F45E2SGE3
+Progress: Loading IP/lpm_mult_29_18.qsys
+Progress: Reading input file
+Progress: Adding lpm_mult_0 [lpm_mult 15.1]
+Progress: Parameterizing module lpm_mult_0
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: lpm_mult_29_18.lpm_mult_0: GUI_WIDTH_P will be ignored... The result width can't be set if it is automatically calculated.
+Info: lpm_mult_29_18.lpm_mult_0: GUI_CONSTANT_B will be ignored... Con only set the constant B port value if the B port is constant.
+Info: lpm_mult_29_18: "Transforming system: lpm_mult_29_18"
+Info: lpm_mult_29_18: Running transform generation_view_transform
+Info: lpm_mult_29_18: Running transform generation_view_transform took 0.000s
+Info: lpm_mult_0: Running transform generation_view_transform
+Info: lpm_mult_0: Running transform generation_view_transform took 0.000s
+Info: lpm_mult_29_18: Running transform merlin_avalon_transform
+Info: lpm_mult_29_18: Running transform merlin_avalon_transform took 0.053s
+Info: lpm_mult_29_18: "Naming system components in system: lpm_mult_29_18"
+Info: lpm_mult_29_18: "Processing generation queue"
+Info: lpm_mult_29_18: "Generating: lpm_mult_29_18"
+Info: lpm_mult_29_18: "Generating: lpm_mult_29_18_lpm_mult_151_qp6wzaq"
+Info: lpm_mult_29_18: Done "lpm_mult_29_18" with 2 modules, 2 files
+Info: qsys-generate succeeded.
+Info: Finished: Create simulation model
+Info: Starting: Create Modelsim Project.
+Info: sim-script-gen --spd=C:\work\pj104\code\1611\CE\src\IP\lpm_mult_29_18\lpm_mult_29_18.spd --output-directory=C:/work/pj104/code/1611/CE/src/IP/lpm_mult_29_18/sim/ --use-relative-paths=true
+Info: Doing: ip-make-simscript --spd=C:\work\pj104\code\1611\CE\src\IP\lpm_mult_29_18\lpm_mult_29_18.spd --output-directory=C:/work/pj104/code/1611/CE/src/IP/lpm_mult_29_18/sim/ --use-relative-paths=true
+Info: Generating the following file(s) for MODELSIM simulator in C:/work/pj104/code/1611/CE/src/IP/lpm_mult_29_18/sim/ directory:
+Info: 	mentor/msim_setup.tcl
+Info: Generating the following file(s) for VCS simulator in C:/work/pj104/code/1611/CE/src/IP/lpm_mult_29_18/sim/ directory:
+Info: 	synopsys/vcs/vcs_setup.sh
+Info: Generating the following file(s) for VCSMX simulator in C:/work/pj104/code/1611/CE/src/IP/lpm_mult_29_18/sim/ directory:
+Info: 	synopsys/vcsmx/synopsys_sim.setup
+Info: 	synopsys/vcsmx/vcsmx_setup.sh
+Info: Generating the following file(s) for NCSIM simulator in C:/work/pj104/code/1611/CE/src/IP/lpm_mult_29_18/sim/ directory:
+Info: 	cadence/cds.lib
+Info: 	cadence/hdl.var
+Info: 	cadence/ncsim_setup.sh
+Info: 	1 .cds.lib files in cadence/cds_libs/ directory
+Info: Generating the following file(s) for RIVIERA simulator in C:/work/pj104/code/1611/CE/src/IP/lpm_mult_29_18/sim/ directory:
+Info: 	aldec/rivierapro_setup.tcl
+Info: For information on how to simulate your IP, see the explanatory comments in the simulator-specific subdirectories under C:/work/pj104/code/1611/CE/src/IP/lpm_mult_29_18/sim/.
+Info: Finished: Create Modelsim Project.
+Info: 
+Info: Starting: Create HDL design files for synthesis
+Info: qsys-generate C:\work\pj104\code\1611\CE\src\IP\lpm_mult_29_18.qsys --synthesis=VERILOG --output-directory=C:\work\pj104\code\1611\CE\src\IP\lpm_mult_29_18 --family="Arria 10" --part=10AX115U3F45E2SGE3
+Progress: Loading IP/lpm_mult_29_18.qsys
+Progress: Reading input file
+Progress: Adding lpm_mult_0 [lpm_mult 15.1]
+Progress: Parameterizing module lpm_mult_0
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: lpm_mult_29_18.lpm_mult_0: GUI_WIDTH_P will be ignored... The result width can't be set if it is automatically calculated.
+Info: lpm_mult_29_18.lpm_mult_0: GUI_CONSTANT_B will be ignored... Con only set the constant B port value if the B port is constant.
+Info: lpm_mult_29_18: "Transforming system: lpm_mult_29_18"
+Info: lpm_mult_29_18: Running transform generation_view_transform
+Info: lpm_mult_29_18: Running transform generation_view_transform took 0.000s
+Info: lpm_mult_0: Running transform generation_view_transform
+Info: lpm_mult_0: Running transform generation_view_transform took 0.000s
+Info: lpm_mult_29_18: Running transform merlin_avalon_transform
+Info: lpm_mult_29_18: Running transform merlin_avalon_transform took 0.085s
+Info: lpm_mult_29_18: "Naming system components in system: lpm_mult_29_18"
+Info: lpm_mult_29_18: "Processing generation queue"
+Info: lpm_mult_29_18: "Generating: lpm_mult_29_18"
+Info: lpm_mult_29_18: "Generating: lpm_mult_29_18_lpm_mult_151_qp6wzaq"
+Info: lpm_mult_29_18: Done "lpm_mult_29_18" with 2 modules, 3 files
+Info: qsys-generate succeeded.
+Info: Finished: Create HDL design files for synthesis

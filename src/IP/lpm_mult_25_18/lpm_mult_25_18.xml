@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deploy
+ date="2016.11.23.15:22:26"
+ outputDirectory="C:/work/pj104/code/1611/CE/src/IP/lpm_mult_25_18/">
+ <perimeter>
+  <parameter
+     name="AUTO_GENERATION_ID"
+     type="Integer"
+     defaultValue="0"
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_UNIQUE_ID"
+     type="String"
+     defaultValue=""
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_DEVICE_FAMILY"
+     type="String"
+     defaultValue="Arria 10"
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_DEVICE"
+     type="String"
+     defaultValue="10AX115U3F45E2SGE3"
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_DEVICE_SPEEDGRADE"
+     type="String"
+     defaultValue="2"
+     onHdl="0"
+     affectsHdl="1" />
+  <interface name="mult_input" kind="conduit" start="0">
+   <property name="associatedClock" value="" />
+   <property name="associatedReset" value="" />
+   <port name="dataa" direction="input" role="dataa" width="25" />
+   <port name="datab" direction="input" role="datab" width="18" />
+   <port name="clock" direction="input" role="clock" width="1" />
+  </interface>
+  <interface name="mult_output" kind="conduit" start="0">
+   <property name="associatedClock" value="" />
+   <property name="associatedReset" value="" />
+   <port name="result" direction="output" role="result" width="43" />
+  </interface>
+ </perimeter>
+ <entity kind="lpm_mult_25_18" version="1.0" name="lpm_mult_25_18">
+  <parameter name="AUTO_GENERATION_ID" value="1479885746" />
+  <parameter name="AUTO_DEVICE" value="10AX115U3F45E2SGE3" />
+  <parameter name="AUTO_DEVICE_FAMILY" value="Arria 10" />
+  <parameter name="AUTO_UNIQUE_ID" value="" />
+  <parameter name="AUTO_DEVICE_SPEEDGRADE" value="2" />
+  <generatedFiles>
+   <file
+       path="C:\work\pj104\code\1611\CE\src\IP\lpm_mult_25_18\synth\lpm_mult_25_18.v"
+       attributes="CONTAINS_INLINE_CONFIGURATION" />
+   <file
+       path="C:\work\pj104\code\1611\CE\src\IP\lpm_mult_25_18\synth\lpm_mult_25_18_cfg.v"
+       attributes="CONTAINS_INLINE_CONFIGURATION" />
+  </generatedFiles>
+  <childGeneratedFiles>
+   <file
+       path="C:\work\pj104\code\1611\CE\src\IP\lpm_mult_25_18\synth\lpm_mult_25_18.v"
+       attributes="CONTAINS_INLINE_CONFIGURATION" />
+   <file
+       path="C:\work\pj104\code\1611\CE\src\IP\lpm_mult_25_18\synth\lpm_mult_25_18_cfg.v"
+       attributes="CONTAINS_INLINE_CONFIGURATION" />
+  </childGeneratedFiles>
+  <sourceFiles>
+   <file path="C:/work/pj104/code/1611/CE/src/IP/lpm_mult_25_18.qsys" />
+  </sourceFiles>
+  <childSourceFiles>
+   <file
+       path="C:/altera/15.1/ip/altera/megafunctions/lpm_mult/lpm_mult_hw.tcl" />
+  </childSourceFiles>
+  <messages>
+   <message level="Info" culprit="lpm_mult_25_18">"Generating: lpm_mult_25_18"</message>
+   <message level="Info" culprit="lpm_mult_25_18">"Generating: lpm_mult_25_18_lpm_mult_151_lnncfha"</message>
+  </messages>
+ </entity>
+ <entity
+   kind="lpm_mult"
+   version="15.1"
+   name="lpm_mult_25_18_lpm_mult_151_lnncfha">
+  <parameter name="GUI_B_IS_CONSTANT" value="0" />
+  <parameter name="GUI_SIGNED_MULT" value="1" />
+  <parameter name="GUI_PIPELINE" value="1" />
+  <parameter name="GUI_RESULT_WIDTH" value="43" />
+  <parameter name="DEVICE_FAMILY" value="Arria 10" />
+  <parameter name="GUI_WIDTH_P" value="43" />
+  <parameter name="GUI_AUTO_SIZE_RESULT" value="1" />
+  <parameter name="GUI_IMPLEMENTATION" value="0" />
+  <parameter name="GUI_LATENCY" value="2" />
+  <parameter name="GUI_CLKEN" value="false" />
+  <parameter name="GUI_OPTIMIZE" value="1" />
+  <parameter name="GUI_CONSTANT_B" value="0" />
+  <parameter name="GUI_WIDTH_A" value="25" />
+  <parameter name="GUI_ACLR" value="false" />
+  <parameter name="GUI_WIDTH_B" value="18" />
+  <parameter name="GUI_USE_MULT" value="1" />
+  <generatedFiles>
+   <file
+       path="C:\work\pj104\code\1611\CE\src\IP\lpm_mult_25_18\lpm_mult_151\synth\lpm_mult_25_18_lpm_mult_151_lnncfha.v"
+       attributes="" />
+  </generatedFiles>
+  <childGeneratedFiles>
+   <file
+       path="C:\work\pj104\code\1611\CE\src\IP\lpm_mult_25_18\lpm_mult_151\synth\lpm_mult_25_18_lpm_mult_151_lnncfha.v"
+       attributes="" />
+  </childGeneratedFiles>
+  <sourceFiles>
+   <file
+       path="C:/altera/15.1/ip/altera/megafunctions/lpm_mult/lpm_mult_hw.tcl" />
+  </sourceFiles>
+  <childSourceFiles/>
+  <instantiator instantiator="lpm_mult_25_18" as="lpm_mult_0" />
+  <messages>
+   <message level="Info" culprit="lpm_mult_25_18">"Generating: lpm_mult_25_18_lpm_mult_151_lnncfha"</message>
+  </messages>
+ </entity>
+</deploy>

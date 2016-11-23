@@ -1,0 +1,9 @@
+	component lpm_mult_16_18 is
+		port (
+			dataa  : in  std_logic_vector(15 downto 0) := (others => 'X'); -- dataa
+			datab  : in  std_logic_vector(17 downto 0) := (others => 'X'); -- datab
+			clock  : in  std_logic                     := 'X';             -- clock
+			result : out std_logic_vector(33 downto 0)                     -- result
+		);
+	end component lpm_mult_16_18;
+
