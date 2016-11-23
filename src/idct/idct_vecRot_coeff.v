@@ -46,8 +46,8 @@ module idct_vecRot_coeff #(parameter
 	input wire [11:0] 		fftpts_in, 		
 	// right side
 	// 1 clks delay with sink_valid
-	output wire [wDataOut-1:0] 	source_cos,
-	output wire [wDataOut-1:0] 	source_sin
+	output reg [wDataOut-1:0] 	source_cos,
+	output reg [wDataOut-1:0] 	source_sin
 	);
 
 
@@ -92,8 +92,19 @@ module idct_vecRot_coeff #(parameter
 	// 	end
 	// end
 
-			assign source_cos = source_cos1;
-			assign source_sin = source_sin1;
+	always@(posedge clk)
+	begin
+		if (!rst_n_sync)
+		begin
+			source_cos <= 0;
+			source_sin <= 0;
+		end
+		else
+		begin
+			source_cos <= source_cos1;
+			source_sin <= source_sin1;
+		end
+	end
 
 	always@(posedge clk)
 	begin
