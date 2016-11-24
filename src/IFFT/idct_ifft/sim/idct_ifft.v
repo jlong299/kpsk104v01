@@ -25,7 +25,7 @@ module idct_ifft (
 		output wire [11:0] fftpts_out    //       .fftpts_out
 	);
 
-	idct_ifft_altera_fft_ii_151_7z74xyy fft_ii_0 (
+	idct_ifft_altera_fft_ii_151_yzznevi fft_ii_0 (
 		.clk          (clk),          //    clk.clk
 		.reset_n      (reset_n),      //    rst.reset_n
 		.sink_valid   (sink_valid),   //   sink.sink_valid

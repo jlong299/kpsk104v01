@@ -110,16 +110,16 @@ alias file_copy {
   file copy -force $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_c7dyz3i_opt_twr2.hex ./
   file copy -force $QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_c7dyz3i_opt_twi3.hex ./
 
-  file copy -force $QSYS_SIMDIR_2/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twr4.hex ./
-  file copy -force $QSYS_SIMDIR_2/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twi1.hex ./
-  file copy -force $QSYS_SIMDIR_2/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twi5.hex ./
-  file copy -force $QSYS_SIMDIR_2/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twr5.hex ./
-  file copy -force $QSYS_SIMDIR_2/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twr1.hex ./
-  file copy -force $QSYS_SIMDIR_2/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twi2.hex ./
-  file copy -force $QSYS_SIMDIR_2/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twi3.hex ./
-  file copy -force $QSYS_SIMDIR_2/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twr2.hex ./
-  file copy -force $QSYS_SIMDIR_2/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twr3.hex ./
-  file copy -force $QSYS_SIMDIR_2/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twi4.hex ./
+  file copy -force $QSYS_SIMDIR_2/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_yzznevi_opt_twr3.hex ./
+  file copy -force $QSYS_SIMDIR_2/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_yzznevi_opt_twi4.hex ./
+  file copy -force $QSYS_SIMDIR_2/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_yzznevi_opt_twr4.hex ./
+  file copy -force $QSYS_SIMDIR_2/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_yzznevi_opt_twi1.hex ./
+  file copy -force $QSYS_SIMDIR_2/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_yzznevi_opt_twi5.hex ./
+  file copy -force $QSYS_SIMDIR_2/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_yzznevi_opt_twi2.hex ./
+  file copy -force $QSYS_SIMDIR_2/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_yzznevi_opt_twr5.hex ./
+  file copy -force $QSYS_SIMDIR_2/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_yzznevi_opt_twr1.hex ./
+  file copy -force $QSYS_SIMDIR_2/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_yzznevi_opt_twi3.hex ./
+  file copy -force $QSYS_SIMDIR_2/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_yzznevi_opt_twr2.hex ./
 }
 
 # ----------------------------------------
@@ -179,7 +179,7 @@ alias com {
   eval  vlog $USER_DEFINED_COMPILE_OPTIONS "$QSYS_SIMDIR/../altera_fft_ii_151/sim/dct_fft_altera_fft_ii_151_c7dyz3i.vo" -work dct_fft_altera_fft_ii_151
   eval  vlog $USER_DEFINED_COMPILE_OPTIONS "$QSYS_SIMDIR/dct_fft.v"                                                                                    
 
-  eval  vlog $USER_DEFINED_COMPILE_OPTIONS "$QSYS_SIMDIR_2/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy.vo" -work idct_ifft_altera_fft_ii_151
+  eval  vlog $USER_DEFINED_COMPILE_OPTIONS "$QSYS_SIMDIR_2/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_yzznevi.vo" -work idct_ifft_altera_fft_ii_151
   eval  vlog $USER_DEFINED_COMPILE_OPTIONS "$QSYS_SIMDIR_2/idct_ifft.v" 
 }
 

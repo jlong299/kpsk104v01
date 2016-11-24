@@ -12,7 +12,7 @@
 # or its authorized distributors. Please refer to the applicable 
 # agreement for further details.
 
-# ACDS 15.1 185 win32 2016.11.10.14:49:38
+# ACDS 15.1 185 win32 2016.11.23.17:18:54
 
 # ----------------------------------------
 # ncsim - auto-generated simulation script
@@ -59,7 +59,7 @@
 # within the Quartus project, and generate a unified
 # script which supports all the Altera IP within the design.
 # ----------------------------------------
-# ACDS 15.1 185 win32 2016.11.10.14:49:38
+# ACDS 15.1 185 win32 2016.11.23.17:18:54
 # ----------------------------------------
 # initialize variables
 TOP_LEVEL_NAME="idct_ifft"
@@ -112,16 +112,16 @@ mkdir -p ./libraries/twentynm_hip_ver/
 # ----------------------------------------
 # copy RAM/ROM files to simulation directory
 if [ $SKIP_FILE_COPY -eq 0 ]; then
-  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twr4.hex ./
-  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twi1.hex ./
-  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twi5.hex ./
-  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twr5.hex ./
-  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twr1.hex ./
-  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twi2.hex ./
-  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twi3.hex ./
-  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twr2.hex ./
-  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twr3.hex ./
-  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy_opt_twi4.hex ./
+  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_yzznevi_opt_twr3.hex ./
+  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_yzznevi_opt_twi4.hex ./
+  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_yzznevi_opt_twr4.hex ./
+  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_yzznevi_opt_twi1.hex ./
+  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_yzznevi_opt_twi5.hex ./
+  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_yzznevi_opt_twi2.hex ./
+  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_yzznevi_opt_twr5.hex ./
+  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_yzznevi_opt_twr1.hex ./
+  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_yzznevi_opt_twi3.hex ./
+  cp -f $QSYS_SIMDIR/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_yzznevi_opt_twr2.hex ./
 fi
 
 # ----------------------------------------
@@ -143,7 +143,7 @@ fi
 # ----------------------------------------
 # compile design files in correct order
 if [ $SKIP_COM -eq 0 ]; then
-  ncvlog $USER_DEFINED_COMPILE_OPTIONS           "$QSYS_SIMDIR/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_7z74xyy.vo" -work idct_ifft_altera_fft_ii_151 -cdslib ./cds_libs/idct_ifft_altera_fft_ii_151.cds.lib
+  ncvlog $USER_DEFINED_COMPILE_OPTIONS           "$QSYS_SIMDIR/../altera_fft_ii_151/sim/idct_ifft_altera_fft_ii_151_yzznevi.vo" -work idct_ifft_altera_fft_ii_151 -cdslib ./cds_libs/idct_ifft_altera_fft_ii_151.cds.lib
   ncvlog -compcnfg $USER_DEFINED_COMPILE_OPTIONS "$QSYS_SIMDIR/idct_ifft.v"                                                                                                                                             
 fi
 

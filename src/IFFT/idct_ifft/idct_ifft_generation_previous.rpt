@@ -1,5 +1,5 @@
 Info: Starting: Create simulation model
-Info: qsys-generate C:\work\pj104\code\1611\CE\src\IFFT\idct_ifft.qsys --simulation=VERILOG --output-directory=C:\work\pj104\code\1611\CE\src\IFFT\idct_ifft --family="Arria 10" --part=10AX115U3F45E2SGE3
+Info: qsys-generate c:\work\pj104\code\1611\CE\src\IFFT\idct_ifft.qsys --simulation=VERILOG --output-directory=C:\work\pj104\code\1611\CE\src\IFFT\idct_ifft --family="Arria 10" --part=10AX115U3F45E2SGE3
 Progress: Loading IFFT/idct_ifft.qsys
 Progress: Reading input file
 Progress: Adding fft_ii_0 [altera_fft_ii 15.1]
@@ -14,12 +14,12 @@ Info: idct_ifft: Running transform generation_view_transform took 0.000s
 Info: fft_ii_0: Running transform generation_view_transform
 Info: fft_ii_0: Running transform generation_view_transform took 0.000s
 Info: idct_ifft: Running transform merlin_avalon_transform
-Info: idct_ifft: Running transform merlin_avalon_transform took 0.039s
+Info: idct_ifft: Running transform merlin_avalon_transform took 0.070s
 Info: idct_ifft: "Naming system components in system: idct_ifft"
 Info: idct_ifft: "Processing generation queue"
 Info: idct_ifft: "Generating: idct_ifft"
-Info: idct_ifft: "Generating: idct_ifft_altera_fft_ii_151_yzznevi"
-Info: fft_ii_0: Created simgen file at: C:/Users/longjia1/AppData/Local/Temp/alt7128_6632354534284223451.dir/0001_fft_ii_0_gen/idct_ifft_altera_fft_ii_151_yzznevi.vo
+Info: idct_ifft: "Generating: idct_ifft_altera_fft_ii_151_7z74xyy"
+Info: fft_ii_0: Created simgen file at: C:/Users/longjia1/AppData/Local/Temp/alt7115_434005945990227884.dir/0001_fft_ii_0_gen/idct_ifft_altera_fft_ii_151_7z74xyy.vo
 Info: idct_ifft: Done "idct_ifft" with 2 modules, 12 files
 Info: qsys-generate succeeded.
 Info: Finished: Create simulation model
@@ -44,7 +44,7 @@ Info: For information on how to simulate your IP, see the explanatory comments i
 Info: Finished: Create Modelsim Project.
 Info: 
 Info: Starting: Create HDL design files for synthesis
-Info: qsys-generate C:\work\pj104\code\1611\CE\src\IFFT\idct_ifft.qsys --synthesis=VERILOG --output-directory=C:\work\pj104\code\1611\CE\src\IFFT\idct_ifft --family="Arria 10" --part=10AX115U3F45E2SGE3
+Info: qsys-generate c:\work\pj104\code\1611\CE\src\IFFT\idct_ifft.qsys --synthesis=VERILOG --output-directory=C:\work\pj104\code\1611\CE\src\IFFT\idct_ifft --family="Arria 10" --part=10AX115U3F45E2SGE3
 Progress: Loading IFFT/idct_ifft.qsys
 Progress: Reading input file
 Progress: Adding fft_ii_0 [altera_fft_ii 15.1]
@@ -63,7 +63,7 @@ Info: idct_ifft: Running transform merlin_avalon_transform took 0.007s
 Info: idct_ifft: "Naming system components in system: idct_ifft"
 Info: idct_ifft: "Processing generation queue"
 Info: idct_ifft: "Generating: idct_ifft"
-Info: idct_ifft: "Generating: idct_ifft_altera_fft_ii_151_yzznevi"
+Info: idct_ifft: "Generating: idct_ifft_altera_fft_ii_151_7z74xyy"
 Info: idct_ifft: Done "idct_ifft" with 2 modules, 56 files
 Info: qsys-generate succeeded.
 Info: Finished: Create HDL design files for synthesis
