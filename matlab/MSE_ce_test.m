@@ -17,9 +17,9 @@ mse_FPGA_out = abs(H_Est_FPGA_out([end-nSubcarrierUsed/2+1:end,2:nSubcarrierUsed
 ttt0 = temp_mse(:,1,1,1);
 ttt2 = abs(H_Est2([end-nSubcarrierUsed/2+1:end,2:nSubcarrierUsed/2+1]) - channelFreqUsed([end-nSubcarrierUsed/2+1:end,2:nSubcarrierUsed/2+1],1,iRxAnte, iUE)).^2;
 
-sum(ttt2)
 sum(ttt0)
+sum(ttt2)
 sum(mse_FPGA_out)
-mean(ttt2)
 mean(ttt0)
+mean(ttt2)
 mean(mse_FPGA_out)
