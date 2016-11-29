@@ -73,7 +73,7 @@ begin
 		begin
 			if ( sink_real[wDataIn-1:wDataOut+divide_width-1] == {(wDataIn - wDataOut -divide_width+1){1'b0}} ||
 				 sink_real[wDataIn-1:wDataOut+divide_width-1] == {(wDataIn - wDataOut -divide_width+1){1'b1}} )
-				source_real <= sink_real[wDataOut+divide_width-1:divide_width]+sink_real[divide_width-1]; //rounding (/65536)
+				source_real <= sink_real[wDataOut+divide_width-1:divide_width]+sink_real[divide_width-1]; //rounding 
 			else if ( sink_real[wDataIn-1] == 1'b0) // saturating
 				source_real <= { 1'b0, {(wDataOut-1){1'b1}} };
 			else
@@ -81,7 +81,7 @@ begin
 
 			if ( sink_imag[wDataIn-1:wDataOut+divide_width-1] == {(wDataIn - wDataOut -divide_width+1){1'b0}} ||
 				 sink_imag[wDataIn-1:wDataOut+divide_width-1] == {(wDataIn - wDataOut -divide_width+1){1'b1}} )
-				source_imag <= sink_imag[wDataOut+divide_width-1:divide_width]+sink_imag[divide_width-1]; //rounding (/65536)
+				source_imag <= sink_imag[wDataOut+divide_width-1:divide_width]+sink_imag[divide_width-1]; //rounding 
 			else if ( sink_imag[wDataIn-1] == 1'b0) // saturating
 				source_imag <= { 1'b0, {(wDataOut-1){1'b1}} };
 			else
@@ -91,7 +91,7 @@ begin
 		begin
 			if ( sink_real[wDataIn-1:wDataOut+divide_width-1] == {(wDataIn - wDataOut -divide_width+1){1'b0}} ||
 				 sink_real[wDataIn-1:wDataOut+divide_width-1] == {(wDataIn - wDataOut -divide_width+1){1'b1}} )
-				source_real <= sink_real[wDataOut+divide_width-1:divide_width]+sink_real[divide_width-1]; //rounding (/65536)
+				source_real <= sink_real[wDataOut+divide_width-1:divide_width]+sink_real[divide_width-1]; //rounding 
 			else if ( sink_real[wDataIn-1] == 1'b0) // saturating
 				source_real <= { 1'b0, {(wDataOut-1){1'b1}} };
 			else
@@ -99,7 +99,7 @@ begin
 
 			if ( sink_imag[wDataIn-1:wDataOut+divide_width-1] == {(wDataIn - wDataOut -divide_width+1){1'b0}} ||
 				 sink_imag[wDataIn-1:wDataOut+divide_width-1] == {(wDataIn - wDataOut -divide_width+1){1'b1}} )
-				source_imag <= sink_imag[wDataOut+divide_width-1:divide_width]+sink_imag[divide_width-1]; //rounding (/65536)
+				source_imag <= sink_imag[wDataOut+divide_width-1:divide_width]+sink_imag[divide_width-1]; //rounding 
 			else if ( sink_imag[wDataIn-1] == 1'b0) // saturating
 				source_imag <= { 1'b0, {(wDataOut-1){1'b1}} };
 			else
@@ -109,7 +109,7 @@ begin
 		begin
 			if ( sink_real[wDataIn-1:wDataOut+divide_width-1-1] == {(wDataIn - wDataOut -divide_width+1+1){1'b0}} ||
 				 sink_real[wDataIn-1:wDataOut+divide_width-1-1] == {(wDataIn - wDataOut -divide_width+1+1){1'b1}} )
-				source_real <= sink_real[wDataOut+divide_width-1-1:divide_width-1]+sink_real[divide_width-1-1]; //rounding (/65536)
+				source_real <= sink_real[wDataOut+divide_width-1-1:divide_width-1]+sink_real[divide_width-1-1]; //rounding 
 			else if ( sink_real[wDataIn-1] == 1'b0) // saturating
 				source_real <= { 1'b0, {(wDataOut-1){1'b1}} };
 			else
@@ -117,7 +117,7 @@ begin
 
 			if ( sink_imag[wDataIn-1:wDataOut+divide_width-1-1] == {(wDataIn - wDataOut -divide_width+1+1){1'b0}} ||
 				 sink_imag[wDataIn-1:wDataOut+divide_width-1-1] == {(wDataIn - wDataOut -divide_width+1+1){1'b1}} )
-				source_imag <= sink_imag[wDataOut+divide_width-1-1:divide_width-1]+sink_imag[divide_width-1-1]; //rounding (/65536)
+				source_imag <= sink_imag[wDataOut+divide_width-1-1:divide_width-1]+sink_imag[divide_width-1-1]; //rounding 
 			else if ( sink_imag[wDataIn-1] == 1'b0) // saturating
 				source_imag <= { 1'b0, {(wDataOut-1){1'b1}} };
 			else
@@ -127,7 +127,7 @@ begin
 		begin
 			if ( sink_real[wDataIn-1:wDataOut+divide_width-1-1] == {(wDataIn - wDataOut -divide_width+1+1){1'b0}} ||
 				 sink_real[wDataIn-1:wDataOut+divide_width-1-1] == {(wDataIn - wDataOut -divide_width+1+1){1'b1}} )
-				source_real <= sink_real[wDataOut+divide_width-1-1:divide_width-1]+sink_real[divide_width-1-1]; //rounding (/65536)
+				source_real <= sink_real[wDataOut+divide_width-1-1:divide_width-1]+sink_real[divide_width-1-1]; //rounding 
 			else if ( sink_real[wDataIn-1] == 1'b0) // saturating
 				source_real <= { 1'b0, {(wDataOut-1){1'b1}} };
 			else
@@ -135,7 +135,7 @@ begin
 
 			if ( sink_imag[wDataIn-1:wDataOut+divide_width-1-1] == {(wDataIn - wDataOut -divide_width+1+1){1'b0}} ||
 				 sink_imag[wDataIn-1:wDataOut+divide_width-1-1] == {(wDataIn - wDataOut -divide_width+1+1){1'b1}} )
-				source_imag <= sink_imag[wDataOut+divide_width-1-1:divide_width-1]+sink_imag[divide_width-1-1]; //rounding (/65536)
+				source_imag <= sink_imag[wDataOut+divide_width-1-1:divide_width-1]+sink_imag[divide_width-1-1]; //rounding 
 			else if ( sink_imag[wDataIn-1] == 1'b0) // saturating
 				source_imag <= { 1'b0, {(wDataOut-1){1'b1}} };
 			else
@@ -145,7 +145,7 @@ begin
 		begin
 			if ( sink_real[wDataIn-1:wDataOut+divide_width-1-2] == {(wDataIn - wDataOut -divide_width+1+2){1'b0}} ||
 				 sink_real[wDataIn-1:wDataOut+divide_width-1-2] == {(wDataIn - wDataOut -divide_width+1+2){1'b1}} )
-				source_real <= sink_real[wDataOut+divide_width-1-2:divide_width-2]+sink_real[divide_width-1-2]; //rounding (/65536)
+				source_real <= sink_real[wDataOut+divide_width-1-2:divide_width-2]+sink_real[divide_width-1-2]; //rounding 
 			else if ( sink_real[wDataIn-1] == 1'b0) // saturating
 				source_real <= { 1'b0, {(wDataOut-1){1'b1}} };
 			else
@@ -153,7 +153,7 @@ begin
 
 			if ( sink_imag[wDataIn-1:wDataOut+divide_width-1-2] == {(wDataIn - wDataOut -divide_width+1+2){1'b0}} ||
 				 sink_imag[wDataIn-1:wDataOut+divide_width-1-2] == {(wDataIn - wDataOut -divide_width+1+2){1'b1}} )
-				source_imag <= sink_imag[wDataOut+divide_width-1-2:divide_width-2]+sink_imag[divide_width-1-2]; //rounding (/65536)
+				source_imag <= sink_imag[wDataOut+divide_width-1-2:divide_width-2]+sink_imag[divide_width-1-2]; //rounding 
 			else if ( sink_imag[wDataIn-1] == 1'b0) // saturating
 				source_imag <= { 1'b0, {(wDataOut-1){1'b1}} };
 			else
@@ -163,7 +163,7 @@ begin
 		begin
 			if ( sink_real[wDataIn-1:wDataOut+divide_width-1-2] == {(wDataIn - wDataOut -divide_width+1+2){1'b0}} ||
 				 sink_real[wDataIn-1:wDataOut+divide_width-1-2] == {(wDataIn - wDataOut -divide_width+1+2){1'b1}} )
-				source_real <= sink_real[wDataOut+divide_width-1-2:divide_width-2]+sink_real[divide_width-1-2]; //rounding (/65536)
+				source_real <= sink_real[wDataOut+divide_width-1-2:divide_width-2]+sink_real[divide_width-1-2]; //rounding 
 			else if ( sink_real[wDataIn-1] == 1'b0) // saturating
 				source_real <= { 1'b0, {(wDataOut-1){1'b1}} };
 			else
@@ -171,7 +171,25 @@ begin
 
 			if ( sink_imag[wDataIn-1:wDataOut+divide_width-1-2] == {(wDataIn - wDataOut -divide_width+1+2){1'b0}} ||
 				 sink_imag[wDataIn-1:wDataOut+divide_width-1-2] == {(wDataIn - wDataOut -divide_width+1+2){1'b1}} )
-				source_imag <= sink_imag[wDataOut+divide_width-1-2:divide_width-2]+sink_imag[divide_width-1-2]; //rounding (/65536)
+				source_imag <= sink_imag[wDataOut+divide_width-1-2:divide_width-2]+sink_imag[divide_width-1-2]; //rounding 
+			else if ( sink_imag[wDataIn-1] == 1'b0) // saturating
+				source_imag <= { 1'b0, {(wDataOut-1){1'b1}} };
+			else
+				source_imag <= { 1'b1, {(wDataOut-1){1'b0}} };
+		end
+		12'd32:
+		begin
+			if ( sink_real[wDataIn-1:wDataOut+divide_width-1-3] == {(wDataIn - wDataOut -divide_width+1+3){1'b0}} ||
+				 sink_real[wDataIn-1:wDataOut+divide_width-1-3] == {(wDataIn - wDataOut -divide_width+1+3){1'b1}} )
+				source_real <= sink_real[wDataOut+divide_width-1-3:divide_width-3]+sink_real[divide_width-1-3]; //rounding 
+			else if ( sink_real[wDataIn-1] == 1'b0) // saturating
+				source_real <= { 1'b0, {(wDataOut-1){1'b1}} };
+			else
+				source_real <= { 1'b1, {(wDataOut-1){1'b0}} };
+
+			if ( sink_imag[wDataIn-1:wDataOut+divide_width-1-3] == {(wDataIn - wDataOut -divide_width+1+3){1'b0}} ||
+				 sink_imag[wDataIn-1:wDataOut+divide_width-1-3] == {(wDataIn - wDataOut -divide_width+1+3){1'b1}} )
+				source_imag <= sink_imag[wDataOut+divide_width-1-3:divide_width-3]+sink_imag[divide_width-1-3]; //rounding 
 			else if ( sink_imag[wDataIn-1] == 1'b0) // saturating
 				source_imag <= { 1'b0, {(wDataOut-1){1'b1}} };
 			else
@@ -181,7 +199,7 @@ begin
 		begin
 			if ( sink_real[wDataIn-1:wDataOut+divide_width-1] == {(wDataIn - wDataOut -divide_width+1){1'b0}} ||
 				 sink_real[wDataIn-1:wDataOut+divide_width-1] == {(wDataIn - wDataOut -divide_width+1){1'b1}} )
-				source_real <= sink_real[wDataOut+divide_width-1:divide_width]+sink_real[divide_width-1]; //rounding (/65536)
+				source_real <= sink_real[wDataOut+divide_width-1:divide_width]+sink_real[divide_width-1]; //rounding 
 			else if ( sink_real[wDataIn-1] == 1'b0) // saturating
 				source_real <= { 1'b0, {(wDataOut-1){1'b1}} };
 			else
@@ -189,7 +207,7 @@ begin
 
 			if ( sink_imag[wDataIn-1:wDataOut+divide_width-1] == {(wDataIn - wDataOut -divide_width+1){1'b0}} ||
 				 sink_imag[wDataIn-1:wDataOut+divide_width-1] == {(wDataIn - wDataOut -divide_width+1){1'b1}} )
-				source_imag <= sink_imag[wDataOut+divide_width-1:divide_width]+sink_imag[divide_width-1]; //rounding (/65536)
+				source_imag <= sink_imag[wDataOut+divide_width-1:divide_width]+sink_imag[divide_width-1]; //rounding 
 			else if ( sink_imag[wDataIn-1] == 1'b0) // saturating
 				source_imag <= { 1'b0, {(wDataOut-1){1'b1}} };
 			else

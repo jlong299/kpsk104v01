@@ -36,7 +36,7 @@ module dct_tb (
 	wire [1:0]  source_error_t0; //       .source_error
 	wire        source_sop_t0;   //       .source_sop
 	wire        source_eop_t0;   //       .source_eop
-	wire [23:0] source_real_t0;  //       .source_real
+	wire [23:0] source_real_t0;  //       .source_reals
 	wire [23:0] source_imag_t0;  //       .source_imag
 	wire [23:0] source_real_rev_t0;  //       .source_real
 	wire [23:0] source_imag_rev_t0;  //       .source_imag
@@ -44,7 +44,7 @@ module dct_tb (
 	reg [15:0] cnt_rd, cnt_file_end;
 	integer 	data_file, scan_file, wr_file;
 	reg [31:0] 	captured_data, captured_data_imag;
-	localparam reg [11:0] fftpts_cnst = 12'd2048;
+	localparam reg [11:0] fftpts_cnst = 12'd128;
 	localparam reg [15:0] cnt_rd_end = {{4{1'b0}}, fftpts_cnst};
 	localparam reg [15:0] param_cnt_file_end = 16'd2;  //Number of frames to be processed.
 
@@ -151,7 +151,9 @@ module dct_tb (
 		.source_imag	(source_imag_t0),  
 		.source_real_rev	(source_real_rev_t0),  
 		.source_imag_rev	(source_imag_rev_t0),  
-		.fftpts_out()
+		.fftpts_out(),
+
+		.overflow()
 	);
 
 	idct_top  #(
@@ -180,7 +182,9 @@ module dct_tb (
 		.source_eop		(source_eop),   
 		.source_real	(source_real),  
 		.source_imag	(source_imag),  
-		.fftpts_out()
+		.fftpts_out(),
+
+		.overflow()
 	);
 
 	reg signed [15:0] source_real_r, source_imag_r;
