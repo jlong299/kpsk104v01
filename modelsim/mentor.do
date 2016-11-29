@@ -16,12 +16,12 @@ source msim_setup.tcl
 # Compile eda/sim_lib contents first
 dev_com
 # Override the top-level name (so that elab is useful)
-set TOP_LEVEL_NAME ce_tb
+set TOP_LEVEL_NAME dct_tb
 # Compile the standalone IP.
 com
 # Compile the user top-level
 #------ DCT -----------
-#vlog -sv ../tb/dct_tb.v
+vlog -sv ../tb/dct_tb.v
 vlog -sv ../src/dct/dct_vecRot_ram.v 
 vlog -sv ../src/RAM_FIFO/RAM_dct_vecRot/sim/RAM_dct_vecRot.v
 vlog -sv ../src/RAM_FIFO/RAM_dct_vecRot/ram_2port_151/sim/RAM_dct_vecRot_ram_2port_151_byb7zvy.v
@@ -55,6 +55,10 @@ vlog -sv ../src/RAM_FIFO/ROM_sin_idct_vecRot/rom_1port_151/sim/ROM_sin_idct_vecR
 vlog -sv ../src/idct/idct_aftIFFt_scaling.v
 vlog -sv ../src/RAM_FIFO/RAM_idct_aftIFFT/sim/RAM_idct_aftIFFT.v 
 vlog -sv ../src/RAM_FIFO/RAM_idct_aftIFFT/ram_2port_151/sim/RAM_idct_aftIFFT_ram_2port_151_65vwdsi.v
+vlog -sv ../src/RAM_FIFO/ROM2_cos_idct_vecRot/sim/ROM2_cos_idct_vecRot.v
+vlog -sv ../src/RAM_FIFO/ROM2_cos_idct_vecRot/rom_1port_151/sim/ROM2_cos_idct_vecRot_rom_1port_151_h3zc72i.v
+vlog -sv ../src/RAM_FIFO/ROM2_sin_idct_vecRot/sim/ROM2_sin_idct_vecRot.v
+vlog -sv ../src/RAM_FIFO/ROM2_sin_idct_vecRot/rom_1port_151/sim/ROM2_sin_idct_vecRot_rom_1port_151_scljbpy.v
 #-------- CE ------------
 vlog -sv ../tb/ce_tb.v
 vlog -sv ../src/ce/ce_window.v
@@ -80,15 +84,18 @@ elab
 
 view wave
 add wave *
-add wave sim:/ce_tb/ce_top_inst/*
-add wave sim:/ce_tb/ce_top_inst/dct_top_inst/*
-add wave sim:/ce_tb/ce_top_inst/dct_top_inst/dct_vecRot_inst/dct_vecRot_twiddle_inst/*
+# add wave sim:/ce_tb/ce_top_inst/*
+# add wave sim:/ce_tb/ce_top_inst/dct_top_inst/*
+# add wave sim:/ce_tb/ce_top_inst/dct_top_inst/dct_vecRot_inst/dct_vecRot_twiddle_inst/*
+
+add wave sim:/dct_tb/dct_top_inst/*
+add wave sim:/dct_tb/dct_top_inst/dct_vecRot_inst/dct_vecRot_ram_ping/*
 
 
 #add wave sim:/dct_tb/idct_top_inst/idct_aftIFFT_reod_ping/*
 view structure
 view signals
-run 160us
+run 3us
 # Report success to the shell
 # exit -code 0
 # End of template

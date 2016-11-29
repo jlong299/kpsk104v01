@@ -143,6 +143,10 @@ module dct_vecRot_coeff #(parameter
 			begin
 				step <= 10'd64;
 			end
+			12'd16:
+			begin
+				step <= 10'd128;
+			end
 			default:
 			begin
 				step <= 10'd1;

@@ -272,6 +272,21 @@ begin
 	cnt_sink_valid_rev[1] = cnt_sink_valid[3];
 	cnt_sink_valid_rev[0] = cnt_sink_valid[4];
 end
+12'd16 :
+begin
+	cnt_sink_valid_rev[11] = 1'b0;
+	cnt_sink_valid_rev[10] = 1'b0;
+	cnt_sink_valid_rev[9] = 1'b0;
+	cnt_sink_valid_rev[8] = 1'b0;
+	cnt_sink_valid_rev[7] = 1'b0;
+	cnt_sink_valid_rev[6] = 1'b0;
+	cnt_sink_valid_rev[5] = 1'b0;
+	cnt_sink_valid_rev[4] = 1'b0;
+	cnt_sink_valid_rev[3] = cnt_sink_valid[0];
+	cnt_sink_valid_rev[2] = cnt_sink_valid[1];
+	cnt_sink_valid_rev[1] = cnt_sink_valid[2];
+	cnt_sink_valid_rev[0] = cnt_sink_valid[3];
+end
 default :
 begin
 	cnt_sink_valid_rev[11] = 1'b0;

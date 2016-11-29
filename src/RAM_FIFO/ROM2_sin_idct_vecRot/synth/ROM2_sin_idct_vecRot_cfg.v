@@ -1,0 +1,5 @@
+config ROM2_sin_idct_vecRot_cfg;
+		design ROM2_sin_idct_vecRot;
+		instance ROM2_sin_idct_vecRot.rom_1port_0 use ROM2_sin_idct_vecRot_rom_1port_151.ROM2_sin_idct_vecRot_rom_1port_151_scljbpy;
+endconfig
+
