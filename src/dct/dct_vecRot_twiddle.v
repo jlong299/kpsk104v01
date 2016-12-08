@@ -136,11 +136,11 @@ module dct_vecRot_twiddle #(parameter
 	output reg signed [wDataOut-1:0] source_imag,  //       .source_imag
 	output reg signed [wDataOut-1:0] source_real_rev,  //       .source_real
 	output reg signed [wDataOut-1:0] source_imag_rev,  //       .source_imag
-	output wire [11:0] fftpts_out    //       .fftpts_out
+	output reg [11:0] fftpts_out    //       .fftpts_out
 	);
 
 assign 	source_error = 2'b00;
-assign  fftpts_out = fftpts_in;
+//assign  fftpts_out = fftpts_in;
 assign 	sink_ready = source_ready;
 
 reg signed [wDataIn:0] 	p0 [3:0];
@@ -154,6 +154,8 @@ reg signed [wDataIn:0] 	p0_rev [3:0];
 reg signed [wDataIn:0] 	p1_rev [3:0];
 reg signed [wDataIn+wCoeff:0] 	p2_rev [3:0];
 //reg signed [wDataIn+wCoeff+1:0] 	p3_rev [1:0];
+
+reg [11:0] 	fftpts_reg;
 
 // ---------- PART 1 :  forward direction -------------
 // ---------------- Pipeline 0 -------------------------
@@ -369,6 +371,20 @@ begin
 	source_valid <= valid_r[3];
 	source_sop <= sop_r[3];
 	source_eop <= eop_r[3];
+end
+
+always@(posedge clk)
+begin
+	if (!rst_n_sync)
+	begin
+		fftpts_reg <= 0;
+		fftpts_out <= 0;
+	end
+	else
+	begin
+		fftpts_reg <= (sink_sop) ? fftpts_in : fftpts_reg;
+		fftpts_out <= (sop_r[3]) ? fftpts_reg : fftpts_out;
+	end
 end
 
 endmodule

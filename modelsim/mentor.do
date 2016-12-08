@@ -16,7 +16,7 @@ source msim_setup.tcl
 # Compile eda/sim_lib contents first
 dev_com
 # Override the top-level name (so that elab is useful)
-set TOP_LEVEL_NAME dct_tb
+set TOP_LEVEL_NAME ce_tb
 # Compile the standalone IP.
 com
 # Compile the user top-level
@@ -84,18 +84,18 @@ elab
 
 view wave
 add wave *
-# add wave sim:/ce_tb/ce_top_inst/*
+add wave sim:/ce_tb/ce_top_inst/*
 # add wave sim:/ce_tb/ce_top_inst/dct_top_inst/*
 # add wave sim:/ce_tb/ce_top_inst/dct_top_inst/dct_vecRot_inst/dct_vecRot_twiddle_inst/*
 
-add wave sim:/dct_tb/dct_top_inst/*
-add wave sim:/dct_tb/dct_top_inst/dct_vecRot_inst/dct_vecRot_ram_ping/*
+#add wave sim:/dct_tb/dct_top_inst/*
+#add wave sim:/dct_tb/dct_top_inst/dct_vecRot_inst/dct_vecRot_ram_ping/*
 
 
 #add wave sim:/dct_tb/idct_top_inst/idct_aftIFFT_reod_ping/*
 view structure
 view signals
-run 3us
+run 400us
 # Report success to the shell
 # exit -code 0
 # End of template

@@ -6,8 +6,8 @@ outf = fopen('../modelsim/ce_result.dat','r');
 fclose(outf);
 
 NN = 2048;
-
-FPGA_out = FPGA_out(:,1:NN);
+kk = 1;
+FPGA_out = FPGA_out(:,1+NN*(kk-1):NN*kk);
 FPGA_out = FPGA_out';
 
 H_Est_FPGA_out = (FPGA_out(:,1) + sqrt(-1)*FPGA_out(:,2))/2048;

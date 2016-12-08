@@ -119,6 +119,8 @@ wire        source_eop_ping, source_eop_pong;   //       .source_eop
 wire [wDataIn-1:0] source_real_ping, source_real_pong;  //       .source_real
 wire [wDataIn-1:0] source_imag_ping, source_imag_pong;  //       .source_imag
 
+localparam InDataLen_1200 = 0;
+
 assign fftpts_out = fftpts_in;
 
 //-----------------------------------------------------
@@ -195,6 +197,12 @@ begin
 		end
 	end
 end
+
+
+generate
+if (InDataLen_1200 == 1)
+begin : t0
+
 dct_preFFT_reod_1200in #(
 	.wDataInOut (wDataIn) 
 	)
@@ -254,6 +262,75 @@ dct_preFFT_reod_1200in_pong (
 	.fftpts_out 	( )   
 
 	);
+
+end
+
+else
+begin : t0
+
+dct_preFFT_reod #(
+	.wDataInOut (wDataIn) 
+	)
+dct_preFFT_reod_ping (
+	// left side
+	.rst_n_sync 	(rst_n_sync),
+	.clk 			(clk),
+
+	.sink_valid 	(sink_valid_ping), 
+	.sink_ready 	(sink_ready_ping), 
+	.sink_error 	(sink_error_ping), 
+	.sink_sop 		(sink_sop_ping 	),   
+	.sink_eop 		(sink_eop_ping 	),   
+	.sink_real 		(sink_real_ping ),  
+	.sink_imag 		(sink_imag_ping ),  
+
+	.fftpts_in 		(fftpts_in),
+
+	// right side
+	.source_valid 	(source_valid_ping), 
+	.source_ready 	(source_ready_ping), 
+	.source_error 	(source_error_ping), 
+	.source_sop 	(source_sop_ping ),   
+	.source_eop 	(source_eop_ping ),   
+	.source_real 	(source_real_ping ),  
+	.source_imag 	(source_imag_ping ),
+	.fftpts_out 	( )   
+
+	);
+
+dct_preFFT_reod #(
+	.wDataInOut (wDataIn) 
+	)
+dct_preFFT_reod_pong (
+	// left side
+	.rst_n_sync 	(rst_n_sync),
+	.clk 			(clk),
+
+	.sink_valid 	(sink_valid_pong), 
+	.sink_ready 	(sink_ready_pong), 
+	.sink_error 	(sink_error_pong), 
+	.sink_sop 		(sink_sop_pong 	),   
+	.sink_eop 		(sink_eop_pong 	),   
+	.sink_real 		(sink_real_pong ),  
+	.sink_imag 		(sink_imag_pong ),  
+
+	.fftpts_in 		(fftpts_in),
+
+	// right side
+	.source_valid 	(source_valid_pong), 
+	.source_ready 	(source_ready_pong), 
+	.source_error 	(source_error_pong), 
+	.source_sop 	(source_sop_pong ),   
+	.source_eop 	(source_eop_pong ),   
+	.source_real 	(source_real_pong ),  
+	.source_imag 	(source_imag_pong ),
+	.fftpts_out 	( )   
+
+	);
+
+end
+endgenerate
+
 
 always@(posedge clk)
 begin

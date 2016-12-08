@@ -67,7 +67,7 @@ module dct_preFFT_reod #(parameter
 	output reg		source_eop,
 	output 	[wDataInOut-1:0]	source_real,
 	output 	[wDataInOut-1:0]	source_imag,
-	output	[11:0]	fftpts_out
+	output	reg [11:0]	fftpts_out
 	);
 
 reg [1:0] fsm;
@@ -77,12 +77,27 @@ wire wren;
 wire [2*wDataInOut-1:0] 	data, q;
 reg  read_latter_half;
 
-assign fftpts_out = fftpts_in;
+reg [11:0] 	fftpts_reg;
+
+//assign fftpts_out = fftpts_in;
 assign source_error = 2'b00;
 assign data = {sink_real, sink_imag};
 assign source_real = q[2*wDataInOut-1:wDataInOut];
 assign source_imag = q[wDataInOut-1:0];
 assign wren = sink_valid;
+
+always@(posedge clk)
+begin
+	if (!rst_n_sync)
+		fftpts_reg <= 0;
+	else
+	begin
+		if(sink_sop)
+			fftpts_reg <= fftpts_in;
+		else
+			fftpts_reg <= fftpts_reg;
+	end
+end
 
 //--------------  RAM ----------------- 
 // depth: 2048  datawidth: 2*wDataInOut  
@@ -106,7 +121,7 @@ begin
 		2'd0:
 			fsm <= (sink_sop)? 2'd1 : 2'd0;
 		2'd1: //write half data (ready to read)
-			fsm <= (wraddress == fftpts_out[11:1])? 2'd2 : 2'd1;
+			fsm <= (wraddress == fftpts_reg[11:1])? 2'd2 : 2'd1;
 		2'd2:
 			fsm <= (source_ready) ? 2'd3 : 2'd2;
 		2'd3: // begin to read
@@ -152,14 +167,14 @@ begin
 	else
 	begin
 		if(fsm==2'd3)
-			read_latter_half <= (rdaddress== (fftpts_in-2'd2))? 1'b1 : read_latter_half;
+			read_latter_half <= (rdaddress== (fftpts_reg-2'd2))? 1'b1 : read_latter_half;
 		else
 			read_latter_half <= 0;
 
 		if(fsm==2'd3)
 		begin
-			if(rdaddress== (fftpts_in-2'd2))
-				rdaddress <= fftpts_in-1'd1;
+			if(rdaddress== (fftpts_reg-2'd2))
+				rdaddress <= fftpts_reg-1'd1;
 			else if (read_latter_half == 1'b0)
 				rdaddress <= rdaddress + 2'd2;
 			else
@@ -178,10 +193,12 @@ begin
 		source_valid <= 0;
 		source_sop <= 0;
 		source_eop <= 0;
+		fftpts_out <= 0;
 	end
 	else
 	begin
 		source_sop <= (fsm==2'd3 && rdaddress==1'd0 && source_eop==1'b0)? 1'b1 : 1'b0;
+		fftpts_out <= (fsm==2'd3 && rdaddress==1'd0 && source_eop==1'b0)? fftpts_reg : fftpts_out;
 
 		source_eop <= (fsm==2'd3 && rdaddress==2'd1)? 1'b1 : 1'b0;
 
