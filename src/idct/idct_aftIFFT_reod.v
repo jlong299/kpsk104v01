@@ -57,11 +57,11 @@ module idct_aftIFFT_reod #(parameter
 	output reg		source_eop,
 	output reg [wDataInOut-1:0]	source_real,
 	output reg [wDataInOut-1:0]	source_imag,
-	output	[11:0]	fftpts_out
+	output reg [11:0]	fftpts_out
 	);
 
 
-wire [11:0] 	fftpts_divd2;
+reg [11:0] 	fftpts_divd2_reg, fftpts_reg;
 reg 	wren0, wren1;
 reg	 [9:0]	wraddress0, rdaddress0, wraddress1, rdaddress1;	//constant width
  wire [2*wDataInOut -1:0]  	q0, q1;
@@ -75,10 +75,23 @@ reg [11:0] 	cnt_sink_valid_rev;
 reg 		duty_cycle;
 
 assign 	source_error = 2'b00;
-assign 	fftpts_divd2 = {1'b0,fftpts_in[11:1]};
+// assign 	fftpts_divd2 = {1'b0,fftpts_in[11:1]};
 assign	data = {sink_real,sink_imag};
-assign  fftpts_out = fftpts_in;
+// assign  fftpts_out = fftpts_in;
 
+always@(posedge clk)
+begin
+	if (!rst_n_sync)
+	begin
+		fftpts_reg <= 0;
+		fftpts_divd2_reg <= 0;
+	end
+	else
+	begin
+		fftpts_reg <= (sink_sop)? fftpts_in : fftpts_reg;
+		fftpts_divd2_reg <= (sink_sop)? {1'b0,fftpts_in[11:1]} : fftpts_divd2_reg;
+	end
+end
 
 //--------------  2 RAMs (Each RAM only stores half of the data)-----------------
 RAM_idct_aftIFFT u0 (
@@ -166,7 +179,7 @@ end
 
 always@(*)
 begin
-case (fftpts_in)
+case (fftpts_reg)
 12'd2048 : 
 begin
 	cnt_sink_valid_rev[11] = 1'b0;
@@ -308,14 +321,14 @@ end
 
 always@(*)
 begin
-	wren0 = (cnt_sink_valid_rev < fftpts_divd2) ? sink_valid : 1'b0;
-	wren1 = (cnt_sink_valid_rev >= fftpts_divd2) ? sink_valid : 1'b0;
+	wren0 = (cnt_sink_valid_rev < fftpts_divd2_reg) ? sink_valid : 1'b0;
+	wren1 = (cnt_sink_valid_rev >= fftpts_divd2_reg) ? sink_valid : 1'b0;
 end
 
 always@(*)
 begin
-	wraddress0 = (cnt_sink_valid_rev < fftpts_divd2) ? cnt_sink_valid_rev : 10'd0;
-	wraddress1 = (cnt_sink_valid_rev >= fftpts_divd2) ? (cnt_sink_valid_rev - fftpts_divd2) : 10'd0;
+	wraddress0 = (cnt_sink_valid_rev < fftpts_divd2_reg) ? cnt_sink_valid_rev : 10'd0;
+	wraddress1 = (cnt_sink_valid_rev >= fftpts_divd2_reg) ? (cnt_sink_valid_rev - fftpts_divd2_reg) : 10'd0;
 end
 
 
@@ -343,7 +356,7 @@ begin
 		begin
 			if (duty_cycle) 
 			begin
-				rdaddress0 <= (rdaddress0 == (fftpts_divd2-1'd1)) ? (fftpts_divd2-1'd1) : rdaddress0 + 1'd1; 
+				rdaddress0 <= (rdaddress0 == (fftpts_divd2_reg-1'd1)) ? (fftpts_divd2_reg-1'd1) : rdaddress0 + 1'd1; 
 				rdaddress1 <= rdaddress1 - 1'd1;
 			end
 			else
@@ -356,7 +369,7 @@ begin
 		else
 		begin
 			rdaddress0 <= 0;
-			rdaddress1 <= fftpts_divd2;
+			rdaddress1 <= fftpts_divd2_reg;
 			duty_cycle <= 0;
 		end
 

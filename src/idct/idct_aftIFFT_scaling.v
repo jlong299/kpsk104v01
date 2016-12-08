@@ -37,7 +37,7 @@ module idct_aftIFFT_scaling #(parameter
 	output reg        	source_eop,   //       .source_eop
 	output reg [wDataOut-1:0] source_real,  //       .source_real
 	output reg [wDataOut-1:0] source_imag,  //       .source_imag
-	output wire [11:0] fftpts_out,    //       .fftpts_out
+	output reg [11:0] fftpts_out,    //       .fftpts_out
 
 	output reg 	overflow
 	);
@@ -47,7 +47,7 @@ localparam 	divide_width = 10-2;    //
 reg overflow_real, overflow_imag;
 
 assign 	source_error = 2'b00;
-assign  fftpts_out = fftpts_in;
+// assign  fftpts_out = fftpts_in;
 
 always@(posedge clk)
 begin
@@ -57,6 +57,7 @@ begin
 		source_valid <= 0;
 		source_sop <= 0;
 		source_eop <= 0;
+		fftpts_out <= 0;
 	end
 	else
 	begin
@@ -64,6 +65,7 @@ begin
 		source_valid <= sink_valid;
 		source_sop <= sink_sop;
 		source_eop <= sink_eop;
+		fftpts_out <= fftpts_in;
 	end
 end
 
