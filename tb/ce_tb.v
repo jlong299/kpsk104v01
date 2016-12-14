@@ -36,7 +36,7 @@ module ce_tb (
 	reg [31:0] 	captured_data, captured_data_imag;
 	localparam reg [11:0] fftpts_cnst = 12'd2048;
 	localparam reg [15:0] cnt_rd_end = 16'd1200;
-	localparam reg [15:0] param_cnt_file_end = 16'd12;  //Number of frames to be processed.
+	localparam reg [15:0] param_cnt_file_end = 16'd4;  //Number of frames to be processed.
 
 	wire overflow;
 	reg  overflow_latch;
